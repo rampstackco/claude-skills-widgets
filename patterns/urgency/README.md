@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="../../assets/illustrations/category-urgency.png" alt="Urgency patterns category illustration" width="200">
+</p>
+
 # Urgency Patterns
 
 5-8 patterns that frame time, scarcity, or activity to motivate immediate action. Use these carefully; manipulative urgency damages trust.

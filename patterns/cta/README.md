@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="../../assets/illustrations/category-cta.png" alt="CTA patterns category illustration" width="200">
+</p>
+
 # CTA Patterns
 
 15-20 documented patterns for primary and secondary calls to action across landing pages, product pages, and conversion surfaces.

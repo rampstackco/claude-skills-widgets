@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="../../assets/illustrations/category-social-proof.png" alt="Social proof patterns category illustration" width="200">
+</p>
+
 # Social Proof Patterns
 
 10-12 patterns demonstrating credibility, popularity, and existing user satisfaction.
