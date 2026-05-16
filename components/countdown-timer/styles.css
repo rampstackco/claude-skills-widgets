@@ -1,0 +1,55 @@
+/* CountdownTimer shared styles.
+   Consumed by both the React component (react/CountdownTimer.tsx)
+   and the HTML variant (html/index.html).
+   Class names: .cdt (root), .cdt__label, .cdt__display.
+   Modifier: .cdt--expired (applied when deadline has passed). */
+
+.cdt {
+  /* Display typography */
+  --cdt-display-font: ui-monospace, "Cascadia Code", "Source Code Pro",
+    Menlo, Consolas, "DejaVu Sans Mono", monospace;
+  --cdt-display-font-size: 1.75rem;
+  --cdt-display-color: var(--brand-ink, #102542);
+  --cdt-display-font-weight: 600;
+
+  /* Label typography */
+  --cdt-label-color: var(--brand-muted, #5a6a7a);
+  --cdt-label-font-size: 0.875rem;
+  --cdt-label-font-weight: 400;
+
+  /* Layout */
+  --cdt-gap: 0.375rem;
+
+  display: inline-flex;
+  flex-direction: column;
+  gap: var(--cdt-gap);
+}
+
+.cdt__label {
+  margin: 0;
+  font-size: var(--cdt-label-font-size);
+  font-weight: var(--cdt-label-font-weight);
+  color: var(--cdt-label-color);
+  line-height: 1.4;
+  font-family: inherit;
+}
+
+.cdt__display {
+  margin: 0;
+  font-family: var(--cdt-display-font);
+  font-size: var(--cdt-display-font-size);
+  font-weight: var(--cdt-display-font-weight);
+  color: var(--cdt-display-color);
+  line-height: 1.2;
+  /* Tabular nums prevents digits from shifting column width as they change. */
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.01em;
+}
+
+/* Expired modifier: mutes the display text to signal the offer has closed. */
+.cdt--expired .cdt__display {
+  color: var(--cdt-label-color);
+  font-size: var(--cdt-label-font-size);
+  font-family: inherit;
+  font-weight: var(--cdt-label-font-weight);
+}

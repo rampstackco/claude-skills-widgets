@@ -75,6 +75,10 @@ Less natural with:
 - `02-secondary-text-cta.md` for the secondary link component
 - `20-asymmetric-cta-primary-de-emphasized-secondary.md` for the explicitly asymmetric variant
 
+## Component implementation
+
+A v2 implementation of this pattern is available in [`components/hero-stack-cta/`](../../components/hero-stack-cta/). Both React (TypeScript) and HTML/CSS variants are provided. Customize via CSS custom properties.
+
 ## Sources
 
 - Hick's Law: "Hick's Law: Making the choice easier for users" (nngroup.com)

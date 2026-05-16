@@ -76,6 +76,10 @@ Less natural with:
 - `03-single-quote-testimonial.md` for adding specificity after the count establishes scale
 - `09-review-aggregate.md` for the third-party-verified quantity signal
 
+## Component implementation
+
+A v2 implementation of this pattern is available in [`components/customer-count/`](../../components/customer-count/). Both React (TypeScript) and HTML/CSS variants are provided. Customize via CSS custom properties.
+
 ## Sources
 
 - Cialdini, Robert. "Influence: The Psychology of Persuasion." Social proof principle.

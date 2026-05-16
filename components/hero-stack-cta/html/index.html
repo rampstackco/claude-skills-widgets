@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HeroStackCTA examples</title>
+  <!-- PrimaryButtonCTA base styles (required) -->
+  <link rel="stylesheet" href="../../primary-button-cta/styles.css">
+  <!-- HeroStackCTA wrapper and text-link styles -->
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    body { font-family: system-ui, sans-serif; padding: 2rem; max-width: 900px; margin: 0 auto; }
+    .demo { margin-bottom: 2.5rem; }
+    h2 { margin-top: 2rem; font-size: 1rem; color: #555; margin-bottom: 0.75rem; }
+  </style>
+</head>
+<body>
+  <h1>HeroStackCTA examples</h1>
+
+  <h2>Horizontal: solid primary + text-link secondary (asymmetric)</h2>
+  <div class="demo">
+    <div class="hsc hsc--horizontal">
+      <a class="pbc pbc--solid pbc--rounded pbc--with-icon" href="/signup">
+        Get started
+        <svg class="pbc__icon" viewBox="0 0 16 16" aria-hidden="true">
+          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" fill="none"/>
+        </svg>
+      </a>
+      <a class="hsc__text-link" href="/demo">See how it works</a>
+    </div>
+  </div>
+
+  <h2>Horizontal: solid primary + text-link secondary (sales path)</h2>
+  <div class="demo">
+    <div class="hsc hsc--horizontal">
+      <a class="pbc pbc--solid pbc--rounded" href="/signup">Start free trial</a>
+      <a class="hsc__text-link" href="/contact">Contact sales</a>
+    </div>
+  </div>
+
+  <h2>Horizontal: solid primary + outlined secondary (equal-weight)</h2>
+  <div class="demo">
+    <div class="hsc hsc--horizontal">
+      <a class="pbc pbc--solid pbc--rounded" href="/signup">Get started free</a>
+      <a class="pbc pbc--outlined pbc--rounded" href="/demo">Request a demo</a>
+    </div>
+  </div>
+
+  <h2>Stacked: solid primary + text-link secondary</h2>
+  <div class="demo">
+    <div class="hsc hsc--stacked">
+      <a class="pbc pbc--solid pbc--rounded" href="/deploy">Deploy now</a>
+      <a class="hsc__text-link" href="/docs">Read the docs</a>
+    </div>
+  </div>
+
+  <h2>Stacked: solid primary + outlined secondary</h2>
+  <div class="demo">
+    <div class="hsc hsc--stacked">
+      <a class="pbc pbc--solid pbc--rounded" href="/signup">Open an account</a>
+      <a class="pbc pbc--outlined pbc--rounded" href="/call">Book a call</a>
+    </div>
+  </div>
+</body>
+</html>

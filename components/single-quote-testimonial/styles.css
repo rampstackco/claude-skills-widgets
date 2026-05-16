@@ -1,0 +1,133 @@
+/* SingleQuoteTestimonial shared styles */
+
+.sqt {
+  /* Quote typography */
+  --sqt-quote-font-size: 1.25rem;
+  --sqt-quote-color: var(--brand-ink, #111827);
+  --sqt-quote-line-height: 1.7;
+
+  /* Attribution */
+  --sqt-name-color: var(--brand-ink, #111827);
+  --sqt-meta-color: #6b7280;
+
+  /* Card variant */
+  --sqt-card-bg: var(--brand-surface, #f9fafb);
+  --sqt-card-border-color: #e5e7eb;
+  --sqt-card-border-radius: 0.75rem;
+  --sqt-card-padding: 2rem;
+
+  /* Avatar */
+  --sqt-avatar-size: 3rem;
+
+  /* Layout */
+  --sqt-max-width: 42rem;
+
+  margin: 0 auto;
+  max-width: var(--sqt-max-width);
+  padding: 0;
+  font-family: inherit;
+}
+
+/* ---- Quote mark decoration ---- */
+.sqt__quote {
+  margin: 0 0 1.25rem;
+  padding: 0;
+  border: none;
+  position: relative;
+}
+
+.sqt__quote::before {
+  content: "\201C";
+  display: block;
+  font-size: 3.5rem;
+  line-height: 1;
+  color: var(--sqt-quote-color);
+  opacity: 0.15;
+  margin-bottom: -0.5rem;
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.sqt__quote p {
+  margin: 0;
+  font-size: var(--sqt-quote-font-size);
+  color: var(--sqt-quote-color);
+  line-height: var(--sqt-quote-line-height);
+  font-style: italic;
+}
+
+/* ---- Attribution ---- */
+.sqt__attribution {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+}
+
+.sqt__name {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--sqt-name-color);
+  display: block;
+}
+
+.sqt__meta {
+  font-size: 0.875rem;
+  color: var(--sqt-meta-color);
+  display: block;
+  margin-top: 0.125rem;
+}
+
+.sqt__logo {
+  display: block;
+  height: 1.875rem;
+  width: auto;
+  margin-top: 0.5rem;
+  opacity: 0.75;
+}
+
+/* ---- Avatar ---- */
+.sqt__avatar {
+  width: var(--sqt-avatar-size);
+  height: var(--sqt-avatar-size);
+  border-radius: 9999px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+/* ---- Variant: minimal (default) ---- */
+.sqt--minimal {
+  text-align: center;
+}
+
+.sqt--minimal .sqt__attribution {
+  justify-content: center;
+}
+
+.sqt--minimal .sqt__quote::before {
+  text-align: center;
+}
+
+/* ---- Variant: card ---- */
+.sqt--card {
+  background-color: var(--sqt-card-bg);
+  border: 1px solid var(--sqt-card-border-color);
+  border-radius: var(--sqt-card-border-radius);
+  padding: var(--sqt-card-padding);
+}
+
+/* ---- Variant: with-headshot ---- */
+.sqt--with-headshot .sqt__attribution {
+  flex-direction: row;
+  align-items: center;
+}
+
+/* Mobile: stack headshot above text at narrow widths */
+@media (max-width: 480px) {
+  .sqt__quote p {
+    font-size: 1.125rem;
+  }
+
+  .sqt--with-headshot .sqt__attribution {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
