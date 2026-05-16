@@ -1,0 +1,440 @@
+/* HeroProductMockup shared styles. Used by both React and HTML implementations.
+   Renders a decorative SaaS dashboard illustration: browser chrome, sidebar, KPI tiles,
+   funnel bar chart, and cohort list. All colors and fonts are CSS custom properties
+   with fallbacks so the component works with zero configuration. */
+
+.hpm {
+  /* Font stacks */
+  --hpm-serif-font: var(--brand-serif, Georgia, "Times New Roman", serif);
+  --hpm-sans-font: var(--brand-sans, system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif);
+  --hpm-mono-font: var(--brand-mono, ui-monospace, "SFMono-Regular", Menlo, Monaco, Consolas, monospace);
+
+  /* Surface and border */
+  --hpm-surface: var(--brand-surface, #faf9f6);
+  --hpm-surface-main: var(--brand-surface-main, #ffffff);
+  --hpm-border: var(--brand-border, #edeff2);
+
+  /* Ink scale */
+  --hpm-ink: var(--brand-ink, #0f1b2d);
+  --hpm-ink-secondary: var(--brand-ink-secondary, #1f2d44);
+  --hpm-muted: var(--brand-muted, #4a5568);
+
+  /* Accent */
+  --hpm-accent: var(--brand-accent, #5b8b85);
+
+  /* Value highlight (KPI numbers) */
+  --hpm-value: var(--brand-value, #8e6e1a);
+
+  /* Positive / trend-up color */
+  --hpm-positive: var(--brand-positive, #3f6e55);
+
+  /* Neutral dot color (browser chrome traffic lights) */
+  --hpm-dot: var(--brand-dot, #c7ccd4);
+
+  /* Frame shadow */
+  --hpm-frame-shadow: var(
+    --brand-frame-shadow,
+    0 24px 48px -16px rgba(15, 27, 45, 0.18),
+    0 8px 16px -8px rgba(15, 27, 45, 0.08),
+    0 0 0 1px rgba(15, 27, 45, 0.06)
+  );
+
+  /* Sidebar width */
+  --hpm-sidebar-width: 120px;
+
+  /* Min height of the app body */
+  --hpm-body-min-height: 440px;
+
+  font-family: var(--hpm-sans-font);
+  position: relative;
+  width: 100%;
+}
+
+/* ── Frame ─────────────────────────────────────────────── */
+
+.hpm__frame {
+  overflow: hidden;
+  border-radius: 0.75rem;
+  background-color: var(--hpm-surface-main);
+  box-shadow: var(--hpm-frame-shadow);
+}
+
+/* ── Browser chrome ────────────────────────────────────── */
+
+.hpm__chrome {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-bottom: 1px solid var(--hpm-border);
+  padding: 0.75rem 1rem;
+  background-color: var(--hpm-surface);
+}
+
+.hpm__dot {
+  display: inline-flex;
+  width: 0.625rem;
+  height: 0.625rem;
+  border-radius: 50%;
+  background-color: var(--hpm-dot);
+  flex-shrink: 0;
+}
+
+.hpm__url {
+  font-family: var(--hpm-mono-font);
+  margin-left: 0.75rem;
+  flex: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  border-radius: 0.375rem;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.6875rem; /* 11px */
+  background-color: var(--hpm-surface-main);
+  color: var(--hpm-muted);
+  box-shadow: 0 0 0 1px var(--hpm-border);
+}
+
+/* ── App body: sidebar + main panel ────────────────────── */
+
+.hpm__body {
+  display: grid;
+  grid-template-columns: var(--hpm-sidebar-width) 1fr;
+  min-height: var(--hpm-body-min-height);
+}
+
+/* ── Sidebar ────────────────────────────────────────────── */
+
+.hpm__sidebar {
+  border-right: 1px solid var(--hpm-border);
+  background-color: var(--hpm-surface);
+  padding: 1rem 0.75rem;
+}
+
+.hpm__brand {
+  font-family: var(--hpm-serif-font);
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0 0.5rem;
+  margin-bottom: 1rem;
+  color: var(--hpm-ink);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.hpm__brand-mark {
+  flex-shrink: 0;
+}
+
+.hpm__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.hpm__nav-item {
+  border-radius: 0.375rem;
+  padding: 0.375rem 0.625rem;
+  font-size: 0.6875rem; /* 11px */
+  font-weight: 500;
+  color: var(--hpm-muted);
+  background-color: transparent;
+  box-shadow: none;
+  cursor: default;
+  user-select: none;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+
+.hpm__nav-item--active {
+  background-color: var(--hpm-surface-main);
+  color: var(--hpm-ink);
+  box-shadow: 0 0 0 1px var(--hpm-border);
+}
+
+/* ── Main panel ─────────────────────────────────────────── */
+
+.hpm__main {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* ── Page header ────────────────────────────────────────── */
+
+.hpm__header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.hpm__header-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.hpm__eyebrow {
+  font-size: 0.625rem; /* 10px */
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--hpm-accent);
+  margin: 0;
+}
+
+.hpm__page-title {
+  font-family: var(--hpm-serif-font);
+  margin: 0.25rem 0 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--hpm-ink);
+  line-height: 1.2;
+}
+
+.hpm__badge {
+  font-family: var(--hpm-mono-font);
+  border-radius: 0.25rem;
+  padding: 0.125rem 0.5rem;
+  font-size: 0.625rem; /* 10px */
+  background-color: var(--hpm-border);
+  color: var(--hpm-muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ── KPI tiles ──────────────────────────────────────────── */
+
+.hpm__kpis {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.hpm__kpi {
+  border-radius: 0.375rem;
+  padding: 0.625rem;
+  background-color: var(--hpm-surface);
+  box-shadow: 0 0 0 1px var(--hpm-border);
+}
+
+.hpm__kpi-label {
+  font-size: 0.5625rem; /* 9px */
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--hpm-muted);
+  margin: 0;
+}
+
+.hpm__kpi-value {
+  font-family: var(--hpm-mono-font);
+  font-size: 1.125rem; /* 18px */
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--hpm-value);
+  margin: 0.25rem 0 0;
+}
+
+.hpm__kpi-delta {
+  font-family: var(--hpm-mono-font);
+  font-size: 0.625rem; /* 10px */
+  color: var(--hpm-positive);
+  margin: 0.125rem 0 0;
+}
+
+/* ── Section label ──────────────────────────────────────── */
+
+.hpm__section {
+  margin-top: 1.25rem;
+}
+
+.hpm__section-label {
+  font-size: 0.625rem; /* 10px */
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--hpm-muted);
+  margin: 0 0 0.625rem;
+}
+
+/* ── Funnel bar chart ───────────────────────────────────── */
+
+.hpm__funnel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.hpm__funnel-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.hpm__funnel-stage {
+  width: 6rem; /* 96px fixed label column */
+  font-size: 0.625rem; /* 10px */
+  color: var(--hpm-ink-secondary);
+  flex-shrink: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.hpm__funnel-track {
+  position: relative;
+  height: 1rem;
+  flex: 1;
+  overflow: hidden;
+  border-radius: 0.25rem;
+  background-color: var(--hpm-border);
+}
+
+.hpm__funnel-bar {
+  height: 100%;
+  border-radius: 0.25rem;
+  background-color: var(--hpm-accent);
+  /* width set via inline style (data-driven) */
+}
+
+.hpm__funnel-value {
+  font-family: var(--hpm-mono-font);
+  width: 3rem;
+  text-align: right;
+  font-size: 0.625rem; /* 10px */
+  color: var(--hpm-ink);
+  flex-shrink: 0;
+}
+
+.hpm__funnel-count {
+  font-family: var(--hpm-mono-font);
+  width: 3rem;
+  text-align: right;
+  font-size: 0.625rem; /* 10px */
+  color: var(--hpm-muted);
+  flex-shrink: 0;
+}
+
+/* ── Cohort list ────────────────────────────────────────── */
+
+.hpm__cohorts-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.hpm__cohorts-link {
+  font-size: 0.625rem; /* 10px */
+  color: var(--hpm-accent);
+  text-decoration: none;
+}
+
+.hpm__cohorts {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.hpm__cohort-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border-radius: 0.25rem;
+  padding: 0.375rem 0.5rem;
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.hpm__cohort-row--lead {
+  background-color: var(--hpm-surface);
+  box-shadow: 0 0 0 1px var(--hpm-border);
+}
+
+.hpm__cohort-label {
+  font-family: var(--hpm-mono-font);
+  font-size: 0.625rem; /* 10px */
+  color: var(--hpm-ink-secondary);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.hpm__cohort-track {
+  position: relative;
+  height: 0.25rem;
+  flex: 1;
+  overflow: hidden;
+  border-radius: 9999px;
+  background-color: var(--hpm-border);
+}
+
+.hpm__cohort-bar {
+  height: 100%;
+  border-radius: 9999px;
+  background-color: var(--hpm-accent);
+  /* width set via inline style (data-driven) */
+}
+
+.hpm__cohort-value {
+  font-family: var(--hpm-mono-font);
+  width: 3rem;
+  text-align: right;
+  font-size: 0.625rem; /* 10px */
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.hpm__cohort-value--up {
+  color: var(--hpm-positive);
+}
+
+.hpm__cohort-value--flat {
+  color: var(--hpm-muted);
+}
+
+.hpm__cohort-trend {
+  font-size: 0.625rem; /* 10px */
+  flex-shrink: 0;
+  width: 0.75rem;
+  text-align: center;
+}
+
+.hpm__cohort-trend--up {
+  color: var(--hpm-positive);
+}
+
+.hpm__cohort-trend--flat {
+  color: var(--hpm-dot);
+}
+
+/* ── Responsive ─────────────────────────────────────────── */
+
+@media (max-width: 480px) {
+  .hpm {
+    --hpm-sidebar-width: 88px;
+    --hpm-body-min-height: 360px;
+  }
+
+  .hpm__kpis {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.375rem;
+  }
+
+  .hpm__kpi-value {
+    font-size: 0.9375rem; /* 15px */
+  }
+
+  .hpm__funnel-stage {
+    width: 4.5rem;
+  }
+
+  .hpm__funnel-value,
+  .hpm__funnel-count {
+    width: 2.25rem;
+  }
+}

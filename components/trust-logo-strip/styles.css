@@ -1,0 +1,69 @@
+/* TrustLogoStrip shared styles. Used by both React and HTML implementations. */
+
+.tls {
+  --tls-eyebrow-color: var(--brand-muted, #6b7280);
+  --tls-eyebrow-size: 0.75rem;
+  --tls-eyebrow-tracking: 0.1em;
+  --tls-eyebrow-weight: 600;
+  --tls-logo-height: 32px;
+  --tls-logo-opacity: 0.65;
+  --tls-logo-opacity-hover: 1;
+  --tls-logo-filter: grayscale(100%);
+  --tls-gap: 2.5rem;
+  --tls-padding-block: 2rem;
+
+  text-align: center;
+  padding-block: var(--tls-padding-block);
+}
+
+.tls__eyebrow {
+  color: var(--tls-eyebrow-color);
+  font-size: var(--tls-eyebrow-size);
+  font-weight: var(--tls-eyebrow-weight);
+  letter-spacing: var(--tls-eyebrow-tracking);
+  text-transform: uppercase;
+  margin: 0 0 1.25rem;
+}
+
+.tls__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: var(--tls-gap);
+}
+
+.tls__item {
+  display: flex;
+  align-items: center;
+}
+
+.tls__item-link {
+  display: flex;
+  align-items: center;
+  transition: opacity 200ms ease;
+}
+
+.tls__logo {
+  height: var(--tls-logo-height);
+  width: auto;
+  opacity: var(--tls-logo-opacity);
+  filter: var(--tls-logo-filter);
+  transition: opacity 200ms ease, filter 200ms ease;
+}
+
+.tls__item-link:hover .tls__logo,
+.tls__item-link:focus-visible .tls__logo {
+  opacity: var(--tls-logo-opacity-hover);
+  filter: none;
+}
+
+@media (max-width: 640px) {
+  .tls {
+    --tls-gap: 1.5rem;
+    --tls-logo-height: 24px;
+  }
+}
