@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ActivationFunnelInline example</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+  <!-- Default example: four-step activation funnel -->
+  <div class="afi" role="img" aria-label="Activation funnel with 4 stages: step 1 Sign-up at 100%, step 2 Verified at 68%, step 3 First action at 53%, step 4 Activated at 47%.">
+    <p class="afi__title">Sample funnel</p>
+    <div class="afi__rows">
+
+      <div class="afi__row">
+        <span class="afi__index">01</span>
+        <span class="afi__label">Sign-up</span>
+        <div class="afi__track">
+          <div class="afi__bar" style="width: 100%;"></div>
+        </div>
+        <span class="afi__value">100%</span>
+      </div>
+
+      <div class="afi__row">
+        <span class="afi__index">02</span>
+        <span class="afi__label">Verified</span>
+        <div class="afi__track">
+          <div class="afi__bar" style="width: 68%;"></div>
+        </div>
+        <span class="afi__value">68%</span>
+        <span class="afi__dropoff">-32</span>
+      </div>
+
+      <div class="afi__row">
+        <span class="afi__index">03</span>
+        <span class="afi__label">First action</span>
+        <div class="afi__track">
+          <div class="afi__bar" style="width: 53%;"></div>
+        </div>
+        <span class="afi__value">53%</span>
+        <span class="afi__dropoff">-15</span>
+      </div>
+
+      <div class="afi__row">
+        <span class="afi__index">04</span>
+        <span class="afi__label">Activated</span>
+        <div class="afi__track">
+          <div class="afi__bar" style="width: 47%;"></div>
+        </div>
+        <span class="afi__value">47%</span>
+        <span class="afi__dropoff">-6</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Customized example: overriding CSS variables for a different brand palette -->
+  <div
+    class="afi"
+    role="img"
+    aria-label="Onboarding funnel with 3 stages: step 1 Invited at 100%, step 2 Accepted at 74%, step 3 Connected at 55%."
+    style="--afi-bar-color: #3b6ea5; --afi-dropoff-color: #8b3b3b; margin-top: 2rem;"
+  >
+    <p class="afi__title">Onboarding funnel</p>
+    <div class="afi__rows">
+
+      <div class="afi__row">
+        <span class="afi__index">01</span>
+        <span class="afi__label">Invited</span>
+        <div class="afi__track">
+          <div class="afi__bar" style="width: 100%;"></div>
+        </div>
+        <span class="afi__value">100%</span>
+      </div>
+
+      <div class="afi__row">
+        <span class="afi__index">02</span>
+        <span class="afi__label">Accepted</span>
+        <div class="afi__track">
+          <div class="afi__bar" style="width: 74%;"></div>
+        </div>
+        <span class="afi__value">74%</span>
+        <span class="afi__dropoff">-26</span>
+      </div>
+
+      <div class="afi__row">
+        <span class="afi__index">03</span>
+        <span class="afi__label">Connected</span>
+        <div class="afi__track">
+          <div class="afi__bar" style="width: 55%;"></div>
+        </div>
+        <span class="afi__value">55%</span>
+        <span class="afi__dropoff">-19</span>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>

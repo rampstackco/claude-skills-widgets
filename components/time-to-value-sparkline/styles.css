@@ -1,0 +1,83 @@
+/* TimeToValueSparkline shared styles. Used by both React and HTML implementations. */
+
+.ttvs {
+  --ttvs-title-color: var(--brand-muted, #4a5568);
+  --ttvs-title-size: 0.625rem;
+  --ttvs-title-weight: 600;
+  --ttvs-title-tracking: 0.12em;
+  --ttvs-line-color: var(--brand-accent, #5b8b85);
+  --ttvs-line-width: 1.5px;
+  --ttvs-area-color: var(--brand-accent, #5b8b85);
+  --ttvs-area-opacity: 0.12;
+  --ttvs-point-color: var(--brand-accent, #5b8b85);
+  --ttvs-endpoint-color: var(--brand-highlight, #8e6e1a);
+  --ttvs-start-color: var(--brand-muted, #4a5568);
+  --ttvs-summary-color: var(--brand-positive, #3f6e55);
+  --ttvs-summary-weight: 600;
+  --ttvs-footer-size: 0.75rem;
+  --ttvs-mono-font: ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas, monospace;
+  --ttvs-max-width: 280px;
+  --ttvs-gap: 0.5rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--ttvs-gap);
+  max-width: var(--ttvs-max-width);
+}
+
+.ttvs__title {
+  color: var(--ttvs-title-color);
+  font-size: var(--ttvs-title-size);
+  font-weight: var(--ttvs-title-weight);
+  font-family: var(--ttvs-mono-font);
+  letter-spacing: var(--ttvs-title-tracking);
+  text-transform: uppercase;
+  margin: 0;
+  line-height: 1;
+}
+
+.ttvs__chart {
+  display: block;
+  width: 100%;
+  max-width: var(--ttvs-max-width);
+  overflow: visible;
+}
+
+.ttvs__area {
+  fill: var(--ttvs-area-color);
+  fill-opacity: var(--ttvs-area-opacity);
+}
+
+.ttvs__line {
+  fill: none;
+  stroke: var(--ttvs-line-color);
+  stroke-width: var(--ttvs-line-width);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ttvs__point {
+  fill: var(--ttvs-point-color);
+}
+
+.ttvs__point--end {
+  fill: var(--ttvs-endpoint-color);
+}
+
+.ttvs__footer {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  font-size: var(--ttvs-footer-size);
+  font-family: var(--ttvs-mono-font);
+  line-height: 1;
+}
+
+.ttvs__start {
+  color: var(--ttvs-start-color);
+}
+
+.ttvs__summary {
+  color: var(--ttvs-summary-color);
+  font-weight: var(--ttvs-summary-weight);
+}

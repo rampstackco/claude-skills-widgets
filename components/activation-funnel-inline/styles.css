@@ -1,0 +1,101 @@
+/* ActivationFunnelInline shared styles. Used by both React and HTML implementations. */
+
+.afi {
+  --afi-title-color: var(--brand-muted, #4a5568);
+  --afi-label-color: var(--brand-ink, #1f2d44);
+  --afi-index-color: var(--brand-muted, #4a5568);
+  --afi-track-color: var(--brand-surface-alt, #edeff2);
+  --afi-bar-color: var(--brand-accent, #5b8b85);
+  --afi-value-color: var(--brand-ink-strong, #0f1b2d);
+  --afi-dropoff-color: var(--brand-danger, #a33b3b);
+  --afi-mono-font: ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas, monospace;
+  --afi-bar-radius: 0.25rem;
+  --afi-bar-height: 0.625rem;
+  --afi-row-gap: 0.375rem;
+  --afi-col-gap: 0.5rem;
+  --afi-title-size: 0.625rem;
+  --afi-title-tracking: 0.12em;
+  --afi-label-size: 0.75rem;
+  --afi-value-size: 0.75rem;
+  --afi-dropoff-size: 0.625rem;
+  --afi-index-width: 0.75rem;
+  --afi-label-width: 5rem;
+  --afi-value-width: 2.5rem;
+  --afi-dropoff-width: 2.5rem;
+}
+
+.afi__title {
+  font-family: var(--afi-mono-font);
+  font-size: var(--afi-title-size);
+  font-weight: 600;
+  letter-spacing: var(--afi-title-tracking);
+  text-transform: uppercase;
+  color: var(--afi-title-color);
+  margin: 0 0 0.5rem;
+}
+
+.afi__rows {
+  display: flex;
+  flex-direction: column;
+  gap: var(--afi-row-gap);
+}
+
+.afi__row {
+  display: flex;
+  align-items: center;
+  gap: var(--afi-col-gap);
+}
+
+.afi__index {
+  font-family: var(--afi-mono-font);
+  font-size: var(--afi-title-size);
+  color: var(--afi-index-color);
+  width: var(--afi-index-width);
+  flex-shrink: 0;
+}
+
+.afi__label {
+  font-size: var(--afi-label-size);
+  color: var(--afi-label-color);
+  width: var(--afi-label-width);
+  flex-shrink: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.afi__track {
+  position: relative;
+  height: var(--afi-bar-height);
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  border-radius: var(--afi-bar-radius);
+  background-color: var(--afi-track-color);
+}
+
+.afi__bar {
+  height: 100%;
+  border-radius: var(--afi-bar-radius);
+  background-color: var(--afi-bar-color);
+  /* width is set inline per-row since it is data-driven */
+}
+
+.afi__value {
+  font-family: var(--afi-mono-font);
+  font-size: var(--afi-value-size);
+  font-weight: 600;
+  color: var(--afi-value-color);
+  width: var(--afi-value-width);
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.afi__dropoff {
+  font-family: var(--afi-mono-font);
+  font-size: var(--afi-dropoff-size);
+  color: var(--afi-dropoff-color);
+  width: var(--afi-dropoff-width);
+  text-align: right;
+  flex-shrink: 0;
+}

@@ -57,6 +57,18 @@ Five categories, ~65 patterns at v1 launch:
 
 Browse `patterns/{category}/README.md` for the full pattern list per category.
 
+## Component implementations (v2.0)
+
+The catalog now ships with React and HTML/CSS implementations for a starter set of components, migrated from the Threshold reference build at rampstack.co/demo/threshold:
+
+- **TrustLogoStrip**: implements `patterns/social-proof/01-customer-logo-strip.md`
+- **HeroProductMockup**: dashboard mockup illustration utility (pattern not yet documented)
+- **ActivationFunnelInline**: funnel and step-progress visualization utility
+- **TimeToValueSparkline**: inline data visualization utility
+- **FlowConnector**: SVG flow-diagram layout utility
+
+Browse `components/` for the full v2.0 catalog. Each component ships with shared CSS, a React variant, an HTML variant, and example usage. v2.1 onwards will add component implementations for more patterns across the 5 categories. See `components/README.md` for the roadmap.
+
 ## How patterns are documented
 
 Every pattern follows a consistent schema (see `patterns/SCHEMA.md`):
@@ -79,6 +91,8 @@ For people building by hand: each pattern is a complete reference for that patte
 For agencies and consultants: the catalog is a shared vocabulary for client conversations. Pointing at a documented pattern is faster than describing one.
 
 ## Companion repos
+
+This repo provides two surfaces: pattern documentation in `patterns/` and component implementations in `components/`. The documentation explains the design space; the components are portable React and HTML/CSS code.
 
 - [rampstackco/claude-skills](https://github.com/rampstackco/claude-skills): the parent catalog of methodology skills covering brand, design, engineering, audit, and growth work (99 skills)
 - `rampstackco/claude-skills-starter` (planned): curated 12-15 skill subset for users who want a focused starter pack rather than the full catalog

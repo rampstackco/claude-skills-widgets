@@ -1,0 +1,20 @@
+/* FlowConnector shared styles. Used by both React and HTML implementations. */
+
+.fc {
+  --fc-line-color: var(--brand-muted, #c7ccd4);
+  --fc-accent-color: var(--brand-accent, #5b8b85);
+  --fc-stroke-width: 1.5;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fc--horizontal {
+  /* No extra rules needed; flex centering handles the horizontal SVG. */
+}
+
+.fc--vertical {
+  /* Column direction centers the taller vertical SVG within its container. */
+  flex-direction: column;
+}

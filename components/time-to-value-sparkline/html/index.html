@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TimeToValueSparkline example</title>
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      padding: 2rem;
+      background: #f9fafb;
+      display: flex;
+      gap: 3rem;
+      flex-wrap: wrap;
+      align-items: flex-start;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Default example: 12-week descending TTFV series -->
+  <div
+    class="ttvs"
+    role="img"
+    aria-label="Median TTFV by week sparkline trending downward from 6.8 to 4.2 over 12 weeks"
+  >
+    <p class="ttvs__title">Median TTFV by week</p>
+
+    <!--
+      Static SVG coordinates computed for the series:
+      [6.8, 6.5, 6.2, 6.0, 5.7, 5.5, 5.2, 4.9, 4.7, 4.5, 4.4, 4.2]
+      viewBox: 0 0 240 60, padding: 4
+    -->
+    <svg
+      class="ttvs__chart"
+      width="240"
+      height="60"
+      viewBox="0 0 240 60"
+      aria-hidden="true"
+    >
+      <path
+        class="ttvs__area"
+        d="M 4,4 L 25.1,10 L 46.2,16 L 67.3,20 L 88.4,26 L 109.5,30 L 130.5,36 L 151.6,42 L 172.7,46 L 193.8,50 L 214.9,52 L 236,56 L 236,60 L 4,60 Z"
+      />
+      <path
+        class="ttvs__line"
+        d="M 4,4 L 25.1,10 L 46.2,16 L 67.3,20 L 88.4,26 L 109.5,30 L 130.5,36 L 151.6,42 L 172.7,46 L 193.8,50 L 214.9,52 L 236,56"
+      />
+      <!-- Intermediate points -->
+      <circle class="ttvs__point" cx="4"     cy="4"  r="1.5" />
+      <circle class="ttvs__point" cx="25.1"  cy="10" r="1.5" />
+      <circle class="ttvs__point" cx="46.2"  cy="16" r="1.5" />
+      <circle class="ttvs__point" cx="67.3"  cy="20" r="1.5" />
+      <circle class="ttvs__point" cx="88.4"  cy="26" r="1.5" />
+      <circle class="ttvs__point" cx="109.5" cy="30" r="1.5" />
+      <circle class="ttvs__point" cx="130.5" cy="36" r="1.5" />
+      <circle class="ttvs__point" cx="151.6" cy="42" r="1.5" />
+      <circle class="ttvs__point" cx="172.7" cy="46" r="1.5" />
+      <circle class="ttvs__point" cx="193.8" cy="50" r="1.5" />
+      <circle class="ttvs__point" cx="214.9" cy="52" r="1.5" />
+      <!-- Final (highlighted) endpoint -->
+      <circle class="ttvs__point ttvs__point--end" cx="236" cy="56" r="3" />
+    </svg>
+
+    <div class="ttvs__footer">
+      <span class="ttvs__start">12 weeks ago</span>
+      <span class="ttvs__summary">6.8d to 4.2d</span>
+    </div>
+  </div>
+
+  <!-- Customized example: upward activation rate series with CSS variable overrides -->
+  <div
+    class="ttvs"
+    role="img"
+    aria-label="Activation rate percent by week sparkline trending upward from 41 to 71 over 8 weeks"
+    style="
+      --ttvs-line-color: #2563eb;
+      --ttvs-area-color: #2563eb;
+      --ttvs-point-color: #2563eb;
+      --ttvs-endpoint-color: #1d4ed8;
+      --ttvs-summary-color: #1d4ed8;
+    "
+  >
+    <p class="ttvs__title">Activation rate % by week</p>
+
+    <!--
+      Static SVG coordinates computed for the series:
+      [41, 45, 48, 52, 57, 61, 66, 71]
+      min=41, max=71, range=30
+      viewBox: 0 0 240 60, padding: 4
+      x_i = 4 + (i/7)*232
+      y_i = 4 + (1 - (v-41)/30)*52
+    -->
+    <svg
+      class="ttvs__chart"
+      width="240"
+      height="60"
+      viewBox="0 0 240 60"
+      aria-hidden="true"
+    >
+      <path
+        class="ttvs__area"
+        d="M 4,56 L 37.1,49.1 L 70.3,43.9 L 103.4,36.4 L 136.6,27.3 L 169.7,20.7 L 202.9,12.3 L 236,4 L 236,60 L 4,60 Z"
+      />
+      <path
+        class="ttvs__line"
+        d="M 4,56 L 37.1,49.1 L 70.3,43.9 L 103.4,36.4 L 136.6,27.3 L 169.7,20.7 L 202.9,12.3 L 236,4"
+      />
+      <circle class="ttvs__point" cx="4"     cy="56"   r="1.5" />
+      <circle class="ttvs__point" cx="37.1"  cy="49.1" r="1.5" />
+      <circle class="ttvs__point" cx="70.3"  cy="43.9" r="1.5" />
+      <circle class="ttvs__point" cx="103.4" cy="36.4" r="1.5" />
+      <circle class="ttvs__point" cx="136.6" cy="27.3" r="1.5" />
+      <circle class="ttvs__point" cx="169.7" cy="20.7" r="1.5" />
+      <circle class="ttvs__point" cx="202.9" cy="12.3" r="1.5" />
+      <circle class="ttvs__point ttvs__point--end" cx="236" cy="4" r="3" />
+    </svg>
+
+    <div class="ttvs__footer">
+      <span class="ttvs__start">8 weeks ago</span>
+      <span class="ttvs__summary">41% to 71%</span>
+    </div>
+  </div>
+
+</body>
+</html>

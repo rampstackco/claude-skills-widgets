@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HeroProductMockup example</title>
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    body {
+      margin: 2rem auto;
+      max-width: 720px;
+      padding: 0 1rem;
+      font-family: system-ui, sans-serif;
+      background: #f5f5f0;
+    }
+  </style>
+</head>
+<body>
+
+  <div
+    class="hpm"
+    role="img"
+    aria-label="Decorative product dashboard mockup showing activation metrics, a funnel chart, and recent cohorts"
+  >
+    <div class="hpm__frame">
+
+      <!-- Browser chrome -->
+      <div class="hpm__chrome">
+        <span class="hpm__dot" aria-hidden="true"></span>
+        <span class="hpm__dot" aria-hidden="true"></span>
+        <span class="hpm__dot" aria-hidden="true"></span>
+        <div class="hpm__url">app.example.com/activation</div>
+      </div>
+
+      <!-- App body: sidebar + main panel -->
+      <div class="hpm__body">
+
+        <!-- Sidebar -->
+        <aside class="hpm__sidebar">
+          <div class="hpm__brand">
+            <!-- Inline SVG brand mark: vertical line + circle -->
+            <svg
+              class="hpm__brand-mark"
+              width="10"
+              height="14"
+              viewBox="0 0 16 20"
+              fill="none"
+              aria-hidden="true"
+            >
+              <line
+                x1="8" y1="2" x2="8" y2="13"
+                stroke="var(--hpm-accent, #5b8b85)"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+              <circle cx="8" cy="16" r="3" fill="var(--hpm-accent, #5b8b85)" />
+            </svg>
+            <span>northwind</span>
+          </div>
+
+          <ul class="hpm__nav" aria-label="Mockup sidebar navigation">
+            <li class="hpm__nav-item hpm__nav-item--active">Activation</li>
+            <li class="hpm__nav-item">Funnels</li>
+            <li class="hpm__nav-item">Cohorts</li>
+            <li class="hpm__nav-item">Events</li>
+            <li class="hpm__nav-item">Settings</li>
+          </ul>
+        </aside>
+
+        <!-- Main panel -->
+        <div class="hpm__main">
+
+          <!-- Page header -->
+          <div class="hpm__header">
+            <div class="hpm__header-left">
+              <p class="hpm__eyebrow">Dashboard</p>
+              <h3 class="hpm__page-title">Activation</h3>
+            </div>
+            <span class="hpm__badge">Q1 2026</span>
+          </div>
+
+          <!-- KPI tiles -->
+          <div class="hpm__kpis">
+
+            <div class="hpm__kpi">
+              <p class="hpm__kpi-label">Activation</p>
+              <p class="hpm__kpi-value">47.3%</p>
+              <p class="hpm__kpi-delta">+3.2</p>
+            </div>
+
+            <div class="hpm__kpi">
+              <p class="hpm__kpi-label">TTFV</p>
+              <p class="hpm__kpi-value">4.2d</p>
+              <p class="hpm__kpi-delta">-0.8</p>
+            </div>
+
+            <div class="hpm__kpi">
+              <p class="hpm__kpi-label">Trial-to-paid</p>
+              <p class="hpm__kpi-value">63%</p>
+              <p class="hpm__kpi-delta">+1.1</p>
+            </div>
+
+          </div>
+
+          <!-- Funnel bar chart -->
+          <div class="hpm__section">
+            <p class="hpm__section-label">Activation funnel</p>
+            <div class="hpm__funnel">
+
+              <div class="hpm__funnel-row">
+                <span class="hpm__funnel-stage">Sign-up</span>
+                <div class="hpm__funnel-track">
+                  <div class="hpm__funnel-bar" style="width: 100%;"></div>
+                </div>
+                <span class="hpm__funnel-value">100%</span>
+                <span class="hpm__funnel-count">1,847</span>
+              </div>
+
+              <div class="hpm__funnel-row">
+                <span class="hpm__funnel-stage">Verified email</span>
+                <div class="hpm__funnel-track">
+                  <div class="hpm__funnel-bar" style="width: 68%;"></div>
+                </div>
+                <span class="hpm__funnel-value">68%</span>
+                <span class="hpm__funnel-count">1,256</span>
+              </div>
+
+              <div class="hpm__funnel-row">
+                <span class="hpm__funnel-stage">First action</span>
+                <div class="hpm__funnel-track">
+                  <div class="hpm__funnel-bar" style="width: 53%;"></div>
+                </div>
+                <span class="hpm__funnel-value">53%</span>
+                <span class="hpm__funnel-count">979</span>
+              </div>
+
+              <div class="hpm__funnel-row">
+                <span class="hpm__funnel-stage">Activated</span>
+                <div class="hpm__funnel-track">
+                  <div class="hpm__funnel-bar" style="width: 47%;"></div>
+                </div>
+                <span class="hpm__funnel-value">47%</span>
+                <span class="hpm__funnel-count">868</span>
+              </div>
+
+              <div class="hpm__funnel-row">
+                <span class="hpm__funnel-stage">Day-7 retained</span>
+                <div class="hpm__funnel-track">
+                  <div class="hpm__funnel-bar" style="width: 42%;"></div>
+                </div>
+                <span class="hpm__funnel-value">42%</span>
+                <span class="hpm__funnel-count">776</span>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Cohort list -->
+          <div class="hpm__section">
+            <div class="hpm__cohorts-header">
+              <p class="hpm__section-label">Recent cohorts</p>
+              <span class="hpm__cohorts-link" aria-hidden="true">view all</span>
+            </div>
+            <div class="hpm__cohorts">
+
+              <!-- Lead row (most recent cohort gets the highlighted card treatment) -->
+              <div class="hpm__cohort-row hpm__cohort-row--lead">
+                <span class="hpm__cohort-label">Q1 2026</span>
+                <div class="hpm__cohort-track">
+                  <!-- 47.3 / 50 * 100 = 94.6% -->
+                  <div class="hpm__cohort-bar" style="width: 94.6%;"></div>
+                </div>
+                <span class="hpm__cohort-value hpm__cohort-value--up">47.3%</span>
+                <span class="hpm__cohort-trend hpm__cohort-trend--up" aria-hidden="true">
+                  <svg width="8" height="8" viewBox="0 0 8 8" fill="currentColor" aria-hidden="true">
+                    <polygon points="4,1 7,7 1,7" />
+                  </svg>
+                </span>
+              </div>
+
+              <div class="hpm__cohort-row">
+                <span class="hpm__cohort-label">Q4 2025</span>
+                <div class="hpm__cohort-track">
+                  <!-- 44.1 / 50 * 100 = 88.2% -->
+                  <div class="hpm__cohort-bar" style="width: 88.2%;"></div>
+                </div>
+                <span class="hpm__cohort-value hpm__cohort-value--up">44.1%</span>
+                <span class="hpm__cohort-trend hpm__cohort-trend--up" aria-hidden="true">
+                  <svg width="8" height="8" viewBox="0 0 8 8" fill="currentColor" aria-hidden="true">
+                    <polygon points="4,1 7,7 1,7" />
+                  </svg>
+                </span>
+              </div>
+
+              <div class="hpm__cohort-row">
+                <span class="hpm__cohort-label">Q3 2025</span>
+                <div class="hpm__cohort-track">
+                  <!-- 41.8 / 50 * 100 = 83.6% -->
+                  <div class="hpm__cohort-bar" style="width: 83.6%;"></div>
+                </div>
+                <span class="hpm__cohort-value hpm__cohort-value--flat">41.8%</span>
+                <span class="hpm__cohort-trend hpm__cohort-trend--flat" aria-hidden="true">
+                  <span>.</span>
+                </span>
+              </div>
+
+            </div>
+          </div>
+
+        </div><!-- /.hpm__main -->
+      </div><!-- /.hpm__body -->
+    </div><!-- /.hpm__frame -->
+  </div><!-- /.hpm -->
+
+</body>
+</html>

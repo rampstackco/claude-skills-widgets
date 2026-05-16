@@ -75,6 +75,10 @@ Less natural with:
 - `03-single-quote-testimonial.md` for the next tier of specificity after logos establish baseline trust
 - `10-detailed-case-study-card.md` for the deeper version of logo-level proof
 
+## Component implementation
+
+A v2 implementation of this pattern is available in [`components/trust-logo-strip/`](../../components/trust-logo-strip/). Both React (TypeScript) and HTML/CSS variants are provided. Customize via CSS custom properties.
+
 ## Sources
 
 - Cialdini, Robert. "Influence: The Psychology of Persuasion." Social proof principle.
