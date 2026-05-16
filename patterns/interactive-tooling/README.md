@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="../../assets/illustrations/category-interactive-tooling.png" alt="Interactive tooling patterns category illustration" width="200">
+</p>
+
 # Interactive Tooling Patterns
 
 8-10 patterns for interactive tools that capture user input, compute or recommend, and double as conversion surfaces.

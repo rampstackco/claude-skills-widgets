@@ -86,7 +86,7 @@ Less natural with:
 
 ## Voice and length
 
-- Length: 200-500 words per file (some patterns are simpler and shorter; some warrant more detail)
+- Length: 500-1500 words per file. The catalog's ~1100 word average reflects the schema's 8+ structured sections (description, why, when-to, when-not-to, variations, examples, implementation, archetype-compatibility, related-patterns). Patterns with fewer variations or simpler implementation notes can land closer to 500; patterns with rich variation analysis can reach 1500. Files over 1500 should be reviewed for trim opportunities.
 - Voice: direct, declarative, no marketing language
 - Length-related decisions: 3-7 real examples is the right band. Less than 3 is insufficient grounding; more than 7 is over-attribution.
 - Attribution language: "exemplified by", "common among", "characteristic of", "used by". Avoid implying endorsement.

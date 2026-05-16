@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/illustrations/hero.png" alt="Visual representation of the 5 pattern categories in the catalog: CTAs, lead capture, social proof, urgency, and interactive tooling" width="100%">
+</p>
+
 # claude-skills-widgets
 
 A research-backed pattern catalog of lead-gen, CTA, social proof, urgency, and interactive tooling patterns used by top-converting B2B SaaS, fintech, DTC, and consumer brands.
@@ -18,13 +22,38 @@ Components may follow in a future companion repo. For now, this catalog is docum
 
 ## What's in the catalog
 
-Five categories, ~50-65 patterns total at v1 launch:
+Five categories, ~65 patterns at v1 launch:
 
-- **CTA patterns** (~15-20): primary buttons, secondary CTAs, sticky bars, exit-intent, in-content, contextual prompts
-- **Lead capture patterns** (~12-15): inline forms, multi-step, content gates, modals, progressive profiling, social login
-- **Social proof patterns** (~10-12): logo strips, testimonials, customer counts, activity feeds, reviews, case studies
-- **Urgency patterns** (~5-8): countdowns, scarcity indicators, deadline framing, real-time activity
-- **Interactive tooling patterns** (~8-10): calculators, quizzes, configurators, wizards, comparison tools
+- **CTA patterns** (~20): primary buttons, secondary CTAs, sticky bars, exit-intent, in-content, contextual prompts
+- **Lead capture patterns** (~15): inline forms, multi-step, content gates, modals, progressive profiling, social login
+- **Social proof patterns** (~12): logo strips, testimonials, customer counts, activity feeds, reviews, case studies
+- **Urgency patterns** (~8): countdowns, scarcity indicators, deadline framing, real-time activity
+- **Interactive tooling patterns** (~10): calculators, quizzes, configurators, wizards, comparison tools
+
+<table>
+  <tr>
+    <td align="center" width="20%">
+      <a href="patterns/cta/README.md"><img src="assets/illustrations/category-cta.png" alt="CTA patterns category illustration" width="100%"></a>
+      <p><strong>CTA</strong></p>
+    </td>
+    <td align="center" width="20%">
+      <a href="patterns/lead-capture/README.md"><img src="assets/illustrations/category-lead-capture.png" alt="Lead capture patterns category illustration" width="100%"></a>
+      <p><strong>Lead Capture</strong></p>
+    </td>
+    <td align="center" width="20%">
+      <a href="patterns/social-proof/README.md"><img src="assets/illustrations/category-social-proof.png" alt="Social proof patterns category illustration" width="100%"></a>
+      <p><strong>Social Proof</strong></p>
+    </td>
+    <td align="center" width="20%">
+      <a href="patterns/urgency/README.md"><img src="assets/illustrations/category-urgency.png" alt="Urgency patterns category illustration" width="100%"></a>
+      <p><strong>Urgency</strong></p>
+    </td>
+    <td align="center" width="20%">
+      <a href="patterns/interactive-tooling/README.md"><img src="assets/illustrations/category-interactive-tooling.png" alt="Interactive tooling patterns category illustration" width="100%"></a>
+      <p><strong>Interactive Tooling</strong></p>
+    </td>
+  </tr>
+</table>
 
 Browse `patterns/{category}/README.md` for the full pattern list per category.
 

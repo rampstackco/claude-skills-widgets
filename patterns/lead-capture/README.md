@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="../../assets/illustrations/category-lead-capture.png" alt="Lead capture patterns category illustration" width="200">
+</p>
+
 # Lead Capture Patterns
 
 12-15 patterns for capturing user information across forms, modals, gates, and progressive disclosure mechanisms.
