@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Product-Market Fit Assessment</title>
+  <link rel="stylesheet" href="../../diagnostic-quiz-assessment/styles.css">
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      padding: 2rem;
+      max-width: 800px;
+      margin: 0 auto;
+      background: #f6f8fa;
+    }
+  </style>
+</head>
+<body>
+  <section class="dqa" id="pmf-quiz"></section>
+
+  <script>
+    (function () {
+      /* PMF quiz configuration. Mirrors ProductMarketFitQuiz React props.
+         Adjust productName and the includeUsage / includeOpenEnded flags below. */
+      var productName = "this product";
+      var includeUsageQuestion = true;
+      var includeOpenEnded = true;
+
+      var resultTiers = [
+        {
+          minScore: 3,
+          maxScore: 99,
+          title: "Strong PMF",
+          description:
+            "Your product shows strong product-market fit. Focus on growth and retention.",
+          recommendation:
+            "Double down on what your most loyal users value. Systematize onboarding so new users reach that same moment faster.",
+        },
+        {
+          minScore: 1,
+          maxScore: 2,
+          title: "Emerging PMF",
+          description:
+            "Your product shows emerging fit. Iterate on what your most-disappointed users value.",
+          recommendation:
+            "Identify the subset of users who would be very disappointed and study their use case. Close the gap for that segment first.",
+        },
+        {
+          minScore: 0,
+          maxScore: 0,
+          title: "No PMF yet",
+          description:
+            "Product-market fit is not yet established. Consider repositioning or talking to more users.",
+          recommendation:
+            "Run qualitative interviews with current users to understand what would need to change for them to feel the product is indispensable.",
+        },
+      ];
+
+      function buildQuestions() {
+        var qs = [
+          {
+            id: "disappointment",
+            text: "How would you feel if you could no longer use " + productName + "?",
+            type: "single-select",
+            options: [
+              { value: "very", label: "Very disappointed", score: 3 },
+              { value: "somewhat", label: "Somewhat disappointed", score: 1 },
+              { value: "not", label: "Not disappointed", score: 0 },
+              { value: "na", label: "Not applicable / I no longer use it", score: 0 },
+            ],
+          },
+        ];
+        if (includeUsageQuestion) {
+          qs.push({
+            id: "usage-frequency",
+            text: "How often do you use " + productName + "?",
+            type: "single-select",
+            options: [
+              { value: "daily", label: "Daily", score: 0 },
+              { value: "weekly", label: "Weekly", score: 0 },
+              { value: "monthly", label: "Monthly", score: 0 },
+              { value: "less", label: "Less often", score: 0 },
+            ],
+          });
+        }
+        if (includeOpenEnded) {
+          qs.push({
+            id: "main-benefit",
+            text: "What is the main benefit you receive from " + productName + "?",
+            type: "text",
+            required: false,
+          });
+        }
+        return qs;
+      }
+
+      var config = {
+        title: "Product-Market Fit Assessment",
+        description:
+          "Answer a few questions to get a signal on how this product is landing with you.",
+        questions: buildQuestions(),
+        resultTiers: resultTiers,
+      };
+
+      var root = document.getElementById("pmf-quiz");
+      var state = { phase: "idle" };
+      var answers = {};
+
+      function computeScore() {
+        var score = 0;
+        for (var i = 0; i < config.questions.length; i++) {
+          var q = config.questions[i];
+          var a = answers[q.id];
+          if (a === undefined || a === "") continue;
+          if (q.type === "single-select") {
+            var opt = q.options.find(function (o) { return o.value === a; });
+            score += (opt && opt.score) ? opt.score : 0;
+          }
+          /* text questions score 0 */
+        }
+        return score;
+      }
+
+      function findTier(score) {
+        return config.resultTiers.find(function (t) {
+          return score >= t.minScore && score <= t.maxScore;
+        });
+      }
+
+      function isAnswered(q) {
+        if (q.required === false) return true;
+        var a = answers[q.id];
+        if (a === undefined || a === "") return false;
+        return true;
+      }
+
+      function escapeHtml(str) {
+        return String(str)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;");
+      }
+
+      function render() {
+        if (state.phase === "idle") {
+          root.innerHTML =
+            '<h2 class="dqa__title">' + escapeHtml(config.title) + "</h2>" +
+            '<p class="dqa__description">' + escapeHtml(config.description) + "</p>" +
+            '<div class="dqa__actions">' +
+            '<button class="dqa__button dqa__button--primary" data-action="start">Start</button>' +
+            "</div>";
+        } else if (state.phase === "question") {
+          var q = config.questions[state.index];
+          var progress = ((state.index + 1) / config.questions.length) * 100;
+          var canAdvance = isAnswered(q);
+
+          var questionHtml = "";
+          if (q.type === "single-select") {
+            questionHtml =
+              '<div class="dqa__options" role="radiogroup">' +
+              q.options.map(function (opt) {
+                var checked = answers[q.id] === opt.value ? "checked" : "";
+                return (
+                  '<label class="dqa__option">' +
+                  '<input type="radio" name="' + escapeHtml(q.id) + '" value="' + escapeHtml(opt.value) + '" ' + checked + ">" +
+                  '<span class="dqa__option-label">' + escapeHtml(opt.label) + "</span>" +
+                  "</label>"
+                );
+              }).join("") +
+              "</div>";
+          } else if (q.type === "text") {
+            var currentVal = typeof answers[q.id] === "string" ? answers[q.id] : "";
+            questionHtml =
+              '<textarea class="dqa__text-input" name="' + escapeHtml(q.id) + '" placeholder="Your response...">' +
+              escapeHtml(currentVal) +
+              "</textarea>";
+          }
+
+          var isLast = state.index === config.questions.length - 1;
+          root.innerHTML =
+            '<p class="dqa__progress-label" aria-live="polite">Question ' +
+            (state.index + 1) + " of " + config.questions.length + "</p>" +
+            '<div class="dqa__progress" role="progressbar" aria-valuenow="' +
+            (state.index + 1) + '" aria-valuemin="1" aria-valuemax="' +
+            config.questions.length + '">' +
+            '<div class="dqa__progress-fill" style="width: ' + progress + '%"></div>' +
+            "</div>" +
+            '<h2 class="dqa__question">' + escapeHtml(q.text) + "</h2>" +
+            questionHtml +
+            '<div class="dqa__actions">' +
+            (state.index > 0
+              ? '<button class="dqa__button dqa__button--secondary" data-action="back">Back</button>'
+              : "") +
+            '<button class="dqa__button dqa__button--primary" data-action="next"' +
+            (canAdvance ? "" : " disabled") +
+            ">" +
+            (isLast ? "Submit" : "Next") +
+            "</button>" +
+            "</div>";
+        } else if (state.phase === "result") {
+          var score = computeScore();
+          var tier = findTier(score);
+          root.innerHTML =
+            '<div class="dqa__result" role="region" aria-label="Quiz results">' +
+            '<p class="dqa__result-score">' + score + "</p>" +
+            (tier
+              ? '<h2 class="dqa__result-tier">' + escapeHtml(tier.title) + "</h2>" +
+                '<p class="dqa__result-description">' + escapeHtml(tier.description) + "</p>" +
+                (tier.recommendation
+                  ? '<p class="dqa__result-recommendation">' + escapeHtml(tier.recommendation) + "</p>"
+                  : "")
+              : "") +
+            '<p style="font-size:0.8125rem;color:#888;margin-top:1rem;">' +
+            "Note: this result reflects one response. The Sean Ellis 40% benchmark applies to an aggregated cohort, not a single user." +
+            "</p>" +
+            '<div class="dqa__actions">' +
+            '<button class="dqa__button dqa__button--secondary" data-action="restart">Retake</button>' +
+            "</div>" +
+            "</div>";
+        }
+      }
+
+      root.addEventListener("click", function (e) {
+        var action = e.target.dataset && e.target.dataset.action;
+        if (!action) return;
+        if (action === "start") {
+          state = { phase: "question", index: 0 };
+          render();
+        } else if (action === "back") {
+          state = { phase: "question", index: state.index - 1 };
+          render();
+        } else if (action === "next") {
+          var q = config.questions[state.index];
+          if (!isAnswered(q)) return;
+          if (state.index < config.questions.length - 1) {
+            state = { phase: "question", index: state.index + 1 };
+          } else {
+            state = { phase: "result" };
+          }
+          render();
+        } else if (action === "restart") {
+          answers = {};
+          state = { phase: "idle" };
+          render();
+        }
+      });
+
+      root.addEventListener("change", function (e) {
+        var el = e.target;
+        if (el.type === "radio") {
+          answers[el.name] = el.value;
+          /* Re-render to enable Next button */
+          render();
+        }
+      });
+
+      root.addEventListener("input", function (e) {
+        var el = e.target;
+        if (el.tagName === "TEXTAREA") {
+          answers[el.name] = el.value;
+        }
+      });
+
+      render();
+    })();
+  </script>
+</body>
+</html>

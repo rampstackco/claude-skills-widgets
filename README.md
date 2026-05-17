@@ -106,7 +106,19 @@ v2.3 introduces the interactive-tooling category and deepens CTA, lead-capture, 
 - **LimitedTimeOfferBanner**: deadline-driven banner composing CountdownTimer
 - **WaitlistPositionDisplay**: position display with optional referral mechanic
 
-Total v2.x: 23 component implementations across CTA, lead capture, social proof, urgency, interactive tooling, and utility categories. Browse `components/` for the full catalog and `components/README.md` for the roadmap.
+Total v2.x: 23 component implementations across CTA, lead capture, social proof, urgency, interactive tooling, and utility categories.
+
+## v2.4: 3 quiz and wizard components
+
+v2.4 advances interactive-tooling with the quiz and wizard family:
+
+- **DiagnosticQuizAssessment**: generic scored quiz framework (single-select, multi-select, scale, text)
+- **ProductMarketFitQuiz**: Sean Ellis PMF assessment (composes DiagnosticQuizAssessment)
+- **MultiStepRecommendationWizard**: branching-logic flow that recommends a specific path
+
+The ROI cost calculator pattern is covered by the existing SavingsCalculator (generic compute API) and is cross-linked rather than reimplemented.
+
+Total v2.x: 26 component implementations. Browse `components/` for the full catalog and `components/README.md` for the roadmap.
 
 ## How patterns are documented
 

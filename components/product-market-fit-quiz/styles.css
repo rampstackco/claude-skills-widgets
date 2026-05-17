@@ -1,0 +1,9 @@
+/* ProductMarketFitQuiz component styles.
+   All quiz UI is inherited from diagnostic-quiz-assessment/styles.css via composition.
+   This file provides only an optional scoping class for overriding DQA tokens
+   specifically on PMF quiz instances. */
+
+.pmfq {
+  /* Use this class on the wrapping element to scope token overrides.
+     Example: .pmfq .dqa { --dqa-accent: #00897b; } */
+}

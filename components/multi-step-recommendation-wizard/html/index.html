@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MultiStepRecommendationWizard example</title>
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      padding: 2rem 1rem;
+      max-width: 800px;
+      margin: 0 auto;
+      background: #f6f8fa;
+    }
+  </style>
+</head>
+<body>
+  <section class="mrw" id="wizard">
+    <!-- Populated by the IIFE script below -->
+  </section>
+
+  <script>
+    (function () {
+      // -----------------------------------------------------------------------
+      // CONFIG: replace questions and recommendations with your own content.
+      //
+      // Branching: set nextQuestion on an option to route to a specific question
+      // id instead of advancing to the next item in the questions array.
+      //
+      // Recommendation matching: the wizard iterates recommendations in order
+      // and returns the first entry whose matchAnswers keys all match the
+      // collected answers. Place more specific entries earlier in the array.
+      // A catch-all entry (empty matchAnswers) should be last.
+      // -----------------------------------------------------------------------
+      const config = {
+        title: "Find the right plan",
+        description:
+          "Answer a few quick questions and we will point you to the plan that fits your situation.",
+
+        questions: [
+          {
+            id: "role",
+            text: "What best describes your role?",
+            description: "This helps us skip questions that are not relevant to you.",
+            options: [
+              { value: "developer", label: "Developer or engineer", nextQuestion: "developer-use-case" },
+              { value: "marketer",  label: "Marketing or growth",   nextQuestion: "marketer-goal" },
+              { value: "founder",   label: "Founder or operator",   nextQuestion: "founder-stage" },
+            ],
+          },
+
+          // Developer branch
+          {
+            id: "developer-use-case",
+            text: "What are you primarily building?",
+            options: [
+              { value: "api",      label: "A backend API or service" },
+              { value: "frontend", label: "A consumer-facing web app" },
+              { value: "data",     label: "A data pipeline or internal tool" },
+            ],
+          },
+
+          // Marketer branch
+          {
+            id: "marketer-goal",
+            text: "What is your primary growth focus?",
+            options: [
+              { value: "acquisition", label: "Bringing in new users" },
+              { value: "retention",   label: "Keeping users engaged longer" },
+              { value: "content",     label: "Content and SEO" },
+            ],
+          },
+
+          // Founder branch
+          {
+            id: "founder-stage",
+            text: "Where are you in your journey?",
+            options: [
+              { value: "idea",    label: "Validating an idea" },
+              { value: "early",   label: "Early traction, finding product fit" },
+              { value: "scaling", label: "Scaling a working business" },
+            ],
+          },
+        ],
+
+        // Recommendations are evaluated in order. The first entry whose
+        // matchAnswers keys all equal the collected answers is returned.
+        recommendations: [
+          // Developer paths
+          {
+            id: "dev-api",
+            title: "API Quickstart Kit",
+            description:
+              "Opinionated scaffolding for backend services: typed routes, auth middleware, and a deploy-ready Dockerfile. Skip the setup and focus on what makes your API unique.",
+            ctaLabel: "View the API kit",
+            ctaHref: "/kits/api-quickstart",
+            matchAnswers: { role: "developer", "developer-use-case": "api" },
+          },
+          {
+            id: "dev-frontend",
+            title: "Frontend Starter Kit",
+            description:
+              "A production-ready web app scaffold with routing, auth, and a component library already wired together.",
+            ctaLabel: "View the frontend kit",
+            ctaHref: "/kits/frontend-starter",
+            matchAnswers: { role: "developer", "developer-use-case": "frontend" },
+          },
+          {
+            id: "dev-data",
+            title: "Data Pipeline Template",
+            description:
+              "ETL scaffolding, a local testing harness, and connectors for the most common sources.",
+            ctaLabel: "View the data template",
+            ctaHref: "/kits/data-pipeline",
+            matchAnswers: { role: "developer", "developer-use-case": "data" },
+          },
+
+          // Marketer paths
+          {
+            id: "marketer-acquisition",
+            title: "Acquisition Playbook",
+            description:
+              "Channel-by-channel breakdowns of what is working for early-stage SaaS, with templates for ads, landing pages, and outbound sequences.",
+            ctaLabel: "Get the playbook",
+            ctaHref: "/playbooks/acquisition",
+            matchAnswers: { role: "marketer", "marketer-goal": "acquisition" },
+          },
+          {
+            id: "marketer-retention",
+            title: "Retention Playbook",
+            description:
+              "Onboarding flows, in-app nudges, and lifecycle email sequences mapped to the moments that predict churn.",
+            ctaLabel: "Get the playbook",
+            ctaHref: "/playbooks/retention",
+            matchAnswers: { role: "marketer", "marketer-goal": "retention" },
+          },
+          {
+            id: "marketer-content",
+            title: "Content and SEO Playbook",
+            description:
+              "A repeatable system for finding topics worth covering, producing content that earns links, and tracking what actually moves organic metrics.",
+            ctaLabel: "Get the playbook",
+            ctaHref: "/playbooks/content-seo",
+            matchAnswers: { role: "marketer", "marketer-goal": "content" },
+          },
+
+          // Founder paths
+          {
+            id: "founder-idea",
+            title: "Validation Checklist",
+            description:
+              "A structured approach to testing whether a problem is real and whether people will pay to solve it.",
+            ctaLabel: "Download the checklist",
+            ctaHref: "/resources/validation-checklist",
+            matchAnswers: { role: "founder", "founder-stage": "idea" },
+          },
+          {
+            id: "founder-early",
+            title: "Early Traction Guide",
+            description:
+              "How to find your first 100 customers, what to measure before you have enough data, and how to know when you have found something worth scaling.",
+            ctaLabel: "Read the guide",
+            ctaHref: "/resources/early-traction",
+            matchAnswers: { role: "founder", "founder-stage": "early" },
+          },
+          {
+            id: "founder-scaling",
+            title: "Scaling Toolkit",
+            description:
+              "Hiring frameworks, process templates, and the operational decisions that determine whether a working business scales cleanly.",
+            ctaLabel: "Explore the toolkit",
+            ctaHref: "/resources/scaling-toolkit",
+            matchAnswers: { role: "founder", "founder-stage": "scaling" },
+          },
+        ],
+
+        // Shown when no recommendation matches. Remove to show the neutral
+        // no-match message instead.
+        defaultRecommendation: {
+          id: "general",
+          title: "General Resources",
+          description:
+            "Our full resource library covers a wide range of topics. Browse by category to find what fits your situation.",
+          ctaLabel: "Browse resources",
+          ctaHref: "/resources",
+          matchAnswers: {},
+        },
+      };
+      // -----------------------------------------------------------------------
+      // End of config. No edits needed below this line for basic usage.
+      // -----------------------------------------------------------------------
+
+      const root = document.getElementById("wizard");
+
+      // State
+      let phase = "idle";           // "idle" | "question" | "result"
+      let history = [];             // stack of visited question ids
+      let answers = {};             // { questionId: chosenOptionValue }
+      let resultRec = null;         // the matched Recommendation or null
+
+      // -----------------------------------------------------------------------
+      // Helpers
+      // -----------------------------------------------------------------------
+
+      function findQuestion(id) {
+        return config.questions.find(function (q) { return q.id === id; });
+      }
+
+      function resolveNextId(question, chosenValue) {
+        var option = question.options.find(function (o) { return o.value === chosenValue; });
+        if (option && option.nextQuestion) return option.nextQuestion;
+
+        // Linear fallback
+        var idx = config.questions.findIndex(function (q) { return q.id === question.id; });
+        if (idx === -1 || idx === config.questions.length - 1) return null;
+        return config.questions[idx + 1].id;
+      }
+
+      function matchRecommendation() {
+        for (var i = 0; i < config.recommendations.length; i++) {
+          var rec = config.recommendations[i];
+          var keys = Object.keys(rec.matchAnswers);
+          var allMatch = keys.every(function (k) {
+            return answers[k] === rec.matchAnswers[k];
+          });
+          if (allMatch) return rec;
+        }
+        return null;
+      }
+
+      function esc(str) {
+        var d = document.createElement("div");
+        d.appendChild(document.createTextNode(str));
+        return d.innerHTML;
+      }
+
+      // -----------------------------------------------------------------------
+      // Render
+      // -----------------------------------------------------------------------
+
+      function render() {
+        if (phase === "idle") {
+          root.innerHTML =
+            (config.title ? '<h2 class="mrw__title">' + esc(config.title) + "</h2>" : "") +
+            (config.description ? '<p class="mrw__description">' + esc(config.description) + "</p>" : "") +
+            '<div class="mrw__actions">' +
+              '<button class="mrw__button mrw__button--primary" data-action="start">Start</button>' +
+            "</div>";
+          return;
+        }
+
+        if (phase === "question") {
+          var qId = history[history.length - 1];
+          var q = findQuestion(qId);
+          if (!q) { phase = "idle"; render(); return; }
+
+          var visitedCount = history.length;
+          var pct = Math.min(Math.round((visitedCount / config.questions.length) * 100), 95);
+          var selectedValue = answers[qId];
+
+          var optionsHtml = q.options.map(function (opt) {
+            var isSelected = selectedValue === opt.value;
+            var cls = "mrw__option" + (isSelected ? " mrw__option--selected" : "");
+            var check = isSelected
+              ? '<svg class="mrw__option-check" viewBox="0 0 18 18" fill="none" aria-hidden="true">' +
+                  '<circle cx="9" cy="9" r="9" fill="currentColor" opacity="0.15"/>' +
+                  '<path d="M5 9l3 3 5-5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>' +
+                "</svg>"
+              : "";
+            return (
+              '<button class="' + cls + '" type="button" ' +
+                'data-action="select" data-qid="' + esc(q.id) + '" data-value="' + esc(opt.value) + '" ' +
+                'aria-pressed="' + (isSelected ? "true" : "false") + '">' +
+                esc(opt.label) + check +
+              "</button>"
+            );
+          }).join("");
+
+          var backBtn = history.length > 0
+            ? '<button class="mrw__button mrw__button--secondary" type="button" data-action="back">Back</button>'
+            : "";
+
+          root.innerHTML =
+            '<p class="mrw__progress-label" aria-live="polite">Step ' + visitedCount + "</p>" +
+            '<div class="mrw__progress" role="progressbar" aria-valuenow="' + visitedCount + '" aria-valuemin="1" aria-valuemax="' + config.questions.length + '">' +
+              '<div class="mrw__progress-fill" style="width:' + pct + '%"></div>' +
+            "</div>" +
+            '<h2 class="mrw__question">' + esc(q.text) + "</h2>" +
+            (q.description ? '<p class="mrw__question-description">' + esc(q.description) + "</p>" : "") +
+            '<div class="mrw__options">' + optionsHtml + "</div>" +
+            '<div class="mrw__actions">' + backBtn + "</div>";
+          return;
+        }
+
+        if (phase === "result") {
+          var rec = resultRec;
+          var cardHtml;
+          if (rec) {
+            cardHtml =
+              '<div class="mrw__recommendation">' +
+                (rec.imageSrc ? '<img class="mrw__recommendation-image" src="' + esc(rec.imageSrc) + '" alt="" aria-hidden="true">' : "") +
+                '<h2 class="mrw__recommendation-title">' + esc(rec.title) + "</h2>" +
+                '<p class="mrw__recommendation-description">' + esc(rec.description) + "</p>" +
+                (rec.ctaLabel && rec.ctaHref
+                  ? '<a class="mrw__recommendation-cta" href="' + esc(rec.ctaHref) + '">' + esc(rec.ctaLabel) + "</a>"
+                  : "") +
+              "</div>";
+          } else {
+            cardHtml =
+              '<p class="mrw__no-match">No specific recommendation matched your answers. ' +
+              "Contact us and we can walk through the options together.</p>";
+          }
+
+          root.innerHTML =
+            '<div role="region" aria-label="Your recommendation">' +
+              cardHtml +
+              '<div class="mrw__result-actions">' +
+                '<button class="mrw__button mrw__button--secondary" type="button" data-action="restart">Start over</button>' +
+              "</div>" +
+            "</div>";
+
+          // NOTE: to submit result data to your backend, uncomment and adapt:
+          //
+          // fetch("/api/wizard-result", {
+          //   method: "POST",
+          //   headers: { "Content-Type": "application/json" },
+          //   body: JSON.stringify({
+          //     answers: answers,
+          //     recommendationId: rec ? rec.id : null,
+          //   }),
+          // });
+        }
+      }
+
+      // -----------------------------------------------------------------------
+      // Event handling
+      // -----------------------------------------------------------------------
+
+      root.addEventListener("click", function (e) {
+        var btn = e.target.closest("[data-action]");
+        if (!btn) return;
+        var action = btn.dataset.action;
+
+        if (action === "start") {
+          if (config.questions.length === 0) return;
+          var firstId = config.questions[0].id;
+          answers = {};
+          history = [firstId];
+          phase = "question";
+          render();
+          return;
+        }
+
+        if (action === "select") {
+          var qId = btn.dataset.qid;
+          var value = btn.dataset.value;
+          answers[qId] = value;
+
+          var q = findQuestion(qId);
+          if (!q) return;
+
+          var nextId = resolveNextId(q, value);
+          if (nextId === null) {
+            // No more questions: compute result
+            var matched = matchRecommendation();
+            resultRec = matched !== null ? matched : (config.defaultRecommendation || null);
+            phase = "result";
+          } else {
+            history.push(nextId);
+            phase = "question";
+          }
+          render();
+          return;
+        }
+
+        if (action === "back") {
+          if (history.length <= 1) {
+            phase = "idle";
+            history = [];
+          } else {
+            history.pop();
+            phase = "question";
+          }
+          render();
+          return;
+        }
+
+        if (action === "restart") {
+          answers = {};
+          history = [];
+          resultRec = null;
+          phase = "idle";
+          render();
+          return;
+        }
+      });
+
+      // Initial render
+      render();
+    })();
+  </script>
+</body>
+</html>
