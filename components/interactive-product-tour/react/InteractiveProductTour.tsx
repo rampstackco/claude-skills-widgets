@@ -105,8 +105,11 @@ function computeTooltipCoords(
   }
 }
 
-/** Fallback: center of the viewport */
+/** Fallback: center of the viewport. Guarded for server-side rendering. */
 function centeredCoords(): TooltipCoords {
+  if (typeof window === "undefined") {
+    return { top: 0, left: 0 };
+  }
   return {
     top: window.innerHeight * 0.35,
     left: window.innerWidth / 2 - 160,

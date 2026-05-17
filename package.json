@@ -1,0 +1,13 @@
+{
+  "name": "claude-skills-widgets",
+  "version": "0.0.0",
+  "private": true,
+  "description": "TypeScript type-checking for the component implementations in /components. The repo itself remains documentation-first; this package exists only to catch type errors before downstream consumers do.",
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0",
+    "@types/react": "^19.0.0"
+  }
+}

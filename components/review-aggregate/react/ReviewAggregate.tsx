@@ -1,4 +1,5 @@
 import "../styles.css";
+import type { JSX } from "react";
 
 export interface ReviewAggregateProps {
   /** Rating value from 0 to maxRating. Fractional values (e.g. 4.5) render a half star. */
