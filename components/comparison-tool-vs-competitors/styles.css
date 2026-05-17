@@ -1,0 +1,225 @@
+/* ComparisonToolVsCompetitors shared styles.
+   Class prefix: .cmp
+   Do NOT define .pbc rules here; those live in primary-button-cta/styles.css.
+*/
+
+.cmp {
+  --cmp-bg: var(--brand-surface, #ffffff);
+  --cmp-cell-bg: var(--brand-surface, #ffffff);
+  --cmp-cell-bg-highlighted: rgba(30, 95, 207, 0.05);
+  --cmp-border: rgba(0, 0, 0, 0.1);
+  --cmp-text-color: var(--brand-ink, #102542);
+  --cmp-muted-color: rgba(16, 37, 66, 0.55);
+  --cmp-icon-check: var(--brand-accent, #1e5fcf);
+  --cmp-icon-x: rgba(16, 37, 66, 0.3);
+  --cmp-rating-filled: var(--brand-accent, #1e5fcf);
+  --cmp-rating-empty: rgba(16, 37, 66, 0.15);
+  --cmp-category-bg: rgba(0, 0, 0, 0.025);
+  --cmp-radius: 1rem;
+  --cmp-cell-padding: 0.875rem 1rem;
+  --cmp-section-padding: 2rem;
+
+  display: block;
+  padding: var(--cmp-section-padding);
+  background: var(--cmp-bg);
+  color: var(--cmp-text-color);
+}
+
+/* Header */
+
+.cmp__header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.cmp__title {
+  margin: 0 0 0.5rem;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.cmp__description {
+  margin: 0;
+  color: var(--cmp-muted-color);
+  font-size: 1.0625rem;
+}
+
+/* Table wrapper: horizontal scroll on narrow viewports */
+
+.cmp__table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: var(--cmp-radius);
+  border: 1px solid var(--cmp-border);
+}
+
+/* Table */
+
+.cmp__table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: auto;
+  background: var(--cmp-cell-bg);
+}
+
+/* Column headers */
+
+.cmp__col-head {
+  padding: var(--cmp-cell-padding);
+  text-align: center;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  border-bottom: 2px solid var(--cmp-border);
+  vertical-align: bottom;
+  white-space: nowrap;
+}
+
+.cmp__col-head:first-child {
+  text-align: left;
+}
+
+.cmp__col-head--highlighted {
+  background: var(--cmp-cell-bg-highlighted);
+  color: var(--cmp-icon-check);
+}
+
+.cmp__col-logo {
+  display: block;
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  margin: 0 auto 0.375rem;
+}
+
+/* Row header (feature label) */
+
+.cmp__row-head {
+  padding: var(--cmp-cell-padding);
+  text-align: left;
+  font-weight: 500;
+  font-size: 0.9375rem;
+  border-bottom: 1px solid var(--cmp-border);
+  vertical-align: middle;
+  min-width: 10rem;
+  white-space: nowrap;
+}
+
+.cmp__row-description {
+  display: block;
+  font-size: 0.8125rem;
+  font-weight: 400;
+  color: var(--cmp-muted-color);
+  margin-top: 0.125rem;
+  white-space: normal;
+}
+
+/* Data cells */
+
+.cmp__cell {
+  padding: var(--cmp-cell-padding);
+  text-align: center;
+  font-size: 0.9375rem;
+  border-bottom: 1px solid var(--cmp-border);
+  vertical-align: middle;
+  background: var(--cmp-cell-bg);
+}
+
+.cmp__cell--highlighted {
+  background: var(--cmp-cell-bg-highlighted);
+}
+
+/* Last row: remove bottom border so it doesn't double up on the wrapper border */
+
+.cmp__table tbody tr:last-child .cmp__row-head,
+.cmp__table tbody tr:last-child .cmp__cell {
+  border-bottom: none;
+}
+
+/* Category rows */
+
+.cmp__category-row {
+  background: var(--cmp-category-bg);
+}
+
+.cmp__category-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--cmp-text-color);
+  padding: 0.625rem 1rem;
+  width: 100%;
+  text-align: left;
+  font-family: inherit;
+}
+
+.cmp__category-toggle:focus-visible {
+  outline: 2px solid var(--cmp-icon-check);
+  outline-offset: 2px;
+}
+
+.cmp__chevron {
+  flex-shrink: 0;
+  transition: transform 200ms ease;
+  color: var(--cmp-muted-color);
+}
+
+.cmp__chevron--expanded {
+  transform: rotate(180deg);
+}
+
+.cmp__category-cell {
+  background: var(--cmp-category-bg);
+  border-bottom: 1px solid var(--cmp-border);
+}
+
+/* Icons */
+
+.cmp__icon {
+  display: inline-block;
+  width: 1.25rem;
+  height: 1.25rem;
+  vertical-align: middle;
+}
+
+/* Rating */
+
+.cmp__rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.1875rem;
+}
+
+.cmp__rating-pip {
+  width: 0.75rem;
+  height: 0.75rem;
+  flex-shrink: 0;
+}
+
+/* Visually hidden (screen-reader text) */
+
+.cmp__visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Footer CTA */
+
+.cmp__footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}

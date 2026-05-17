@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PricingTierConfigurator example</title>
+  <link rel="stylesheet" href="../../primary-button-cta/styles.css">
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 0; background: #f6f8fa; }
+  </style>
+</head>
+<body>
+  <section class="ptc ptc--horizontal" id="ptc">
+    <header class="ptc__header">
+      <h2 class="ptc__title">Find your plan</h2>
+      <p class="ptc__description">Adjust the inputs below; we will recommend the right tier.</p>
+    </header>
+
+    <div class="ptc__inputs" aria-live="polite">
+      <div class="ptc__input-field">
+        <label class="ptc__input-label" for="users">How many users do you need?</label>
+        <div class="ptc__input-row">
+          <input id="users" class="ptc__slider" type="range" name="users" min="1" max="100" step="1" value="5">
+          <span class="ptc__slider-value" data-value-for="users">5</span>
+        </div>
+      </div>
+      <div class="ptc__input-field">
+        <div class="ptc__checkbox-row">
+          <input id="needsAnalytics" class="ptc__checkbox" type="checkbox" name="needsAnalytics">
+          <label class="ptc__input-label" for="needsAnalytics">Need advanced analytics?</label>
+        </div>
+      </div>
+      <div class="ptc__input-field">
+        <div class="ptc__checkbox-row">
+          <input id="needsSso" class="ptc__checkbox" type="checkbox" name="needsSso">
+          <label class="ptc__input-label" for="needsSso">Need SSO?</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="ptc__tiers" data-tiers>
+      <!-- Populated by script -->
+    </div>
+  </section>
+
+  <script>
+    (function () {
+      // Tier definitions - replace with your own.
+      const tiers = [
+        {
+          slug: "starter",
+          name: "Starter",
+          price: "$29/mo",
+          features: ["Up to 5 users", "10GB storage", "Email support"],
+          cta: { label: "Choose Starter", href: "/signup?plan=starter" },
+        },
+        {
+          slug: "pro",
+          name: "Pro",
+          price: "$99/mo",
+          features: ["Up to 25 users", "100GB storage", "Priority support", "Advanced analytics"],
+          cta: { label: "Choose Pro", href: "/signup?plan=pro" },
+          badge: "Most popular",
+        },
+        {
+          slug: "enterprise",
+          name: "Enterprise",
+          price: "Custom",
+          features: ["Unlimited users", "Unlimited storage", "Dedicated support", "SSO + audit logs"],
+          cta: { label: "Contact sales", href: "/sales" },
+        },
+      ];
+
+      // Recommendation logic - replace with your own. Keep it honest:
+      // the recommended tier should reflect real product fit.
+      function recommend(values) {
+        const users = Number(values.users) || 0;
+        if (values.needsSso) return "enterprise";
+        if (users > 25 || values.needsAnalytics) return "pro";
+        return "starter";
+      }
+
+      const root = document.getElementById("ptc");
+      const tiersEl = root.querySelector("[data-tiers]");
+
+      function readValues() {
+        return {
+          users: Number(root.querySelector("#users").value),
+          needsAnalytics: root.querySelector("#needsAnalytics").checked,
+          needsSso: root.querySelector("#needsSso").checked,
+        };
+      }
+
+      function renderTiers() {
+        const recommended = recommend(readValues());
+        tiersEl.innerHTML = tiers.map(function (tier) {
+          const isRec = tier.slug === recommended;
+          const flag = tier.badge
+            ? '<span class="ptc__badge">' + tier.badge + "</span>"
+            : isRec
+            ? '<span class="ptc__recommended-flag">Recommended</span>'
+            : "";
+          const srOnly = isRec
+            ? '<span class="ptc__visually-hidden">Recommended based on your inputs</span>'
+            : "";
+          const features = tier.features
+            .map(function (f) { return "<li>" + f + "</li>"; })
+            .join("");
+          return (
+            '<div class="ptc__tier' + (isRec ? " ptc__tier--recommended" : "") + '">' +
+            flag + srOnly +
+            '<h3 class="ptc__tier-name">' + tier.name + "</h3>" +
+            '<div class="ptc__tier-price">' + tier.price + "</div>" +
+            '<ul class="ptc__tier-features">' + features + "</ul>" +
+            '<a class="pbc pbc--' + (isRec ? "solid" : "outlined") + ' pbc--rounded" href="' +
+            tier.cta.href + '">' + tier.cta.label + "</a>" +
+            "</div>"
+          );
+        }).join("");
+      }
+
+      root.querySelector("[data-value-for='users']").textContent =
+        root.querySelector("#users").value;
+
+      root.addEventListener("input", function (e) {
+        if (e.target.id === "users") {
+          root.querySelector("[data-value-for='users']").textContent = e.target.value;
+        }
+        renderTiers();
+      });
+      root.addEventListener("change", renderTiers);
+
+      renderTiers();
+    })();
+  </script>
+</body>
+</html>

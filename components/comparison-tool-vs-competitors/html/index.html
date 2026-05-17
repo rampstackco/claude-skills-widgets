@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ComparisonToolVsCompetitors example</title>
+  <link rel="stylesheet" href="../../primary-button-cta/styles.css">
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 0; background: #f6f8fa; }
+  </style>
+</head>
+<body>
+
+  <!-- =====================================================================
+    Static basic comparison: 3 competitors, flat table, no category toggles.
+    The highlighted column (Our Product) is always first.
+  ====================================================================== -->
+  <section class="cmp" id="cmp-basic">
+    <header class="cmp__header">
+      <h2 class="cmp__title">How we compare</h2>
+      <p class="cmp__description">An honest look at how Our Product stacks up against the alternatives.</p>
+    </header>
+
+    <div class="cmp__table-wrap">
+      <table class="cmp__table">
+        <thead>
+          <tr>
+            <th scope="col" class="cmp__col-head"></th>
+            <th scope="col" class="cmp__col-head cmp__col-head--highlighted">
+              Our Product
+              <span class="cmp__visually-hidden"> (Our pick)</span>
+            </th>
+            <th scope="col" class="cmp__col-head">Competitor A</th>
+            <th scope="col" class="cmp__col-head">Competitor B</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row" class="cmp__row-head">
+              Free trial
+              <span class="cmp__row-description">No credit card required</span>
+            </th>
+            <td class="cmp__cell cmp__cell--highlighted">
+              <span aria-label="Yes">
+                <svg class="cmp__icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <circle cx="10" cy="10" r="9" fill="var(--cmp-icon-check,#1e5fcf)" opacity="0.12"/>
+                  <path d="M6 10.5l3 3 5-5" stroke="var(--cmp-icon-check,#1e5fcf)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </td>
+            <td class="cmp__cell">
+              <span aria-label="Yes">
+                <svg class="cmp__icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <circle cx="10" cy="10" r="9" fill="var(--cmp-icon-check,#1e5fcf)" opacity="0.12"/>
+                  <path d="M6 10.5l3 3 5-5" stroke="var(--cmp-icon-check,#1e5fcf)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </td>
+            <td class="cmp__cell">
+              <span aria-label="No">
+                <svg class="cmp__icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <circle cx="10" cy="10" r="9" fill="var(--cmp-icon-x,rgba(16,37,66,0.3))" opacity="0.08"/>
+                  <path d="M7 7l6 6M13 7l-6 6" stroke="var(--cmp-icon-x,rgba(16,37,66,0.3))" stroke-width="1.75" stroke-linecap="round"/>
+                </svg>
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row" class="cmp__row-head">API access</th>
+            <td class="cmp__cell cmp__cell--highlighted">Full REST + GraphQL</td>
+            <td class="cmp__cell">REST only</td>
+            <td class="cmp__cell">None</td>
+          </tr>
+          <tr>
+            <th scope="row" class="cmp__row-head">Custom domain</th>
+            <td class="cmp__cell cmp__cell--highlighted">
+              <span aria-label="Yes">
+                <svg class="cmp__icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <circle cx="10" cy="10" r="9" fill="var(--cmp-icon-check,#1e5fcf)" opacity="0.12"/>
+                  <path d="M6 10.5l3 3 5-5" stroke="var(--cmp-icon-check,#1e5fcf)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </td>
+            <td class="cmp__cell">
+              <span aria-label="No">
+                <svg class="cmp__icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <circle cx="10" cy="10" r="9" fill="var(--cmp-icon-x,rgba(16,37,66,0.3))" opacity="0.08"/>
+                  <path d="M7 7l6 6M13 7l-6 6" stroke="var(--cmp-icon-x,rgba(16,37,66,0.3))" stroke-width="1.75" stroke-linecap="round"/>
+                </svg>
+              </span>
+            </td>
+            <td class="cmp__cell">
+              <span aria-label="No">
+                <svg class="cmp__icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <circle cx="10" cy="10" r="9" fill="var(--cmp-icon-x,rgba(16,37,66,0.3))" opacity="0.08"/>
+                  <path d="M7 7l6 6M13 7l-6 6" stroke="var(--cmp-icon-x,rgba(16,37,66,0.3))" stroke-width="1.75" stroke-linecap="round"/>
+                </svg>
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row" class="cmp__row-head">Uptime SLA</th>
+            <td class="cmp__cell cmp__cell--highlighted">99.99%</td>
+            <td class="cmp__cell">99.9%</td>
+            <td class="cmp__cell">99.5%</td>
+          </tr>
+          <tr>
+            <th scope="row" class="cmp__row-head">
+              Support quality
+              <span class="cmp__row-description">Rated from verified customer reviews</span>
+            </th>
+            <td class="cmp__cell cmp__cell--highlighted">
+              <span class="cmp__rating" aria-label="5 out of 5">
+                <svg class="cmp__rating-pip" viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="5" fill="var(--cmp-rating-filled,#1e5fcf)"/></svg>
+                <svg class="cmp__rating-pip" viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="5" fill="var(--cmp-rating-filled,#1e5fcf)"/></svg>
+                <svg class="cmp__rating-pip" viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="5" fill="var(--cmp-rating-filled,#1e5fcf)"/></svg>
+                <svg class="cmp__rating-pip" viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="5" fill="var(--cmp-rating-filled,#1e5fcf)"/></svg>
+                <svg class="cmp__rating-pip" viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="5" fill="var(--cmp-rating-filled,#1e5fcf)"/></svg>
+              </span>
+            </td>
+            <td class="cmp__cell">
+              <span class="cmp__rating" aria-label="3 out of 5">
+                <svg class="cmp__rating-pip" viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="5" fill="var(--cmp-rating-filled,#1e5fcf)"/></svg>
+                <svg class="cmp__rating-pip" viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="5" fill="var(--cmp-rating-filled,#1e5fcf)"/></svg>
+                <svg class="cmp__rating-pip" viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="5" fill="var(--cmp-rating-filled,#1e5fcf)"/></svg>
+                <svg class="cmp__rating-pip" viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="5" fill="var(--cmp-rating-empty,rgba(16,37,66,0.15))"/></svg>
+                <svg class="cmp__rating-pip" viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="5" fill="var(--cmp-rating-empty,rgba(16,37,66,0.15))"/></svg>
+              </span>
+            </td>
+            <td class="cmp__cell">
+              <span class="cmp__rating" aria-label="2 out of 5">
+                <svg class="cmp__rating-pip" viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="5" fill="var(--cmp-rating-filled,#1e5fcf)"/></svg>
+                <svg class="cmp__rating-pip" viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="5" fill="var(--cmp-rating-filled,#1e5fcf)"/></svg>
+                <svg class="cmp__rating-pip" viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="5" fill="var(--cmp-rating-empty,rgba(16,37,66,0.15))"/></svg>
+                <svg class="cmp__rating-pip" viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="5" fill="var(--cmp-rating-empty,rgba(16,37,66,0.15))"/></svg>
+                <svg class="cmp__rating-pip" viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="5" fill="var(--cmp-rating-empty,rgba(16,37,66,0.15))"/></svg>
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row" class="cmp__row-head">Starting price</th>
+            <td class="cmp__cell cmp__cell--highlighted">$29/mo</td>
+            <td class="cmp__cell">$49/mo</td>
+            <td class="cmp__cell">$39/mo</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="cmp__footer">
+      <a class="pbc pbc--solid pbc--rounded pbc--with-icon" href="/signup">
+        Get started free
+        <svg class="pbc__icon" viewBox="0 0 16 16" aria-hidden="true">
+          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" fill="none"/>
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+    Category-toggle comparison: 2 competitors, rows grouped by category.
+    Vanilla JS IIFE wires the toggle buttons. No globals.
+  ====================================================================== -->
+  <section class="cmp" id="cmp-grouped" style="margin-top: 3rem;">
+    <header class="cmp__header">
+      <h2 class="cmp__title">Feature breakdown</h2>
+      <p class="cmp__description">Expand any category to see how each product performs.</p>
+    </header>
+
+    <div class="cmp__table-wrap">
+      <table class="cmp__table" id="cmp-grouped-table">
+        <thead>
+          <tr>
+            <th scope="col" class="cmp__col-head"></th>
+            <th scope="col" class="cmp__col-head cmp__col-head--highlighted">
+              Our Product
+              <span class="cmp__visually-hidden"> (Our pick)</span>
+            </th>
+            <th scope="col" class="cmp__col-head">Competitor A</th>
+          </tr>
+        </thead>
+        <tbody id="cmp-grouped-tbody">
+          <!-- Populated by the IIFE below -->
+        </tbody>
+      </table>
+    </div>
+
+    <div class="cmp__footer">
+      <a class="pbc pbc--solid pbc--rounded pbc--with-icon" href="/signup">
+        Start your free trial
+        <svg class="pbc__icon" viewBox="0 0 16 16" aria-hidden="true">
+          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" fill="none"/>
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <script>
+    (function () {
+      // ----------------------------------------------------------------
+      // Data
+      // ----------------------------------------------------------------
+      var competitors = [
+        { name: "Our Product", highlighted: true },
+        { name: "Competitor A", highlighted: false },
+      ];
+
+      // FeatureValue shapes:
+      //   { type: "boolean", value: true/false }
+      //   { type: "text", value: "string" }
+      //   { type: "rating", value: N, max: N }
+      var features = [
+        // Security
+        { label: "Two-factor authentication", category: "Security",
+          values: { "Our Product": { type: "boolean", value: true }, "Competitor A": { type: "boolean", value: true } } },
+        { label: "SSO / SAML", category: "Security",
+          values: { "Our Product": { type: "boolean", value: true }, "Competitor A": { type: "boolean", value: false } } },
+        { label: "Audit logs", description: "Full user activity history", category: "Security",
+          values: { "Our Product": { type: "boolean", value: true }, "Competitor A": { type: "boolean", value: false } } },
+        { label: "SOC 2 Type II", category: "Security",
+          values: { "Our Product": { type: "boolean", value: true }, "Competitor A": { type: "boolean", value: false } } },
+        // Integrations
+        { label: "Zapier", category: "Integrations",
+          values: { "Our Product": { type: "boolean", value: true }, "Competitor A": { type: "boolean", value: true } } },
+        { label: "Native Slack app", category: "Integrations",
+          values: { "Our Product": { type: "boolean", value: true }, "Competitor A": { type: "boolean", value: false } } },
+        { label: "REST API", category: "Integrations",
+          values: { "Our Product": { type: "text", value: "Full access" }, "Competitor A": { type: "text", value: "Read-only" } } },
+        { label: "Webhooks", category: "Integrations",
+          values: { "Our Product": { type: "boolean", value: true }, "Competitor A": { type: "boolean", value: false } } },
+        // Support
+        { label: "Live chat", category: "Support",
+          values: { "Our Product": { type: "boolean", value: true }, "Competitor A": { type: "boolean", value: false } } },
+        { label: "Support quality", description: "Rated from verified customer reviews", category: "Support",
+          values: { "Our Product": { type: "rating", value: 5, max: 5 }, "Competitor A": { type: "rating", value: 3, max: 5 } } },
+        { label: "Response time (median)", category: "Support",
+          values: { "Our Product": { type: "text", value: "Under 2 hours" }, "Competitor A": { type: "text", value: "1 to 3 business days" } } },
+        // Pricing
+        { label: "Free tier", category: "Pricing",
+          values: { "Our Product": { type: "boolean", value: true }, "Competitor A": { type: "boolean", value: false } } },
+        { label: "Annual discount", category: "Pricing",
+          values: { "Our Product": { type: "text", value: "20% off" }, "Competitor A": { type: "text", value: "10% off" } } },
+      ];
+
+      var defaultExpanded = ["Security", "Integrations", "Support", "Pricing"];
+
+      // ----------------------------------------------------------------
+      // SVG builders
+      // ----------------------------------------------------------------
+      var CHECK_ICON =
+        '<svg class="cmp__icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">' +
+        '<circle cx="10" cy="10" r="9" fill="var(--cmp-icon-check,#1e5fcf)" opacity="0.12"/>' +
+        '<path d="M6 10.5l3 3 5-5" stroke="var(--cmp-icon-check,#1e5fcf)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>' +
+        '</svg>';
+
+      var X_ICON =
+        '<svg class="cmp__icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">' +
+        '<circle cx="10" cy="10" r="9" fill="var(--cmp-icon-x,rgba(16,37,66,0.3))" opacity="0.08"/>' +
+        '<path d="M7 7l6 6M13 7l-6 6" stroke="var(--cmp-icon-x,rgba(16,37,66,0.3))" stroke-width="1.75" stroke-linecap="round"/>' +
+        '</svg>';
+
+      var CHEVRON_DOWN =
+        '<svg viewBox="0 0 16 16" width="14" height="14" fill="none" aria-hidden="true">' +
+        '<path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+        '</svg>';
+
+      function buildRating(value, max) {
+        var pips = "";
+        for (var i = 0; i < max; i++) {
+          var filled = i < value;
+          pips +=
+            '<svg class="cmp__rating-pip" viewBox="0 0 12 12" fill="none" aria-hidden="true">' +
+            '<circle cx="6" cy="6" r="5" fill="' +
+            (filled ? "var(--cmp-rating-filled,#1e5fcf)" : "var(--cmp-rating-empty,rgba(16,37,66,0.15))") +
+            '"/></svg>';
+        }
+        return (
+          '<span class="cmp__rating" aria-label="' + value + " out of " + max + '">' +
+          pips +
+          "</span>"
+        );
+      }
+
+      function buildValueCell(featureValue, highlighted) {
+        var cellClass = "cmp__cell" + (highlighted ? " cmp__cell--highlighted" : "");
+        if (!featureValue) {
+          return '<td class="' + cellClass + '"><span class="cmp__visually-hidden">Not available</span></td>';
+        }
+        if (featureValue.type === "boolean") {
+          return featureValue.value
+            ? '<td class="' + cellClass + '"><span aria-label="Yes">' + CHECK_ICON + "</span></td>"
+            : '<td class="' + cellClass + '"><span aria-label="No">' + X_ICON + "</span></td>";
+        }
+        if (featureValue.type === "rating") {
+          var max = featureValue.max || 5;
+          return '<td class="' + cellClass + '">' + buildRating(featureValue.value, max) + "</td>";
+        }
+        // text
+        return '<td class="' + cellClass + '">' + featureValue.value + "</td>";
+      }
+
+      // ----------------------------------------------------------------
+      // Derive ordered unique categories
+      // ----------------------------------------------------------------
+      var categories = [];
+      features.forEach(function (f) {
+        if (f.category && categories.indexOf(f.category) === -1) {
+          categories.push(f.category);
+        }
+      });
+
+      // ----------------------------------------------------------------
+      // State: which categories are expanded
+      // ----------------------------------------------------------------
+      var expanded = {};
+      defaultExpanded.forEach(function (cat) { expanded[cat] = true; });
+
+      var colCount = competitors.length + 1; // +1 for row-header column
+
+      // ----------------------------------------------------------------
+      // Render tbody
+      // ----------------------------------------------------------------
+      function render() {
+        var tbody = document.getElementById("cmp-grouped-tbody");
+        var html = "";
+
+        categories.forEach(function (cat) {
+          var isExpanded = !!expanded[cat];
+          var chevronClass = "cmp__chevron" + (isExpanded ? " cmp__chevron--expanded" : "");
+
+          // Category toggle row
+          html +=
+            '<tr class="cmp__category-row">' +
+            '<td colspan="' + colCount + '" class="cmp__category-cell">' +
+            '<button type="button" class="cmp__category-toggle" aria-expanded="' + isExpanded + '" data-cat="' + cat + '">' +
+            '<svg class="' + chevronClass + '" viewBox="0 0 16 16" width="14" height="14" fill="none" aria-hidden="true">' +
+            '<path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+            "</svg>" +
+            cat +
+            "</button>" +
+            "</td>" +
+            "</tr>";
+
+          if (isExpanded) {
+            features
+              .filter(function (f) { return f.category === cat; })
+              .forEach(function (row) {
+                html += "<tr>";
+                html +=
+                  '<th scope="row" class="cmp__row-head">' +
+                  row.label +
+                  (row.description
+                    ? '<span class="cmp__row-description">' + row.description + "</span>"
+                    : "") +
+                  "</th>";
+                competitors.forEach(function (comp) {
+                  html += buildValueCell(row.values[comp.name], !!comp.highlighted);
+                });
+                html += "</tr>";
+              });
+          }
+        });
+
+        tbody.innerHTML = html;
+      }
+
+      // ----------------------------------------------------------------
+      // Wire toggle clicks via event delegation on the tbody
+      // ----------------------------------------------------------------
+      document
+        .getElementById("cmp-grouped-tbody")
+        .addEventListener("click", function (e) {
+          var btn = e.target.closest("[data-cat]");
+          if (!btn) return;
+          var cat = btn.getAttribute("data-cat");
+          expanded[cat] = !expanded[cat];
+          render();
+        });
+
+      // Initial render
+      render();
+    })();
+  </script>
+
+</body>
+</html>

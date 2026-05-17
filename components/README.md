@@ -32,8 +32,11 @@ Component implementations of the patterns documented in `/patterns/`. Each compo
 | diagnostic-quiz-assessment | `patterns/interactive-tooling/04-diagnostic-quiz-assessment.md` | yes | yes |
 | product-market-fit-quiz | `patterns/interactive-tooling/03-product-market-fit-quiz.md` | yes | yes |
 | multi-step-recommendation-wizard | `patterns/interactive-tooling/05-multi-step-recommendation-wizard.md` | yes | yes |
+| pricing-tier-configurator | `patterns/interactive-tooling/06-pricing-tier-configurator.md` | yes | yes |
+| product-feature-configurator | `patterns/interactive-tooling/07-product-feature-configurator.md` | yes | yes |
+| comparison-tool-vs-competitors | `patterns/interactive-tooling/08-comparison-tool-vs-competitors.md` | yes | yes |
 
-Components that do not map cleanly to a documented pattern are utilities. The four v2.0 utilities are flagged as candidates for future pattern documentation; the twenty-one v2.1 through v2.4 components each map directly to a documented pattern. The savings-calculator component also covers the ROI cost calculator pattern (`patterns/interactive-tooling/01-roi-cost-calculator.md`) via its generic compute API.
+Components that do not map cleanly to a documented pattern are utilities. The four v2.0 utilities are flagged as candidates for future pattern documentation; the twenty-four v2.1 through v2.5 components each map directly to a documented pattern. The savings-calculator component also covers the ROI cost calculator pattern (`patterns/interactive-tooling/01-roi-cost-calculator.md`) via its generic compute API.
 
 ## Architecture
 
@@ -70,16 +73,18 @@ v2.2: 6 more pattern-mapped components extending CTA, lead capture, and social p
 
 v2.3: 6 more components opening the interactive-tooling category and expanding urgency.
 
-v2.4 (current): 3 quiz and wizard components. Interactive-tooling now 4/10. Highlights:
-- diagnostic-quiz-assessment (generic framework for scored assessments)
-- product-market-fit-quiz (Sean Ellis PMF test, composes diagnostic-quiz-assessment)
-- multi-step-recommendation-wizard (branching-logic recommendation flow)
+v2.4: 3 quiz and wizard components.
+
+v2.5 (current): 3 configurator components extending interactive-tooling to 7/10. Highlights:
+- pricing-tier-configurator (real-time tier recommendation from user inputs)
+- product-feature-configurator (Tesla-style product builder with running price)
+- comparison-tool-vs-competitors (feature comparison table with optional category toggles)
 
 The ROI cost calculator pattern (interactive-tooling/01) is implemented by the existing savings-calculator component.
 
-Total: 26 component implementations across 6 categories.
+Total: 29 component implementations across 6 categories.
 
-v2.5+ planned: configurators (pricing, product features, comparison), specialized tooling (scheduling, product tour), showcase pages.
+v2.6+ planned: specialized tooling (scheduling, product tour), featured-in-press-strip, showcase pages.
 
 ## Cross-references
 

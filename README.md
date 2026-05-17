@@ -118,7 +118,17 @@ v2.4 advances interactive-tooling with the quiz and wizard family:
 
 The ROI cost calculator pattern is covered by the existing SavingsCalculator (generic compute API) and is cross-linked rather than reimplemented.
 
-Total v2.x: 26 component implementations. Browse `components/` for the full catalog and `components/README.md` for the roadmap.
+Total v2.x: 26 component implementations.
+
+## v2.5: 3 configurator components
+
+v2.5 advances interactive-tooling with the configurator family:
+
+- **PricingTierConfigurator**: real-time tier recommendation from user inputs
+- **ProductFeatureConfigurator**: Tesla-style product builder with a running price total
+- **ComparisonToolVsCompetitors**: feature comparison table with optional category toggles
+
+Total v2.x: 29 component implementations. Interactive-tooling at 7/10. Browse `components/` for the full catalog and `components/README.md` for the roadmap.
 
 ## How patterns are documented
 

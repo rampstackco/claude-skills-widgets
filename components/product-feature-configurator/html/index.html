@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ProductFeatureConfigurator example</title>
+  <link rel="stylesheet" href="../../primary-button-cta/styles.css">
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 0; background: #f4f6fa; }
+  </style>
+</head>
+<body>
+
+  <section class="pfc pfc--stacked" id="pfc">
+    <header class="pfc__header">
+      <h2 class="pfc__title">Build your laptop</h2>
+      <p class="pfc__description">Choose your options and see the price update as you go.</p>
+    </header>
+
+    <div class="pfc__body">
+      <!-- Left column: option groups -->
+      <div class="pfc__groups">
+
+        <!-- Group 1: Processor (radio) -->
+        <fieldset class="pfc__group" id="group-processor">
+          <legend class="pfc__group-label">
+            Processor
+            <span class="pfc__visually-hidden"> (required)</span>
+          </legend>
+          <p class="pfc__group-description">Pick the chip that fits your workload.</p>
+          <div class="pfc__options">
+            <label class="pfc__option" for="processor-i5">
+              <input id="processor-i5" type="radio" name="processor" value="i5" data-price="0" checked>
+              <span class="pfc__option-label">
+                <span class="pfc__option-name">Core i5</span>
+                <span class="pfc__option-desc">Everyday web, email, and documents.</span>
+              </span>
+            </label>
+            <label class="pfc__option" for="processor-i7">
+              <input id="processor-i7" type="radio" name="processor" value="i7" data-price="200">
+              <span class="pfc__option-label">
+                <span class="pfc__option-name">Core i7</span>
+                <span class="pfc__option-desc">Heavy multitasking and video editing.</span>
+              </span>
+              <span class="pfc__option-price">+$200</span>
+            </label>
+            <label class="pfc__option" for="processor-i9">
+              <input id="processor-i9" type="radio" name="processor" value="i9" data-price="450">
+              <span class="pfc__option-label">
+                <span class="pfc__option-name">Core i9</span>
+                <span class="pfc__option-desc">Professional rendering and compiling.</span>
+              </span>
+              <span class="pfc__option-price">+$450</span>
+            </label>
+          </div>
+        </fieldset>
+
+        <!-- Group 2: Storage (select) -->
+        <fieldset class="pfc__group" id="group-storage">
+          <legend class="pfc__group-label">
+            Storage
+            <span class="pfc__visually-hidden"> (required)</span>
+          </legend>
+          <p class="pfc__group-description">All options are fast NVMe SSDs.</p>
+          <div class="pfc__options">
+            <select class="pfc__select" id="storage" name="storage" aria-label="Storage">
+              <option value="256gb" data-price="0">256 GB SSD</option>
+              <option value="512gb" data-price="100">512 GB SSD (+$100)</option>
+              <option value="1tb"   data-price="200">1 TB SSD (+$200)</option>
+              <option value="2tb"   data-price="380">2 TB SSD (+$380)</option>
+            </select>
+          </div>
+        </fieldset>
+
+        <!-- Group 3: Add-ons (checkbox) -->
+        <fieldset class="pfc__group" id="group-addons">
+          <legend class="pfc__group-label">Add-ons</legend>
+          <p class="pfc__group-description">Optional extras included at checkout.</p>
+          <div class="pfc__options">
+            <label class="pfc__option" for="addon-warranty">
+              <input id="addon-warranty" type="checkbox" name="addons" value="warranty" data-price="149">
+              <span class="pfc__option-label">
+                <span class="pfc__option-name">3-year extended warranty</span>
+                <span class="pfc__option-desc">Extends standard 1-year coverage to 3 years.</span>
+              </span>
+              <span class="pfc__option-price">+$149</span>
+            </label>
+            <label class="pfc__option" for="addon-office">
+              <input id="addon-office" type="checkbox" name="addons" value="office" data-price="99">
+              <span class="pfc__option-label">
+                <span class="pfc__option-name">Productivity suite license</span>
+                <span class="pfc__option-desc">Full license for word processing, spreadsheets, and slides.</span>
+              </span>
+              <span class="pfc__option-price">+$99</span>
+            </label>
+            <label class="pfc__option" for="addon-bag">
+              <input id="addon-bag" type="checkbox" name="addons" value="bag" data-price="49">
+              <span class="pfc__option-label">
+                <span class="pfc__option-name">Premium carry sleeve</span>
+                <span class="pfc__option-desc">Water-resistant neoprene sleeve for 15" laptops.</span>
+              </span>
+              <span class="pfc__option-price">+$49</span>
+            </label>
+          </div>
+        </fieldset>
+
+      </div>
+
+      <!-- Right column: summary + actions -->
+      <div class="pfc__right">
+
+        <div class="pfc__summary" aria-live="polite" id="pfc-summary">
+          <p class="pfc__summary-heading">Your configuration</p>
+
+          <div class="pfc__summary-line">
+            <span class="pfc__summary-key">Processor</span>
+            <span class="pfc__summary-val" id="summary-processor">Core i5</span>
+          </div>
+          <div class="pfc__summary-line">
+            <span class="pfc__summary-key">Storage</span>
+            <span class="pfc__summary-val" id="summary-storage">256 GB SSD</span>
+          </div>
+          <div class="pfc__summary-line">
+            <span class="pfc__summary-key">Add-ons</span>
+            <span class="pfc__summary-val" id="summary-addons">None</span>
+          </div>
+
+          <div class="pfc__total">
+            <span class="pfc__total-label">Total</span>
+            <span class="pfc__total-price" id="pfc-total">$999</span>
+          </div>
+        </div>
+
+        <div class="pfc__actions">
+          <a class="pbc pbc--solid pbc--rounded pbc--with-icon" href="/checkout">
+            Order now
+            <svg class="pbc__icon" viewBox="0 0 16 16" aria-hidden="true">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" fill="none"/>
+            </svg>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <script>
+    (function () {
+      var BASE_PRICE = 999;
+      var root = document.getElementById("pfc");
+
+      // Option definitions mirror the HTML above so the JS stays in sync.
+      var GROUPS = [
+        {
+          name: "processor",
+          type: "radio",
+          summaryEl: "summary-processor",
+          options: [
+            { value: "i5",    label: "Core i5",     price: 0   },
+            { value: "i7",    label: "Core i7",     price: 200 },
+            { value: "i9",    label: "Core i9",     price: 450 },
+          ],
+        },
+        {
+          name: "storage",
+          type: "select",
+          summaryEl: "summary-storage",
+          options: [
+            { value: "256gb", label: "256 GB SSD",  price: 0   },
+            { value: "512gb", label: "512 GB SSD",  price: 100 },
+            { value: "1tb",   label: "1 TB SSD",    price: 200 },
+            { value: "2tb",   label: "2 TB SSD",    price: 380 },
+          ],
+        },
+        {
+          name: "addons",
+          type: "checkbox",
+          summaryEl: "summary-addons",
+          options: [
+            { value: "warranty", label: "3-yr warranty",         price: 149 },
+            { value: "office",   label: "Productivity license",  price: 99  },
+            { value: "bag",      label: "Carry sleeve",          price: 49  },
+          ],
+        },
+      ];
+
+      function getSelections() {
+        var selections = {};
+        GROUPS.forEach(function (group) {
+          if (group.type === "radio") {
+            var checked = root.querySelector(
+              "input[name='" + group.name + "']:checked"
+            );
+            selections[group.name] = checked ? checked.value : "";
+          } else if (group.type === "select") {
+            var sel = root.querySelector("select[name='" + group.name + "']");
+            selections[group.name] = sel ? sel.value : "";
+          } else if (group.type === "checkbox") {
+            var boxes = root.querySelectorAll(
+              "input[name='" + group.name + "']:checked"
+            );
+            selections[group.name] = Array.prototype.map.call(boxes, function (b) {
+              return b.value;
+            });
+          }
+        });
+        return selections;
+      }
+
+      function computeTotal(selections) {
+        var total = BASE_PRICE;
+        GROUPS.forEach(function (group) {
+          var sel = selections[group.name];
+          if (group.type === "checkbox") {
+            sel.forEach(function (val) {
+              var opt = group.options.find(function (o) { return o.value === val; });
+              if (opt) { total += opt.price; }
+            });
+          } else {
+            var opt = group.options.find(function (o) { return o.value === sel; });
+            if (opt) { total += opt.price; }
+          }
+        });
+        return total;
+      }
+
+      function formatUSD(amount) {
+        return new Intl.NumberFormat("en-US", {
+          style: "currency",
+          currency: "USD",
+          maximumFractionDigits: 0,
+        }).format(amount);
+      }
+
+      function getSummaryLabel(group, selections) {
+        var sel = selections[group.name];
+        if (group.type === "checkbox") {
+          if (!sel || sel.length === 0) { return "None"; }
+          return sel.map(function (val) {
+            var opt = group.options.find(function (o) { return o.value === val; });
+            return opt ? opt.label : val;
+          }).join(", ");
+        }
+        var opt = group.options.find(function (o) { return o.value === sel; });
+        return opt ? opt.label : (sel || "None");
+      }
+
+      function update() {
+        var selections = getSelections();
+        var total = computeTotal(selections);
+
+        // Update summary text.
+        GROUPS.forEach(function (group) {
+          var el = document.getElementById(group.summaryEl);
+          if (el) {
+            el.textContent = getSummaryLabel(group, selections);
+          }
+        });
+
+        // Update total.
+        var totalEl = document.getElementById("pfc-total");
+        if (totalEl) { totalEl.textContent = formatUSD(total); }
+      }
+
+      root.addEventListener("change", update);
+      update();
+    })();
+  </script>
+
+</body>
+</html>

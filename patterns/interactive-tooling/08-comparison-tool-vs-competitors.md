@@ -73,6 +73,10 @@ Less natural with:
 - `06-pricing-tier-configurator.md` for when the comparison is specifically price-based
 - `07-product-feature-configurator.md` for comparing different configurations of the same product
 
+## Component implementation
+
+A v2 implementation of this pattern is available in [`components/comparison-tool-vs-competitors/`](../../components/comparison-tool-vs-competitors/). Both React (TypeScript) and HTML/CSS variants are provided. Customize via CSS custom properties.
+
 ## Sources
 
 - Cialdini, Robert: "Influence" (anchoring and commitment principles)
