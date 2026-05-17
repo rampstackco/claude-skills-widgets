@@ -74,6 +74,10 @@ Less natural with:
 - `09-newsletter-signup-footer.md` for the footer-positioned variant
 - `10-sticky-bottom-newsletter-bar.md` for the persistent bar version
 
+## Component implementation
+
+A v2 implementation of this pattern is available in [`components/inline-single-field-form/`](../../components/inline-single-field-form/). Both React (TypeScript) and HTML/CSS variants are provided. Customize via CSS custom properties.
+
 ## Sources
 
 - Nielsen Norman Group: "Website Forms Usability: Top 10 Recommendations" (nngroup.com)

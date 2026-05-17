@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CountdownTimer examples</title>
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      padding: 2rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    h2 {
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      color: #555;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .demo {
+      margin-bottom: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>CountdownTimer examples</h1>
+
+  <!-- EXAMPLE 1: Full format
+       data-deadline: ISO 8601 datetime string for the real, fixed deadline.
+       data-format: "full" renders "2 days 3 hours 45 minutes 12 seconds".
+       data-expired-label: text shown once deadline passes.
+       The .cdt__display element is populated and updated by the script below. -->
+  <h2>Full format</h2>
+  <div class="demo">
+    <section
+      class="cdt"
+      data-deadline="2026-06-01T00:00:00Z"
+      data-format="full"
+      data-expired-label="Sale has closed"
+    >
+      <p class="cdt__label">Sale ends in</p>
+      <p class="cdt__display" aria-live="off"></p>
+    </section>
+  </div>
+
+  <!-- EXAMPLE 2: Compact format
+       data-format: "compact" renders "02d 03h 45m 12s".
+       Uses the same deadline so both examples stay in sync in this demo. -->
+  <h2>Compact format</h2>
+  <div class="demo">
+    <section
+      class="cdt"
+      data-deadline="2026-06-01T00:00:00Z"
+      data-format="compact"
+      data-expired-label="Offer closed"
+    >
+      <p class="cdt__label">Offer closes</p>
+      <p class="cdt__display" aria-live="off"></p>
+    </section>
+  </div>
+
+  <script>
+    /**
+     * CountdownTimer vanilla JS driver.
+     *
+     * How it works:
+     * 1. Find every .cdt element on the page that has a [data-deadline] attribute.
+     * 2. Parse the deadline once using new Date() (ISO strings are safe cross-browser).
+     * 3. Start a setInterval that fires every 1000 ms.
+     * 4. On each tick, calculate the remaining time by comparing Date.now() to the
+     *    fixed deadline timestamp. This means the countdown is stable across page
+     *    reloads and devices because it is anchored to a fixed point in time, not
+     *    to the moment the page loaded.
+     * 5. When the deadline passes: write the expired label, add .cdt--expired to
+     *    the root, and clear the interval so no further ticks occur.
+     *
+     * To adapt this to any stack:
+     * - Replace the document.querySelectorAll call with however your framework
+     *   identifies the timer element.
+     * - Replace the data-deadline attribute read with however your stack provides
+     *   the deadline value (a server-rendered variable, a JSON endpoint, etc.).
+     * - Keep the deadline as a fixed UTC timestamp, not a duration from page load.
+     */
+
+    (function initCountdownTimers() {
+      /** Pad a number to at least 2 digits. */
+      function pad(n) {
+        return String(n).padStart(2, "0");
+      }
+
+      /**
+       * Calculate remaining time between now and a fixed deadline Date.
+       * Returns null when the deadline has passed.
+       */
+      function getTimeLeft(deadlineMs) {
+        var diff = deadlineMs - Date.now();
+        if (diff <= 0) return null;
+        var total = Math.floor(diff / 1000);
+        return {
+          days:    Math.floor(total / 86400),
+          hours:   Math.floor((total % 86400) / 3600),
+          minutes: Math.floor((total % 3600) / 60),
+          seconds: total % 60
+        };
+      }
+
+      /**
+       * Format a time-left object using the "full" style.
+       * Example output: "2 days 3 hours 45 minutes 12 seconds"
+       */
+      function formatFull(t) {
+        var parts = [];
+        if (t.days > 0) {
+          parts.push(t.days + (t.days === 1 ? " day" : " days"));
+        }
+        if (t.hours > 0 || t.days > 0) {
+          parts.push(t.hours + (t.hours === 1 ? " hour" : " hours"));
+        }
+        parts.push(t.minutes + (t.minutes === 1 ? " minute" : " minutes"));
+        parts.push(t.seconds + (t.seconds === 1 ? " second" : " seconds"));
+        return parts.join(" ");
+      }
+
+      /**
+       * Format a time-left object using the "compact" style.
+       * Example output: "02d 03h 45m 12s"
+       */
+      function formatCompact(t) {
+        var parts = [];
+        if (t.days > 0) parts.push(pad(t.days) + "d");
+        parts.push(pad(t.hours) + "h");
+        parts.push(pad(t.minutes) + "m");
+        parts.push(pad(t.seconds) + "s");
+        return parts.join(" ");
+      }
+
+      /**
+       * Initialize a single .cdt element.
+       * @param {HTMLElement} root - The .cdt section element.
+       */
+      function initTimer(root) {
+        var deadlineAttr = root.dataset.deadline;
+        var expiredLabel = root.dataset.expiredLabel || "Deal ended";
+        var format       = root.dataset.format === "compact" ? "compact" : "full";
+        var display      = root.querySelector(".cdt__display");
+
+        if (!deadlineAttr || !display) {
+          // Nothing to drive: the element is missing required data.
+          return;
+        }
+
+        // Parse the deadline once. Using a fixed timestamp anchors the countdown
+        // to a real moment in time rather than the page load instant.
+        var deadlineMs = new Date(deadlineAttr).getTime();
+
+        /** Write the current time-left string into .cdt__display. */
+        function tick() {
+          var t = getTimeLeft(deadlineMs);
+
+          if (t === null) {
+            // Deadline has passed: show expired state and stop ticking.
+            display.textContent = expiredLabel;
+            root.classList.add("cdt--expired");
+            clearInterval(intervalId);
+            return;
+          }
+
+          display.textContent =
+            format === "compact" ? formatCompact(t) : formatFull(t);
+        }
+
+        // Run once immediately so the display is populated before the first
+        // interval fires, avoiding a blank flash on page load.
+        tick();
+
+        var intervalId = setInterval(tick, 1000);
+      }
+
+      // Initialize all .cdt elements that carry a deadline attribute.
+      var timers = document.querySelectorAll(".cdt[data-deadline]");
+      for (var i = 0; i < timers.length; i++) {
+        initTimer(timers[i]);
+      }
+    })();
+  </script>
+</body>
+</html>

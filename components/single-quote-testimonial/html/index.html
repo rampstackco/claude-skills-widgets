@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SingleQuoteTestimonial examples</title>
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      padding: 3rem 2rem;
+      max-width: 640px;
+      margin: 0 auto;
+      background: #fff;
+      color: #111827;
+    }
+    .demo {
+      margin-bottom: 3rem;
+    }
+    .demo-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #9ca3af;
+      margin: 0 0 1rem;
+    }
+  </style>
+</head>
+<body>
+  <h1 style="font-size:1.25rem;margin-bottom:2.5rem;">SingleQuoteTestimonial examples</h1>
+
+  <!-- Minimal variant -->
+  <div class="demo">
+    <p class="demo-label">Minimal (default)</p>
+    <figure class="sqt sqt--minimal">
+      <blockquote class="sqt__quote">
+        <p>Shipping confidence went up immediately after we switched. Our on-call rotation is genuinely calm now.</p>
+      </blockquote>
+      <figcaption class="sqt__attribution">
+        <span>
+          <span class="sqt__name">Jordan Lee</span>
+          <span class="sqt__meta">VP Engineering, Northwind</span>
+        </span>
+      </figcaption>
+    </figure>
+  </div>
+
+  <!-- Card variant -->
+  <div class="demo">
+    <p class="demo-label">Card</p>
+    <figure class="sqt sqt--card">
+      <blockquote class="sqt__quote">
+        <p>The onboarding cut our setup time from days to under an hour. I expected the usual week-long back-and-forth and it just didn't happen.</p>
+      </blockquote>
+      <figcaption class="sqt__attribution">
+        <span>
+          <span class="sqt__name">Morgan Reyes</span>
+          <span class="sqt__meta">CTO, Crestfield Labs</span>
+        </span>
+      </figcaption>
+    </figure>
+  </div>
+
+  <!-- With-headshot variant -->
+  <div class="demo">
+    <p class="demo-label">With headshot</p>
+    <figure class="sqt sqt--with-headshot">
+      <blockquote class="sqt__quote">
+        <p>The integration team was responsive and the documentation was actually accurate. That combination is rarer than it should be.</p>
+      </blockquote>
+      <figcaption class="sqt__attribution">
+        <img
+          class="sqt__avatar"
+          src="https://via.placeholder.com/64"
+          alt="Casey Tran"
+          width="48"
+          height="48"
+        >
+        <span>
+          <span class="sqt__name">Casey Tran</span>
+          <span class="sqt__meta">Head of Platform, Harborview</span>
+          <img
+            class="sqt__logo"
+            src="https://via.placeholder.com/120x32"
+            alt="Harborview"
+          >
+        </span>
+      </figcaption>
+    </figure>
+  </div>
+
+</body>
+</html>

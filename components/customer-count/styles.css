@@ -1,0 +1,93 @@
+/* CustomerCount shared styles. */
+
+.cc {
+  --cc-count-font-size: var(--brand-display, 4rem);
+  --cc-count-font-weight: var(--brand-weight-bold, 700);
+  --cc-count-color: var(--brand-ink, #0f172a);
+  --cc-label-color: var(--brand-muted, #475569);
+  --cc-label-font-size: var(--brand-text-sm, 1rem);
+  --cc-subtitle-color: var(--brand-subtle, #94a3b8);
+  --cc-growth-up-color: var(--brand-success, #16a34a);
+  --cc-growth-down-color: var(--brand-danger, #dc2626);
+  --cc-gap: 0.375rem;
+
+  display: inline-flex;
+  flex-direction: column;
+  gap: var(--cc-gap);
+}
+
+/* Alignment modifiers */
+.cc--center {
+  align-items: center;
+  text-align: center;
+}
+
+.cc--left {
+  align-items: flex-start;
+  text-align: left;
+}
+
+/* Count: the primary number */
+.cc__count {
+  display: block;
+  font-size: var(--cc-count-font-size);
+  font-weight: var(--cc-count-font-weight);
+  color: var(--cc-count-color);
+  line-height: 1;
+  font-family: inherit;
+  letter-spacing: -0.02em;
+}
+
+/* Label: context below the count */
+.cc__label {
+  display: block;
+  font-size: var(--cc-label-font-size);
+  color: var(--cc-label-color);
+  font-family: inherit;
+  line-height: 1.4;
+}
+
+/* Subtitle: secondary supporting text */
+.cc__subtitle {
+  display: block;
+  font-size: calc(var(--cc-label-font-size) * 0.875);
+  color: var(--cc-subtitle-color);
+  font-family: inherit;
+  line-height: 1.4;
+}
+
+/* Growth indicator row */
+.cc__growth {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: calc(var(--cc-label-font-size) * 0.875);
+  font-family: inherit;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.cc__growth--up {
+  color: var(--cc-growth-up-color);
+}
+
+.cc__growth--down {
+  color: var(--cc-growth-down-color);
+}
+
+/* Growth icon: small inline SVG triangle */
+.cc__growth-icon {
+  width: 0.6em;
+  height: 0.5em;
+  flex-shrink: 0;
+  fill: currentColor;
+}
+
+/* Reduced motion: suppress any parent-driven count animations */
+@media (prefers-reduced-motion: reduce) {
+  .cc,
+  .cc * {
+    animation: none !important;
+    transition: none !important;
+  }
+}

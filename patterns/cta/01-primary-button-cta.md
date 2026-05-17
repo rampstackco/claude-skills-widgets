@@ -74,6 +74,10 @@ Less natural with:
 - `19-microcopy-driven-button-cta.md` for the copy-decision side of primary buttons
 - `20-asymmetric-cta-primary-de-emphasized-secondary.md` for the de-emphasized secondary case
 
+## Component implementation
+
+A v2 implementation of this pattern is available in [`components/primary-button-cta/`](../../components/primary-button-cta/). Both React (TypeScript) and HTML/CSS variants are provided. Customize via CSS custom properties.
+
 ## Sources
 
 - Nielsen Norman Group: "Calls to Action: How to Write Effective Buttons" (search nngroup.com for the article)

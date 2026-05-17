@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>InlineSingleFieldForm examples</title>
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      padding: 2rem;
+      max-width: 640px;
+      margin: 0 auto;
+      color: #111827;
+    }
+    .demo {
+      margin-bottom: 3rem;
+    }
+    h2 {
+      margin-top: 0;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+      color: #6b7280;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+  </style>
+</head>
+<body>
+  <h1>InlineSingleFieldForm examples</h1>
+
+  <!-- =====================================================================
+       Example 1: Default email capture
+       The .isff__success element starts with the "hidden" attribute so it
+       is invisible on load. The script below reveals it after a successful
+       submit and hides the form row.
+       ===================================================================== -->
+  <div class="demo">
+    <h2>Email capture (default)</h2>
+
+    <form class="isff" id="form-email" novalidate>
+      <div class="isff__row">
+        <div class="isff__field">
+          <label for="isff-email-input">Email address</label>
+          <input
+            id="isff-email-input"
+            class="isff__input"
+            type="email"
+            placeholder="you@company.com"
+            autocomplete="email"
+            required
+          >
+        </div>
+        <button class="isff__button" type="submit">Get the newsletter</button>
+      </div>
+
+      <!-- Error message: hidden until an error occurs -->
+      <p class="isff__error" id="isff-email-error" hidden role="alert"></p>
+
+      <!-- Success message: hidden until submission succeeds -->
+      <p class="isff__success" id="isff-email-success" hidden aria-live="polite">
+        You're on the list!
+      </p>
+    </form>
+  </div>
+
+  <!-- =====================================================================
+       Example 2: With disclaimer text
+       ===================================================================== -->
+  <div class="demo">
+    <h2>With disclaimer</h2>
+
+    <form class="isff" id="form-disclaimer" novalidate>
+      <div class="isff__row">
+        <div class="isff__field">
+          <label for="isff-disclaimer-input">Work email</label>
+          <input
+            id="isff-disclaimer-input"
+            class="isff__input"
+            type="email"
+            placeholder="you@company.com"
+            autocomplete="email"
+            required
+          >
+        </div>
+        <button class="isff__button" type="submit">Subscribe</button>
+      </div>
+
+      <p class="isff__error" id="isff-disclaimer-error" hidden role="alert"></p>
+      <p class="isff__success" id="isff-disclaimer-success" hidden aria-live="polite">
+        Welcome aboard!
+      </p>
+
+      <p class="isff__disclaimer">
+        No spam, ever. Unsubscribe at any time. We never sell your data.
+      </p>
+    </form>
+  </div>
+
+  <!-- =====================================================================
+       Example 3: Text field variant (no email type)
+       ===================================================================== -->
+  <div class="demo">
+    <h2>Text field variant</h2>
+
+    <form class="isff" id="form-text" novalidate>
+      <div class="isff__row">
+        <div class="isff__field">
+          <label for="isff-text-input">Company</label>
+          <input
+            id="isff-text-input"
+            class="isff__input"
+            type="text"
+            placeholder="Your company name"
+            autocomplete="organization"
+            required
+          >
+        </div>
+        <button class="isff__button" type="submit">Request access</button>
+      </div>
+
+      <p class="isff__error" id="isff-text-error" hidden role="alert"></p>
+      <p class="isff__success" id="isff-text-success" hidden aria-live="polite">
+        Got it! We'll be in touch.
+      </p>
+    </form>
+  </div>
+
+  <!--
+    ==========================================================================
+    Vanilla JS submit handler
+    ==========================================================================
+    This script is intentionally self-contained and defensive so it can be
+    adapted to any server-side stack. Swap out the fetch call section with
+    your real endpoint, or replace the entire submit handler body if you
+    use a form library (e.g. Mailchimp, Kit/ConvertKit, Resend, etc.).
+
+    The handler:
+      1. Prevents the default browser form submission.
+      2. Reads and trims the input value.
+      3. Guards against empty submissions.
+      4. Disables the input and button during the async operation.
+      5. Calls your endpoint (see the clearly marked section below).
+      6. On success: hides the form row, reveals the success message.
+      7. On error: re-enables the form and reveals an error message.
+    ==========================================================================
+  -->
+  <script>
+    (function () {
+      'use strict';
+
+      /**
+       * Attach a submit handler to one form instance.
+       *
+       * @param {object} opts
+       * @param {string} opts.formId      - The form element id.
+       * @param {string} opts.inputId     - The input element id.
+       * @param {string} opts.errorId     - The error paragraph id.
+       * @param {string} opts.successId   - The success paragraph id.
+       * @param {string} opts.endpoint    - The URL to POST data to.
+       * @param {string} opts.fieldName   - The JSON key to send, e.g. "email" or "value".
+       */
+      function attachFormHandler(opts) {
+        var form = document.getElementById(opts.formId);
+        if (!form) return;
+
+        var input   = document.getElementById(opts.inputId);
+        var errorEl = document.getElementById(opts.errorId);
+        var successEl = document.getElementById(opts.successId);
+        var button  = form.querySelector('button[type="submit"]');
+
+        form.addEventListener('submit', function (event) {
+          // Step 1: Stop the browser from navigating.
+          event.preventDefault();
+
+          // Step 2: Read and trim the value.
+          var value = input ? input.value.trim() : '';
+
+          // Step 3: Guard against empty input.
+          if (!value) {
+            if (errorEl) {
+              errorEl.textContent = 'Please enter a value before submitting.';
+              errorEl.removeAttribute('hidden');
+            }
+            if (input) input.focus();
+            return;
+          }
+
+          // Step 4: Disable the form during submission.
+          if (input)  input.disabled  = true;
+          if (button) button.disabled = true;
+          if (errorEl) errorEl.setAttribute('hidden', '');
+
+          // Step 5: Send data to your endpoint.
+          // -----------------------------------------------------------------------
+          // Replace the URL and body shape to match your API.
+          // Common examples:
+          //   Mailchimp proxy: POST /api/subscribe  { email: value }
+          //   Resend:          POST /api/newsletter { email: value }
+          //   Custom backend:  POST /api/leads      { [opts.fieldName]: value }
+          // -----------------------------------------------------------------------
+          var payload = {};
+          payload[opts.fieldName || 'value'] = value;
+
+          fetch(opts.endpoint || '/api/subscribe', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+            // await fetch('/api/subscribe', { method: 'POST', body: JSON.stringify({ value: value }) });
+          })
+            .then(function (response) {
+              if (!response.ok) {
+                // Non-2xx status: treat as an error.
+                throw new Error('Server responded with status ' + response.status);
+              }
+              return response.json();
+            })
+            .then(function () {
+              // Step 6: Success path.
+              // Hide the form row so only the success message is visible.
+              var row = form.querySelector('.isff__row');
+              if (row) row.setAttribute('hidden', '');
+              if (successEl) successEl.removeAttribute('hidden');
+            })
+            .catch(function (err) {
+              // Step 7: Error path. Re-enable so the user can retry.
+              console.error('Form submission error:', err);
+              if (input)  input.disabled  = false;
+              if (button) button.disabled = false;
+              if (errorEl) {
+                errorEl.textContent = 'Something went wrong. Check your entry and try again.';
+                errorEl.removeAttribute('hidden');
+              }
+            });
+        });
+      }
+
+      // Attach handlers to each form on the page.
+      // Adjust formId, inputId, errorId, successId, endpoint, and fieldName
+      // to match your actual form IDs and API routes.
+
+      attachFormHandler({
+        formId:    'form-email',
+        inputId:   'isff-email-input',
+        errorId:   'isff-email-error',
+        successId: 'isff-email-success',
+        endpoint:  '/api/subscribe',
+        fieldName: 'email'
+      });
+
+      attachFormHandler({
+        formId:    'form-disclaimer',
+        inputId:   'isff-disclaimer-input',
+        errorId:   'isff-disclaimer-error',
+        successId: 'isff-disclaimer-success',
+        endpoint:  '/api/subscribe',
+        fieldName: 'email'
+      });
+
+      attachFormHandler({
+        formId:    'form-text',
+        inputId:   'isff-text-input',
+        errorId:   'isff-text-error',
+        successId: 'isff-text-success',
+        endpoint:  '/api/request-access',
+        fieldName: 'company'
+      });
+
+    })();
+  </script>
+</body>
+</html>

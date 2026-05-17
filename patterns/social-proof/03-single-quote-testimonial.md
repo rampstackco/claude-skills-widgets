@@ -76,6 +76,10 @@ Less natural with:
 - `05-testimonial-grid.md` for when multiple testimonials are shown simultaneously
 - `11-twitter-x-embed-wall.md` for less formal, platform-native social proof
 
+## Component implementation
+
+A v2 implementation of this pattern is available in [`components/single-quote-testimonial/`](../../components/single-quote-testimonial/). Both React (TypeScript) and HTML/CSS variants are provided. Customize via CSS custom properties.
+
 ## Sources
 
 - Cialdini, Robert. "Influence: The Psychology of Persuasion." Social proof principle.

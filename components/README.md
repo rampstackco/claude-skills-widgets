@@ -11,8 +11,14 @@ Component implementations of the patterns documented in `/patterns/`. Each compo
 | activation-funnel-inline | Utility (funnel / step visualization) | yes | yes |
 | time-to-value-sparkline | Utility (inline data visualization) | yes | yes |
 | flow-connector | Utility (layout connector) | yes | yes |
+| primary-button-cta | `patterns/cta/01-primary-button-cta.md` | yes | yes |
+| hero-stack-cta | `patterns/cta/06-hero-stack-primary-plus-secondary.md` | yes | yes |
+| inline-single-field-form | `patterns/lead-capture/01-inline-single-field-form.md` | yes | yes |
+| single-quote-testimonial | `patterns/social-proof/03-single-quote-testimonial.md` | yes | yes |
+| customer-count | `patterns/social-proof/07-customer-count-display.md` | yes | yes |
+| countdown-timer | `patterns/urgency/01-countdown-timer.md` | yes | yes |
 
-Components that do not map cleanly to a documented pattern are utilities. Four of the five v2.0 components are utilities; only `trust-logo-strip` has a direct pattern mapping. The utilities are flagged as candidates for future pattern documentation.
+Components that do not map cleanly to a documented pattern are utilities. The four v2.0 utilities are flagged as candidates for future pattern documentation; the six v2.1 components each map directly to a documented pattern.
 
 ## Architecture
 
@@ -41,11 +47,11 @@ MIT, same as the catalog. Use freely in commercial and non-commercial projects. 
 
 ## Status
 
-v2.0 (initial release): 5 Threshold seed components. Components currently cover utility patterns and one social-proof pattern.
+v2.0: 5 Threshold seed components (utility-leaning).
 
-v2.1 onwards: implementations of patterns from `/patterns/cta/`, `/patterns/lead-capture/`, and additional categories. Roughly batched by category.
+v2.1 (current): 6 pattern-mapped components covering CTA (2), lead capture (1), social proof (2), and urgency (1).
 
-v2.2+: tooling additions (Storybook integration, automated visual checks, NPM package publishing).
+v2.2+ planned: additional CTA variants (sticky bar, exit-intent), multi-step forms, customer logo strips with variations, Storybook integration.
 
 ## Cross-references
 

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PrimaryButtonCTA examples</title>
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    body { font-family: system-ui, sans-serif; padding: 2rem; max-width: 800px; margin: 0 auto; }
+    .demo { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem; }
+    h2 { margin-top: 2rem; font-size: 1rem; color: #555; }
+  </style>
+</head>
+<body>
+  <h1>PrimaryButtonCTA examples</h1>
+
+  <h2>Default solid</h2>
+  <div class="demo">
+    <a class="pbc pbc--solid pbc--rounded" href="#">Get started</a>
+  </div>
+
+  <h2>Variants</h2>
+  <div class="demo">
+    <a class="pbc pbc--solid pbc--rounded" href="#">Solid</a>
+    <a class="pbc pbc--outlined pbc--rounded" href="#">Outlined</a>
+    <a class="pbc pbc--solid pbc--pill" href="#">Pill solid</a>
+    <a class="pbc pbc--outlined pbc--sharp" href="#">Sharp outlined</a>
+  </div>
+
+  <h2>With icon</h2>
+  <div class="demo">
+    <a class="pbc pbc--solid pbc--rounded pbc--with-icon" href="#">
+      Get started
+      <svg class="pbc__icon" viewBox="0 0 16 16" aria-hidden="true">
+        <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" fill="none"/>
+      </svg>
+    </a>
+  </div>
+
+  <h2>Button mode (no href)</h2>
+  <div class="demo">
+    <button class="pbc pbc--solid pbc--rounded" type="button" onclick="alert('Clicked')">
+      Start trial
+    </button>
+  </div>
+</body>
+</html>

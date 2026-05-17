@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CustomerCount examples</title>
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    body { font-family: system-ui, sans-serif; padding: 2rem; max-width: 800px; margin: 0 auto; }
+    .demo { margin-bottom: 3rem; }
+    h2 { margin-top: 2rem; margin-bottom: 1rem; font-size: 1rem; color: #555; font-weight: 500; }
+  </style>
+</head>
+<body>
+  <h1>CustomerCount examples</h1>
+
+  <h2>String count with upward growth indicator (center-aligned)</h2>
+  <div class="demo">
+    <div
+      class="cc cc--center"
+      role="group"
+      aria-label="70 million members worldwide"
+    >
+      <span class="cc__count">70 million</span>
+      <span class="cc__label">members worldwide</span>
+      <span class="cc__growth cc__growth--up">
+        <svg class="cc__growth-icon" viewBox="0 0 10 8" aria-hidden="true" focusable="false">
+          <polygon points="5,0 10,8 0,8"/>
+        </svg>
+        +2M this month
+      </span>
+    </div>
+  </div>
+
+  <h2>Numeric count with subtitle (center-aligned)</h2>
+  <div class="demo">
+    <div
+      class="cc cc--center"
+      role="group"
+      aria-label="10,247 teams using the platform"
+    >
+      <span class="cc__count" aria-label="10247">10,247</span>
+      <span class="cc__label">teams using the platform</span>
+      <span class="cc__subtitle">across 80+ countries</span>
+    </div>
+  </div>
+
+  <h2>Left-aligned with pre-formatted string count</h2>
+  <div class="demo">
+    <div
+      class="cc cc--left"
+      role="group"
+      aria-label="25,000+ businesses served"
+    >
+      <span class="cc__count">25,000+</span>
+      <span class="cc__label">businesses served</span>
+    </div>
+  </div>
+
+  <h2>Downward growth indicator (center-aligned)</h2>
+  <div class="demo">
+    <div
+      class="cc cc--center"
+      role="group"
+      aria-label="4.2% churn rate"
+    >
+      <span class="cc__count">4.2%</span>
+      <span class="cc__label">churn rate</span>
+      <span class="cc__growth cc__growth--down">
+        <svg class="cc__growth-icon" viewBox="0 0 10 8" aria-hidden="true" focusable="false">
+          <polygon points="0,0 10,0 5,8"/>
+        </svg>
+        -0.8% vs last quarter
+      </span>
+    </div>
+  </div>
+
+  <h2>Custom brand color override</h2>
+  <div class="demo">
+    <div
+      class="cc cc--center"
+      role="group"
+      aria-label="135 million monthly active users"
+      style="--cc-count-color: #1e5fcf; --cc-count-font-size: 3.5rem;"
+    >
+      <span class="cc__count">135 million</span>
+      <span class="cc__label">monthly active users</span>
+      <span class="cc__growth cc__growth--up">
+        <svg class="cc__growth-icon" viewBox="0 0 10 8" aria-hidden="true" focusable="false">
+          <polygon points="5,0 10,8 0,8"/>
+        </svg>
+        growing
+      </span>
+    </div>
+  </div>
+</body>
+</html>

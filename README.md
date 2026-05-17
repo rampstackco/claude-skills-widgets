@@ -67,7 +67,20 @@ The catalog now ships with React and HTML/CSS implementations for a starter set 
 - **TimeToValueSparkline**: inline data visualization utility
 - **FlowConnector**: SVG flow-diagram layout utility
 
-Browse `components/` for the full v2.0 catalog. Each component ships with shared CSS, a React variant, an HTML variant, and example usage. v2.1 onwards will add component implementations for more patterns across the 5 categories. See `components/README.md` for the roadmap.
+Browse `components/` for the full v2.0 catalog. Each component ships with shared CSS, a React variant, an HTML variant, and example usage.
+
+## v2.1: 6 pattern-mapped components
+
+v2.1 builds on the Threshold seed migration by adding components that map directly to documented patterns:
+
+- **PrimaryButtonCTA**: implements `patterns/cta/01-primary-button-cta.md`
+- **HeroStackCTA**: implements `patterns/cta/06-hero-stack-primary-plus-secondary.md`
+- **InlineSingleFieldForm**: implements `patterns/lead-capture/01-inline-single-field-form.md`
+- **SingleQuoteTestimonial**: implements `patterns/social-proof/03-single-quote-testimonial.md`
+- **CustomerCount**: implements `patterns/social-proof/07-customer-count-display.md`
+- **CountdownTimer**: implements `patterns/urgency/01-countdown-timer.md`
+
+Each component pairs React (TypeScript) with HTML/CSS for portability across stacks. The form and countdown components include vanilla JS in the HTML variant so the static files demonstrate working behavior. Browse `components/` for the full catalog and `components/README.md` for the roadmap.
 
 ## How patterns are documented
 

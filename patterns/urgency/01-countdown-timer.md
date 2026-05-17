@@ -76,6 +76,10 @@ Less natural with:
 - `05-early-access-window.md` for deadline timers tied to beta or early-bird cohort windows
 - `08-cohort-enrollment-deadline.md` for deadline timers tied to cohort-based course enrollment
 
+## Component implementation
+
+A v2 implementation of this pattern is available in [`components/countdown-timer/`](../../components/countdown-timer/). Both React (TypeScript) and HTML/CSS variants are provided. Customize via CSS custom properties.
+
 ## Sources
 
 - Cialdini, Robert. *Influence: The Psychology of Persuasion*. Scarcity principle.

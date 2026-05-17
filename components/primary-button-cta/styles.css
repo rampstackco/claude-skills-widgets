@@ -1,0 +1,76 @@
+/* PrimaryButtonCTA shared styles. */
+
+.pbc {
+  --pbc-bg-color: var(--brand-accent, #1e5fcf);
+  --pbc-text-color: white;
+  --pbc-border-color: var(--pbc-bg-color);
+  --pbc-bg-hover: color-mix(in srgb, var(--pbc-bg-color) 90%, black);
+  --pbc-radius: 0.5rem;
+  --pbc-padding-y: 0.75rem;
+  --pbc-padding-x: 1.5rem;
+  --pbc-font-size: 1rem;
+  --pbc-font-weight: 600;
+  --pbc-transition: 150ms ease;
+  --pbc-gap: 0.5rem;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--pbc-gap);
+  padding: var(--pbc-padding-y) var(--pbc-padding-x);
+  font-size: var(--pbc-font-size);
+  font-weight: var(--pbc-font-weight);
+  text-decoration: none;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: background-color var(--pbc-transition), border-color var(--pbc-transition), color var(--pbc-transition);
+  min-height: 44px;
+  font-family: inherit;
+  line-height: 1.2;
+}
+
+/* Variants */
+.pbc--solid {
+  background-color: var(--pbc-bg-color);
+  color: var(--pbc-text-color);
+  border-color: var(--pbc-bg-color);
+}
+
+.pbc--solid:hover,
+.pbc--solid:focus-visible {
+  background-color: var(--pbc-bg-hover);
+  border-color: var(--pbc-bg-hover);
+}
+
+.pbc--outlined {
+  background-color: transparent;
+  color: var(--pbc-bg-color);
+  border-color: var(--pbc-border-color);
+}
+
+.pbc--outlined:hover,
+.pbc--outlined:focus-visible {
+  background-color: var(--pbc-bg-color);
+  color: var(--pbc-text-color);
+}
+
+/* Shapes */
+.pbc--rounded { border-radius: var(--pbc-radius); }
+.pbc--pill { border-radius: 9999px; }
+.pbc--sharp { border-radius: 0; }
+
+/* Default shape if no shape class applied */
+.pbc:not(.pbc--pill):not(.pbc--sharp) { border-radius: var(--pbc-radius); }
+
+/* With icon */
+.pbc__icon {
+  width: 1em;
+  height: 1em;
+  flex-shrink: 0;
+}
+
+/* Focus ring */
+.pbc:focus-visible {
+  outline: 2px solid var(--pbc-bg-color);
+  outline-offset: 2px;
+}
