@@ -72,6 +72,10 @@ Less natural with:
 - `05-multi-step-recommendation-wizard.md` for when the output is a product recommendation rather than a diagnostic score
 - `claude-skills/skills/quiz-and-assessment-design` for scoring logic and result page architecture
 
+## Component implementation
+
+A v2 implementation of this pattern is available in [`components/diagnostic-quiz-assessment/`](../../components/diagnostic-quiz-assessment/). Both React (TypeScript) and HTML/CSS variants are provided. Customize via CSS custom properties.
+
 ## Sources
 
 - Cialdini, Robert: "Influence" (liking and reciprocity principles)

@@ -72,6 +72,10 @@ Less natural with:
 - `05-multi-step-recommendation-wizard.md` for when the output drives a specific product recommendation rather than a score
 - `claude-skills/skills/quiz-and-assessment-design` for scoring model architecture and result page design
 
+## Component implementation
+
+A v2 implementation of this pattern is available in [`components/product-market-fit-quiz/`](../../components/product-market-fit-quiz/). Both React (TypeScript) and HTML/CSS variants are provided. Customize via CSS custom properties.
+
 ## Sources
 
 - Sean Ellis: original PMF benchmark research (40% "very disappointed" threshold)

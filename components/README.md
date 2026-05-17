@@ -29,8 +29,11 @@ Component implementations of the patterns documented in `/patterns/`. Each compo
 | social-login-buttons | `patterns/lead-capture/11-social-login-buttons.md` | yes | yes |
 | limited-time-offer-banner | `patterns/urgency/04-limited-time-offer-banner.md` | yes | yes |
 | waitlist-position-display | `patterns/urgency/06-waitlist-position-display.md` | yes | yes |
+| diagnostic-quiz-assessment | `patterns/interactive-tooling/04-diagnostic-quiz-assessment.md` | yes | yes |
+| product-market-fit-quiz | `patterns/interactive-tooling/03-product-market-fit-quiz.md` | yes | yes |
+| multi-step-recommendation-wizard | `patterns/interactive-tooling/05-multi-step-recommendation-wizard.md` | yes | yes |
 
-Components that do not map cleanly to a documented pattern are utilities. The four v2.0 utilities are flagged as candidates for future pattern documentation; the eighteen v2.1, v2.2, and v2.3 components each map directly to a documented pattern.
+Components that do not map cleanly to a documented pattern are utilities. The four v2.0 utilities are flagged as candidates for future pattern documentation; the twenty-one v2.1 through v2.4 components each map directly to a documented pattern. The savings-calculator component also covers the ROI cost calculator pattern (`patterns/interactive-tooling/01-roi-cost-calculator.md`) via its generic compute API.
 
 ## Architecture
 
@@ -65,17 +68,18 @@ v2.1: 6 foundational pattern-mapped components.
 
 v2.2: 6 more pattern-mapped components extending CTA, lead capture, and social proof.
 
-v2.3 (current): 6 more components opening the interactive-tooling category and expanding urgency. Highlights:
-- savings-calculator (first interactive-tooling component)
-- footer-cta-section (last-chance conversion section)
-- multi-option-cta-cluster (choice architecture for B2B and developer-vs-business splits)
-- social-login-buttons (OAuth provider UI)
-- limited-time-offer-banner (deadline-driven banner with countdown integration)
-- waitlist-position-display (position and referral mechanic)
+v2.3: 6 more components opening the interactive-tooling category and expanding urgency.
 
-Total: 23 component implementations across 6 categories.
+v2.4 (current): 3 quiz and wizard components. Interactive-tooling now 4/10. Highlights:
+- diagnostic-quiz-assessment (generic framework for scored assessments)
+- product-market-fit-quiz (Sean Ellis PMF test, composes diagnostic-quiz-assessment)
+- multi-step-recommendation-wizard (branching-logic recommendation flow)
 
-v2.4+ planned: showcase pages on rampstack.co for the rest of the v2.x components, Storybook integration, additional interactive-tooling (quizzes, configurators).
+The ROI cost calculator pattern (interactive-tooling/01) is implemented by the existing savings-calculator component.
+
+Total: 26 component implementations across 6 categories.
+
+v2.5+ planned: configurators (pricing, product features, comparison), specialized tooling (scheduling, product tour), showcase pages.
 
 ## Cross-references
 

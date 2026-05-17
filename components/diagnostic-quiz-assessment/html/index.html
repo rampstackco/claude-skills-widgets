@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DiagnosticQuizAssessment example</title>
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    body { font-family: system-ui, sans-serif; padding: 2rem; max-width: 800px; margin: 0 auto; background: #f6f8fa; }
+  </style>
+</head>
+<body>
+  <section class="dqa" id="quiz" data-screen="idle">
+    <!-- Populated by script below based on data-screen state -->
+  </section>
+
+  <script>
+    (function() {
+      // Quiz configuration - replace with your own
+      const config = {
+        title: "How ready is your team for AI tooling?",
+        description: "A short assessment of your current tooling and pain points.",
+        questions: [
+          {
+            id: "team-size",
+            text: "How large is your team?",
+            type: "single-select",
+            options: [
+              { value: "solo", label: "Just me", score: 1 },
+              { value: "small", label: "2-10 people", score: 3 },
+              { value: "medium", label: "11-50 people", score: 5 },
+            ],
+          },
+          {
+            id: "blocker",
+            text: "How much time does setup waste per week?",
+            type: "scale",
+            scaleMin: 0,
+            scaleMax: 10,
+            scaleLowLabel: "None",
+            scaleHighLabel: "10+ hours",
+          },
+        ],
+        resultTiers: [
+          { minScore: 0, maxScore: 4, title: "Early stage", description: "Build foundations first." },
+          { minScore: 5, maxScore: 15, title: "Ready to scale", description: "Adopt agent workflows." },
+        ],
+      };
+
+      const root = document.getElementById("quiz");
+      let state = { phase: "idle" };
+      let answers = {};
+
+      function computeScore() {
+        let score = 0;
+        for (const q of config.questions) {
+          const a = answers[q.id];
+          if (a === undefined) continue;
+          if (q.type === "single-select") {
+            const opt = q.options.find(o => o.value === a);
+            score += opt?.score || 0;
+          } else if (q.type === "scale") {
+            score += Number(a);
+          }
+        }
+        return score;
+      }
+
+      function findTier(score) {
+        return config.resultTiers.find(t => score >= t.minScore && score <= t.maxScore);
+      }
+
+      function render() {
+        if (state.phase === "idle") {
+          root.innerHTML = `
+            <h2 class="dqa__title">${config.title}</h2>
+            <p class="dqa__description">${config.description}</p>
+            <div class="dqa__actions">
+              <button class="dqa__button dqa__button--primary" data-action="start">Start</button>
+            </div>
+          `;
+        } else if (state.phase === "question") {
+          const q = config.questions[state.index];
+          const progress = ((state.index + 1) / config.questions.length) * 100;
+          let questionHtml = "";
+          if (q.type === "single-select") {
+            questionHtml = `<div class="dqa__options">${
+              q.options.map(opt => `
+                <label class="dqa__option">
+                  <input type="radio" name="${q.id}" value="${opt.value}" ${answers[q.id] === opt.value ? "checked" : ""}>
+                  <span class="dqa__option-label">${opt.label}</span>
+                </label>
+              `).join("")
+            }</div>`;
+          } else if (q.type === "scale") {
+            const val = answers[q.id] !== undefined ? answers[q.id] : q.scaleMin;
+            questionHtml = `
+              <div class="dqa__scale">
+                <input class="dqa__scale-input" type="range" name="${q.id}" min="${q.scaleMin}" max="${q.scaleMax}" value="${val}">
+                <div class="dqa__scale-labels">
+                  <span>${q.scaleLowLabel}</span>
+                  <span>${q.scaleHighLabel}</span>
+                </div>
+                <p class="dqa__scale-value">${val}</p>
+              </div>
+            `;
+          }
+          root.innerHTML = `
+            <p class="dqa__progress-label">Question ${state.index + 1} of ${config.questions.length}</p>
+            <div class="dqa__progress"><div class="dqa__progress-fill" style="width: ${progress}%"></div></div>
+            <h2 class="dqa__question">${q.text}</h2>
+            ${questionHtml}
+            <div class="dqa__actions">
+              ${state.index > 0 ? `<button class="dqa__button dqa__button--secondary" data-action="back">Back</button>` : ""}
+              <button class="dqa__button dqa__button--primary" data-action="next">${state.index === config.questions.length - 1 ? "Submit" : "Next"}</button>
+            </div>
+          `;
+        } else if (state.phase === "result") {
+          const score = computeScore();
+          const tier = findTier(score);
+          root.innerHTML = `
+            <div class="dqa__result" role="region" aria-label="Quiz results">
+              <p class="dqa__result-score">${score}</p>
+              ${tier ? `
+                <h2 class="dqa__result-tier">${tier.title}</h2>
+                <p class="dqa__result-description">${tier.description}</p>
+              ` : ""}
+              <div class="dqa__actions">
+                <button class="dqa__button dqa__button--secondary" data-action="restart">Retake</button>
+              </div>
+            </div>
+          `;
+        }
+      }
+
+      root.addEventListener("click", (e) => {
+        const action = e.target.dataset?.action;
+        if (action === "start") {
+          state = { phase: "question", index: 0 };
+          render();
+        } else if (action === "back") {
+          state = { phase: "question", index: state.index - 1 };
+          render();
+        } else if (action === "next") {
+          if (state.index < config.questions.length - 1) {
+            state = { phase: "question", index: state.index + 1 };
+          } else {
+            state = { phase: "result" };
+          }
+          render();
+        } else if (action === "restart") {
+          answers = {};
+          state = { phase: "idle" };
+          render();
+        }
+      });
+
+      root.addEventListener("change", (e) => {
+        if (e.target.type === "radio") {
+          answers[e.target.name] = e.target.value;
+        } else if (e.target.type === "range") {
+          answers[e.target.name] = Number(e.target.value);
+          render();
+        }
+      });
+
+      render();
+    })();
+  </script>
+</body>
+</html>

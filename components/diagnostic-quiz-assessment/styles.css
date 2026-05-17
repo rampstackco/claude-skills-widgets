@@ -1,0 +1,222 @@
+/* DiagnosticQuizAssessment shared styles. */
+
+.dqa {
+  --dqa-bg: var(--brand-surface, white);
+  --dqa-text-color: var(--brand-ink, #102542);
+  --dqa-muted-color: rgba(16, 37, 66, 0.6);
+  --dqa-accent: var(--brand-accent, #1e5fcf);
+  --dqa-progress-bg: rgba(0, 0, 0, 0.06);
+  --dqa-progress-fill: var(--dqa-accent);
+  --dqa-option-border: rgba(0, 0, 0, 0.12);
+  --dqa-option-bg: white;
+  --dqa-option-bg-selected: rgba(30, 95, 207, 0.08);
+  --dqa-option-border-selected: var(--dqa-accent);
+  --dqa-button-bg: var(--dqa-accent);
+  --dqa-button-text: white;
+  --dqa-button-bg-hover: color-mix(in srgb, var(--dqa-accent) 90%, black);
+  --dqa-radius: 1rem;
+  --dqa-section-padding: 2rem;
+  --dqa-gap: 1rem;
+
+  background: var(--dqa-bg);
+  color: var(--dqa-text-color);
+  padding: var(--dqa-section-padding);
+  border-radius: var(--dqa-radius);
+  border: 1px solid var(--dqa-option-border);
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.dqa__title {
+  margin: 0 0 0.5rem;
+  font-size: 1.75rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.dqa__description {
+  margin: 0 0 1.5rem;
+  color: var(--dqa-muted-color);
+}
+
+.dqa__progress {
+  height: 6px;
+  background: var(--dqa-progress-bg);
+  border-radius: 9999px;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+
+.dqa__progress-fill {
+  height: 100%;
+  background: var(--dqa-progress-fill);
+  transition: width 200ms ease;
+}
+
+.dqa__progress-label {
+  font-size: 0.875rem;
+  color: var(--dqa-muted-color);
+  margin-bottom: 0.5rem;
+}
+
+.dqa__question {
+  margin: 0 0 1rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.dqa__question-description {
+  margin: 0 0 1.5rem;
+  color: var(--dqa-muted-color);
+}
+
+.dqa__options {
+  display: grid;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.dqa__option {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: var(--dqa-option-bg);
+  border: 1.5px solid var(--dqa-option-border);
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: background 150ms ease, border-color 150ms ease;
+}
+
+.dqa__option:hover {
+  border-color: var(--dqa-accent);
+}
+
+.dqa__option:has(input:checked) {
+  background: var(--dqa-option-bg-selected);
+  border-color: var(--dqa-option-border-selected);
+}
+
+.dqa__option input {
+  flex-shrink: 0;
+}
+
+.dqa__option-label {
+  flex: 1;
+}
+
+.dqa__scale {
+  margin-bottom: 1.5rem;
+}
+
+.dqa__scale-input {
+  width: 100%;
+}
+
+.dqa__scale-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  color: var(--dqa-muted-color);
+  margin-top: 0.5rem;
+}
+
+.dqa__scale-value {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: 0.5rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.dqa__text-input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1.5px solid var(--dqa-option-border);
+  border-radius: 0.5rem;
+  font-family: inherit;
+  font-size: 0.9375rem;
+  resize: vertical;
+  min-height: 80px;
+}
+
+.dqa__text-input:focus {
+  outline: 0;
+  border-color: var(--dqa-accent);
+  box-shadow: 0 0 0 3px rgba(30, 95, 207, 0.12);
+}
+
+.dqa__actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.dqa__button {
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  border: 0;
+  font-weight: 600;
+  font-family: inherit;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 150ms ease;
+}
+
+.dqa__button--primary {
+  background: var(--dqa-button-bg);
+  color: var(--dqa-button-text);
+  margin-left: auto;
+}
+
+.dqa__button--primary:hover {
+  background: var(--dqa-button-bg-hover);
+}
+
+.dqa__button--primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.dqa__button--secondary {
+  background: transparent;
+  color: var(--dqa-muted-color);
+  border: 1.5px solid var(--dqa-option-border);
+}
+
+.dqa__button--secondary:hover {
+  color: var(--dqa-text-color);
+}
+
+.dqa__result {
+  text-align: center;
+}
+
+.dqa__result-score {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--dqa-accent);
+  font-variant-numeric: tabular-nums;
+  margin: 0 0 0.5rem;
+}
+
+.dqa__result-tier {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem;
+}
+
+.dqa__result-description {
+  color: var(--dqa-muted-color);
+  margin: 0 0 1rem;
+  line-height: 1.6;
+}
+
+.dqa__result-recommendation {
+  padding: 1rem;
+  background: var(--dqa-option-bg-selected);
+  border-radius: 0.75rem;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+}

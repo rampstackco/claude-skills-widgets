@@ -72,6 +72,10 @@ Less natural with:
 - `06-pricing-tier-configurator.md` for when the recommendation output connects directly to a pricing decision
 - `claude-skills/skills/funnel-flow-architecture` for placing the wizard at the right funnel stage
 
+## Component implementation
+
+A v2 implementation of this pattern is available in [`components/multi-step-recommendation-wizard/`](../../components/multi-step-recommendation-wizard/). Both React (TypeScript) and HTML/CSS variants are provided. Customize via CSS custom properties.
+
 ## Sources
 
 - Iyengar, Sheena and Lepper, Mark: "When Choice is Demotivating" (choice paralysis research)

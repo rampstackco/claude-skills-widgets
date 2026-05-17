@@ -72,6 +72,10 @@ Less natural with:
 - `06-pricing-tier-configurator.md` for the pricing side of the same calculator intent
 - Lead capture patterns for the email-gated output variation
 
+## Component implementation
+
+This pattern is implemented by the [`savings-calculator`](../../components/savings-calculator/) component, which provides a generic config-driven calculator API. The same component covers both savings calculations and ROI calculations via different compute functions. See the savings-calculator README for the SaaS migration example (savings) and the ROI calculator example (cost analysis).
+
 ## Sources
 
 - Cialdini, Robert: "Influence" (commitment-consistency principle)
