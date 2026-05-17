@@ -35,8 +35,11 @@ Component implementations of the patterns documented in `/patterns/`. Each compo
 | pricing-tier-configurator | `patterns/interactive-tooling/06-pricing-tier-configurator.md` | yes | yes |
 | product-feature-configurator | `patterns/interactive-tooling/07-product-feature-configurator.md` | yes | yes |
 | comparison-tool-vs-competitors | `patterns/interactive-tooling/08-comparison-tool-vs-competitors.md` | yes | yes |
+| scheduling-tool | `patterns/interactive-tooling/10-scheduling-tool.md` | yes | yes |
+| interactive-product-tour | `patterns/interactive-tooling/09-interactive-product-tour.md` | yes | yes |
+| featured-in-press-strip | `patterns/social-proof/02-featured-in-press-strip.md` | yes | yes |
 
-Components that do not map cleanly to a documented pattern are utilities. The four v2.0 utilities are flagged as candidates for future pattern documentation; the twenty-four v2.1 through v2.5 components each map directly to a documented pattern. The savings-calculator component also covers the ROI cost calculator pattern (`patterns/interactive-tooling/01-roi-cost-calculator.md`) via its generic compute API.
+Components that do not map cleanly to a documented pattern are utilities. The four v2.0 utilities are flagged as candidates for future pattern documentation; the twenty-seven v2.1 through v2.6 components each map directly to a documented pattern. The savings-calculator component also covers the ROI cost calculator pattern (`patterns/interactive-tooling/01-roi-cost-calculator.md`) via its generic compute API.
 
 ## Architecture
 
@@ -75,16 +78,20 @@ v2.3: 6 more components opening the interactive-tooling category and expanding u
 
 v2.4: 3 quiz and wizard components.
 
-v2.5 (current): 3 configurator components extending interactive-tooling to 7/10. Highlights:
-- pricing-tier-configurator (real-time tier recommendation from user inputs)
-- product-feature-configurator (Tesla-style product builder with running price)
-- comparison-tool-vs-competitors (feature comparison table with optional category toggles)
+v2.5: 3 configurator components extending interactive-tooling to 7/10.
+
+v2.6 (current): 3 components closing interactive-tooling (9/10 explicit, effectively 10/10 with savings-calculator covering the ROI calculator) and adding featured-in-press-strip. Highlights:
+- scheduling-tool (Calendly-style date/time picker with form completion)
+- interactive-product-tour (basic step-by-step tooltip tour pinning to DOM elements)
+- featured-in-press-strip (press-mentions variant of TrustLogoStrip)
 
 The ROI cost calculator pattern (interactive-tooling/01) is implemented by the existing savings-calculator component.
 
-Total: 29 component implementations across 6 categories.
+Total: 32 component implementations across 6 categories.
 
-v2.6+ planned: specialized tooling (scheduling, product tour), featured-in-press-strip, showcase pages.
+Coverage: CTA 6/20, Lead Capture 4/15, Social Proof 6/12, Urgency 3/8, Interactive Tooling 9/10 (effectively complete with the ROI cross-link), plus 4 utilities.
+
+v2.7+ planned: showcase pages on rampstack.co for the expanded library.
 
 ## Cross-references
 

@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>InteractiveProductTour example</title>
+  <link rel="stylesheet" href="../../primary-button-cta/styles.css">
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    body { font-family: system-ui, sans-serif; padding: 2rem; background: #f6f8fa; margin: 0; }
+
+    /* Demo page layout */
+    .demo-page { max-width: 800px; margin: 0 auto; }
+
+    .demo-header {
+      background: #e8effe;
+      border: 1px solid #c7d7f8;
+      border-radius: 0.5rem;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+    }
+    .demo-header strong { font-size: 1.125rem; }
+
+    .demo-body { display: flex; gap: 1.5rem; }
+
+    .demo-sidebar {
+      width: 160px;
+      flex-shrink: 0;
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 0.5rem;
+      padding: 1rem;
+    }
+    .demo-sidebar ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+    .demo-sidebar li { padding: 0.5rem; border-radius: 4px; font-size: 0.875rem; cursor: pointer; }
+    .demo-sidebar li.active { background: #dbeafe; color: #1e40af; font-weight: 600; }
+    .demo-sidebar li:not(.active) { color: #6b7280; }
+
+    .demo-main { flex: 1; }
+
+    .demo-chart {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 0.5rem;
+      height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #9ca3af;
+      font-size: 0.875rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .demo-actions { display: flex; align-items: center; gap: 1rem; }
+
+    .demo-trigger-row { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid #e5e7eb; display: flex; gap: 1rem; align-items: center; }
+    .demo-trigger-row p { margin: 0; font-size: 0.875rem; color: #6b7280; }
+  </style>
+</head>
+<body>
+<div class="demo-page">
+  <!-- Target elements the tour will pin to -->
+  <header class="demo-header" id="tour-header">
+    <strong>Acme Dashboard</strong>
+    <span style="font-size: 0.875rem; color: #6b7280;">v2.6</span>
+  </header>
+
+  <div class="demo-body">
+    <nav class="demo-sidebar" id="tour-sidebar">
+      <ul>
+        <li class="active">Projects</li>
+        <li>Analytics</li>
+        <li>Settings</li>
+      </ul>
+    </nav>
+
+    <main class="demo-main">
+      <div class="demo-chart" id="tour-chart">[Chart placeholder]</div>
+      <div class="demo-actions">
+        <button id="tour-cta" class="pbc pbc--solid pbc--rounded" type="button">
+          Connect data source
+        </button>
+      </div>
+    </main>
+  </div>
+
+  <div class="demo-trigger-row">
+    <button id="start-tour" class="pbc pbc--outlined pbc--rounded" type="button">
+      Take the tour
+    </button>
+    <p>Click to start a 4-step product tour. Press ESC at any time to exit.</p>
+  </div>
+</div>
+
+<!-- Tour overlay injected here by the IIFE below -->
+
+<script>
+(function () {
+  "use strict";
+
+  // ─── Configuration ──────────────────────────────────────────────────────
+  // Define your steps here. Each step:
+  //   target   - CSS selector for the element to anchor to
+  //   title    - Heading shown in the tooltip card
+  //   content  - Body copy
+  //   position - "top" | "bottom" | "left" | "right"  (basic placement only)
+  //   highlight - true to render a spotlight box-shadow cutout over the target
+
+  var STEPS = [
+    {
+      target: "#tour-header",
+      title: "Your command center",
+      content: "Everything you need is pinned here. The header shows your active project and quick-access actions.",
+      position: "bottom",
+      highlight: true
+    },
+    {
+      target: "#tour-sidebar",
+      title: "Navigate by section",
+      content: "Switch between Projects, Analytics, and Settings from the sidebar. Your last-visited section is remembered.",
+      position: "right",
+      highlight: true
+    },
+    {
+      target: "#tour-chart",
+      title: "Live metrics at a glance",
+      content: "This chart updates every 30 seconds. Hover any data point for a breakdown. Use the date selector to zoom.",
+      position: "top",
+      highlight: false
+    },
+    {
+      target: "#tour-cta",
+      title: "Ready to go deeper?",
+      content: "Hit this button to connect your first data source. It takes about two minutes and no code is required.",
+      position: "top",
+      highlight: true
+    }
+  ];
+
+  var OPTIONS = {
+    showProgress: true,
+    showSkip: true,
+    nextLabel: "Next",
+    backLabel: "Back",
+    finishLabel: "Done",
+    skipLabel: "Skip tour"
+  };
+
+  // ─── State ───────────────────────────────────────────────────────────────
+
+  var state = {
+    open: false,
+    step: 0
+  };
+
+  // ─── DOM references (created once, reused) ───────────────────────────────
+
+  var overlayEl = null;
+  var spotlightEl = null;
+  var tooltipEl = null;
+
+  // ─── Basic positioning (note: no auto-flip when near viewport edges)
+  // For intelligent placement, layer driver.js or react-joyride on top.
+
+  var TOOLTIP_OFFSET = 12;   // px gap between target edge and tooltip card
+  var SPOTLIGHT_PAD  = 6;    // px expansion around target rect
+
+  function computeCoords(rect, position, tooltipW, tooltipH) {
+    switch (position) {
+      case "top":
+        return {
+          top:  rect.top - tooltipH - TOOLTIP_OFFSET,
+          left: rect.left + rect.width / 2 - tooltipW / 2
+        };
+      case "left":
+        return {
+          top:  rect.top + rect.height / 2 - tooltipH / 2,
+          left: rect.left - tooltipW - TOOLTIP_OFFSET
+        };
+      case "right":
+        return {
+          top:  rect.top + rect.height / 2 - tooltipH / 2,
+          left: rect.right + TOOLTIP_OFFSET
+        };
+      case "bottom":
+      default:
+        return {
+          top:  rect.bottom + TOOLTIP_OFFSET,
+          left: rect.left + rect.width / 2 - tooltipW / 2
+        };
+    }
+  }
+
+  function centeredCoords() {
+    return {
+      top:  window.innerHeight * 0.35,
+      left: window.innerWidth  / 2 - 160
+    };
+  }
+
+  function clamp(value, min, max) {
+    return Math.max(min, Math.min(value, max));
+  }
+
+  // ─── Build overlay DOM (only once) ───────────────────────────────────────
+
+  function buildDOM() {
+    // Dimming overlay
+    overlayEl = document.createElement("div");
+    overlayEl.className = "ipt__overlay";
+    overlayEl.setAttribute("aria-hidden", "true");
+
+    // Spotlight box (box-shadow cutout technique)
+    // A large outward box-shadow creates the darkened ring outside this
+    // transparent div. The div itself is transparent so the target shows through.
+    spotlightEl = document.createElement("div");
+    spotlightEl.className = "ipt__spotlight";
+    spotlightEl.setAttribute("aria-hidden", "true");
+    spotlightEl.style.display = "none";
+
+    // Tooltip card
+    tooltipEl = document.createElement("div");
+    tooltipEl.className = "ipt__tooltip";
+    tooltipEl.setAttribute("role", "dialog");
+    tooltipEl.setAttribute("aria-modal", "true");
+    tooltipEl.setAttribute("aria-labelledby", "ipt-title");
+    tooltipEl.setAttribute("tabindex", "-1");
+    tooltipEl.innerHTML = buildTooltipHTML(0);
+
+    document.body.appendChild(overlayEl);
+    document.body.appendChild(spotlightEl);
+    document.body.appendChild(tooltipEl);
+
+    bindTooltipEvents();
+  }
+
+  function buildTooltipHTML(stepIndex) {
+    var step   = STEPS[stepIndex];
+    var isLast = stepIndex === STEPS.length - 1;
+    var isFirst = stepIndex === 0;
+
+    var progressHTML = OPTIONS.showProgress
+      ? '<p class="ipt__progress">Step ' + (stepIndex + 1) + ' of ' + STEPS.length + '</p>'
+      : '';
+
+    var closeHTML =
+      '<button class="ipt__close" type="button" id="ipt-close" aria-label="Close tour">' +
+        '<svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true">' +
+          '<path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/>' +
+        '</svg>' +
+      '</button>';
+
+    var titleHTML = '<h2 id="ipt-title" class="ipt__tooltip-title">' + escHTML(step.title) + '</h2>';
+    var contentHTML = '<p class="ipt__tooltip-content">' + escHTML(step.content) + '</p>';
+
+    var backHTML = isFirst ? '' :
+      '<button class="pbc pbc--outlined pbc--rounded" type="button" id="ipt-back">' +
+        escHTML(OPTIONS.backLabel) +
+      '</button>';
+
+    var nextLabel = isLast ? OPTIONS.finishLabel : OPTIONS.nextLabel;
+    var nextHTML =
+      '<button class="pbc pbc--solid pbc--rounded" type="button" id="ipt-next">' +
+        escHTML(nextLabel) +
+      '</button>';
+
+    var skipHTML = OPTIONS.showSkip
+      ? '<button class="ipt__skip" type="button" id="ipt-skip">' + escHTML(OPTIONS.skipLabel) + '</button>'
+      : '';
+
+    var actionsHTML =
+      '<div class="ipt__actions">' +
+        backHTML +
+        nextHTML +
+        skipHTML +
+      '</div>';
+
+    return closeHTML + progressHTML + titleHTML + contentHTML + actionsHTML;
+  }
+
+  function escHTML(str) {
+    var d = document.createElement("div");
+    d.appendChild(document.createTextNode(str));
+    return d.innerHTML;
+  }
+
+  // ─── Bind click events inside tooltip ────────────────────────────────────
+
+  function bindTooltipEvents() {
+    tooltipEl.addEventListener("click", function (e) {
+      if (e.target.closest("#ipt-close")) { closeTour(); return; }
+      if (e.target.closest("#ipt-skip"))  { closeTour(); return; }
+      if (e.target.closest("#ipt-next"))  { handleNext(); return; }
+      if (e.target.closest("#ipt-back"))  { handleBack(); return; }
+    });
+  }
+
+  // ─── Position the tooltip and spotlight ──────────────────────────────────
+
+  function positionStep() {
+    var step       = STEPS[state.step];
+    var target     = document.querySelector(step.target);
+    var tooltipW   = tooltipEl.offsetWidth  || 320;
+    var tooltipH   = tooltipEl.offsetHeight || 160;
+
+    if (!target) {
+      // Graceful degradation: center tooltip when the selector matches nothing
+      var centered = centeredCoords();
+      tooltipEl.style.top  = centered.top  + "px";
+      tooltipEl.style.left = centered.left + "px";
+      spotlightEl.style.display = "none";
+      overlayEl.classList.remove("ipt__overlay--spotlit");
+      return;
+    }
+
+    var rect   = target.getBoundingClientRect();
+    var coords = computeCoords(rect, step.position || "bottom", tooltipW, tooltipH);
+
+    var clampedLeft = clamp(coords.left, 8, window.innerWidth  - tooltipW - 8);
+    var clampedTop  = clamp(coords.top,  8, window.innerHeight - tooltipH - 8);
+
+    tooltipEl.style.top  = clampedTop  + "px";
+    tooltipEl.style.left = clampedLeft + "px";
+
+    if (step.highlight) {
+      spotlightEl.style.display = "block";
+      spotlightEl.style.top    = (rect.top  - SPOTLIGHT_PAD) + "px";
+      spotlightEl.style.left   = (rect.left - SPOTLIGHT_PAD) + "px";
+      spotlightEl.style.width  = (rect.width  + SPOTLIGHT_PAD * 2) + "px";
+      spotlightEl.style.height = (rect.height + SPOTLIGHT_PAD * 2) + "px";
+      overlayEl.classList.add("ipt__overlay--spotlit");
+    } else {
+      spotlightEl.style.display = "none";
+      overlayEl.classList.remove("ipt__overlay--spotlit");
+    }
+  }
+
+  // ─── Open / close / navigation ───────────────────────────────────────────
+
+  function openTour() {
+    state.open = true;
+    state.step = 0;
+
+    if (!overlayEl) buildDOM();
+
+    overlayEl.style.display = "block";
+    tooltipEl.style.display = "block";
+    tooltipEl.innerHTML = buildTooltipHTML(state.step);
+    bindTooltipEvents();
+
+    positionStep();
+
+    // Move focus to the dialog
+    tooltipEl.focus();
+
+    // ESC to close
+    document.addEventListener("keydown", handleKeyDown);
+
+    // Reposition on resize
+    window.addEventListener("resize", positionStep);
+  }
+
+  function closeTour() {
+    state.open = false;
+    if (overlayEl) overlayEl.style.display = "none";
+    if (spotlightEl) spotlightEl.style.display = "none";
+    if (tooltipEl)  tooltipEl.style.display = "none";
+    overlayEl && overlayEl.classList.remove("ipt__overlay--spotlit");
+
+    document.removeEventListener("keydown", handleKeyDown);
+    window.removeEventListener("resize", positionStep);
+
+    // Return focus to the trigger button
+    document.getElementById("start-tour") && document.getElementById("start-tour").focus();
+  }
+
+  function handleNext() {
+    if (state.step === STEPS.length - 1) {
+      // Tour complete. Announce via a status element, then close.
+      var status = document.getElementById("ipt-status");
+      if (status) status.textContent = "Tour complete.";
+      closeTour();
+    } else {
+      state.step += 1;
+      tooltipEl.innerHTML = buildTooltipHTML(state.step);
+      bindTooltipEvents();
+      positionStep();
+      tooltipEl.focus();
+    }
+  }
+
+  function handleBack() {
+    if (state.step > 0) {
+      state.step -= 1;
+      tooltipEl.innerHTML = buildTooltipHTML(state.step);
+      bindTooltipEvents();
+      positionStep();
+      tooltipEl.focus();
+    }
+  }
+
+  function handleKeyDown(e) {
+    if (e.key === "Escape") closeTour();
+  }
+
+  // ─── Status element for screen readers (role="status") ───────────────────
+
+  (function createStatusEl() {
+    var el = document.createElement("div");
+    el.id = "ipt-status";
+    el.className = "ipt__status";
+    el.setAttribute("role", "status");
+    el.setAttribute("aria-live", "polite");
+    el.setAttribute("aria-atomic", "true");
+    document.body.appendChild(el);
+  })();
+
+  // ─── Wire the start button ────────────────────────────────────────────────
+
+  document.addEventListener("DOMContentLoaded", function () {
+    var startBtn = document.getElementById("start-tour");
+    if (startBtn) {
+      startBtn.addEventListener("click", openTour);
+    }
+  });
+
+  // Handle case where DOMContentLoaded already fired (script at bottom of body)
+  if (document.readyState === "interactive" || document.readyState === "complete") {
+    var startBtn = document.getElementById("start-tour");
+    if (startBtn) {
+      startBtn.addEventListener("click", openTour);
+    }
+  }
+
+})();
+</script>
+</body>
+</html>

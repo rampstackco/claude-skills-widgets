@@ -76,6 +76,10 @@ Less natural with:
 - `12-industry-analyst-quote.md` for authority-based proof from research organizations rather than press outlets
 - `03-single-quote-testimonial.md` for the next step of specificity after the strip establishes baseline credibility
 
+## Component implementation
+
+A v2 implementation of this pattern is available in [`components/featured-in-press-strip/`](../../components/featured-in-press-strip/). Both React (TypeScript) and HTML/CSS variants are provided. Customize via CSS custom properties.
+
 ## Sources
 
 - Cialdini, Robert. "Influence: The Psychology of Persuasion." Authority principle.

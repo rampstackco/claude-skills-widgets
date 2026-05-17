@@ -73,6 +73,10 @@ Less natural with:
 - `04-diagnostic-quiz-assessment.md` for qualifying the lead before offering the booking surface
 - `claude-skills/skills/funnel-flow-architecture` for placing the scheduling tool at the correct funnel stage
 
+## Component implementation
+
+A v2 implementation of this pattern is available in [`components/scheduling-tool/`](../../components/scheduling-tool/). Both React (TypeScript) and HTML/CSS variants are provided. Customize via CSS custom properties.
+
 ## Sources
 
 - Calendly: round-robin and routing documentation (calendly.com/help/round-robin-distribution-overview)

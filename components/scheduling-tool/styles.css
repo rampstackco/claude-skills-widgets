@@ -1,0 +1,227 @@
+/* SchedulingTool shared styles. */
+
+.sch {
+  --sch-bg: var(--brand-surface, white);
+  --sch-text-color: var(--brand-ink, #102542);
+  --sch-muted-color: rgba(16, 37, 66, 0.6);
+  --sch-accent: var(--brand-accent, #1e5fcf);
+  --sch-date-bg: white;
+  --sch-date-border: rgba(0, 0, 0, 0.1);
+  --sch-date-bg-selected: var(--sch-accent);
+  --sch-date-text-selected: white;
+  --sch-date-bg-hover: rgba(0, 0, 0, 0.025);
+  --sch-time-bg: white;
+  --sch-time-border: rgba(0, 0, 0, 0.1);
+  --sch-time-bg-selected: var(--sch-accent);
+  --sch-time-text-selected: white;
+  --sch-input-border: rgba(0, 0, 0, 0.12);
+  --sch-radius: 0.75rem;
+  --sch-section-padding: 2rem;
+  --sch-gap: 1rem;
+
+  display: block;
+  background: var(--sch-bg);
+  color: var(--sch-text-color);
+  padding: var(--sch-section-padding);
+  border-radius: var(--sch-radius);
+  border: 1px solid var(--sch-date-border);
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.sch__title {
+  margin: 0 0 0.25rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.sch__duration {
+  color: var(--sch-muted-color);
+  font-size: 0.9375rem;
+  margin: 0 0 0.5rem;
+}
+
+.sch__description {
+  color: var(--sch-muted-color);
+  margin: 0 0 1.5rem;
+}
+
+.sch__step-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--sch-muted-color);
+  margin-bottom: 0.5rem;
+}
+
+.sch__dates {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.sch__date {
+  background: var(--sch-date-bg);
+  border: 1.5px solid var(--sch-date-border);
+  border-radius: 0.5rem;
+  padding: 0.75rem 0.5rem;
+  cursor: pointer;
+  font-family: inherit;
+  text-align: center;
+  transition: background 150ms ease, border-color 150ms ease;
+}
+
+.sch__date:hover {
+  background: var(--sch-date-bg-hover);
+  border-color: var(--sch-accent);
+}
+
+.sch__date[aria-pressed="true"] {
+  background: var(--sch-date-bg-selected);
+  color: var(--sch-date-text-selected);
+  border-color: var(--sch-date-bg-selected);
+}
+
+.sch__date-weekday {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 500;
+  opacity: 0.8;
+  margin-bottom: 0.25rem;
+}
+
+.sch__date-day {
+  display: block;
+  font-size: 1.25rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.sch__date-month {
+  display: block;
+  font-size: 0.6875rem;
+  opacity: 0.7;
+  margin-top: 0.125rem;
+}
+
+.sch__times {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.sch__time {
+  background: var(--sch-time-bg);
+  border: 1.5px solid var(--sch-time-border);
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  transition: background 150ms ease, border-color 150ms ease;
+}
+
+.sch__time:hover {
+  background: var(--sch-date-bg-hover);
+  border-color: var(--sch-accent);
+}
+
+.sch__time[aria-pressed="true"] {
+  background: var(--sch-time-bg-selected);
+  color: var(--sch-time-text-selected);
+  border-color: var(--sch-time-bg-selected);
+}
+
+.sch__form {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.sch__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.sch__field-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.sch__field-input,
+.sch__field-textarea {
+  padding: 0.75rem;
+  border: 1.5px solid var(--sch-input-border);
+  border-radius: 0.5rem;
+  font-family: inherit;
+  font-size: 0.9375rem;
+  background: white;
+}
+
+.sch__field-input:focus,
+.sch__field-textarea:focus {
+  outline: 0;
+  border-color: var(--sch-accent);
+  box-shadow: 0 0 0 3px rgba(30, 95, 207, 0.12);
+}
+
+.sch__field-textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.sch__selected-summary {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1rem;
+  background: rgba(30, 95, 207, 0.06);
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  font-size: 0.9375rem;
+}
+
+.sch__actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
+
+.sch__timezone {
+  font-size: 0.8125rem;
+  color: var(--sch-muted-color);
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.sch__success {
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+.sch__success-icon {
+  width: 4rem;
+  height: 4rem;
+  margin: 0 auto 1rem;
+  border-radius: 50%;
+  background: var(--sch-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sch__success-message {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem;
+}
+
+.sch__success-details {
+  color: var(--sch-muted-color);
+}

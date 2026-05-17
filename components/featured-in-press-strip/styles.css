@@ -1,0 +1,7 @@
+/* FeaturedInPressStrip shared styles. Press variant of TrustLogoStrip. */
+
+.fips--color {
+  --tls-logo-filter: none;
+  --tls-logo-opacity: 1;
+  --tls-logo-opacity-hover: 1;
+}
