@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StickyBarCTA examples</title>
+
+  <!--
+    Order matters: primary-button-cta/styles.css must come first
+    so that .pbc variables are defined before sticky-bar-cta/styles.css
+    references them via the .sbc__action slot.
+  -->
+  <link rel="stylesheet" href="../../primary-button-cta/styles.css">
+  <link rel="stylesheet" href="../styles.css">
+
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      padding: 2rem;
+      max-width: 860px;
+      margin: 0 auto;
+      /* Add bottom padding so page content is not obscured by the fixed bar */
+      padding-bottom: 6rem;
+    }
+    h2 { margin-top: 2.5rem; font-size: 0.9375rem; color: #555; text-transform: uppercase; letter-spacing: 0.05em; }
+    p { max-width: 60ch; line-height: 1.6; color: #333; }
+    .demo-note { font-size: 0.8125rem; color: #888; margin-top: 0.5rem; }
+  </style>
+</head>
+<body>
+  <h1>StickyBarCTA examples</h1>
+
+  <p>
+    This page demonstrates the StickyBarCTA HTML variant. The bar below is
+    fixed to the bottom of the viewport. Click the close button to dismiss it;
+    the dismissed state is stored in localStorage under the key in
+    <code>data-dismiss-key</code>. Reload the page to see the bar stay hidden.
+    To reset, run <code>localStorage.removeItem("sticky-bar-dismissed")</code>
+    in the browser console.
+  </p>
+
+  <h2>Scroll filler (demonstrates persistence on scroll)</h2>
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque habitant morbi tristique senectus et netus.</p>
+  <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Proin vel ante a orci tempus eleifend.</p>
+  <p>Cras commodo cursus magna, vel scelerisque nisl consectetur et. Aenean lacinia bibendum nulla sed consectetur.</p>
+  <p>Nullam quis risus eget urna mollis ornare vel eu leo. Curabitur blandit tempus porttitor.</p>
+  <p>Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Maecenas faucibus mollis interdum.</p>
+  <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Donec id elit non mi porta gravida at eget metus.</p>
+
+  <!--
+    =====================================================================
+    VARIANT 1: Bottom bar, solid fill, dismissible (the default configuration)
+    =====================================================================
+
+    Attributes:
+      - data-dismiss-key: matches the localStorage key the JS snippet uses.
+        Change this value to scope the dismissed state to a specific campaign
+        or page without affecting other bar instances.
+
+    Class reference:
+      .sbc             root; sets CSS variables and fixed positioning
+      .sbc--bottom     pins to bottom edge + safe-area-inset-bottom
+      .sbc--solid      solid background via --sbc-bg
+      .sbc__message    the copy paragraph
+      .sbc__action     wraps the .pbc button element
+      .sbc__close      the dismiss button; hidden when dismissible is not needed
+  -->
+  <div
+    class="sbc sbc--bottom sbc--solid"
+    id="sticky-bar-main"
+    role="complementary"
+    aria-label="Site banner"
+    data-dismiss-key="sticky-bar-dismissed"
+  >
+    <p class="sbc__message">Start your free trial. No credit card required.</p>
+
+    <div class="sbc__action">
+      <a class="pbc pbc--solid pbc--rounded" href="/signup">Get started</a>
+    </div>
+
+    <button class="sbc__close" type="button" aria-label="Dismiss">
+      <svg viewBox="0 0 16 16" aria-hidden="true" width="16" height="16">
+        <path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" fill="none"/>
+      </svg>
+    </button>
+  </div>
+
+  <!--
+    =====================================================================
+    VARIANT 2 (reference only, not rendered by default):
+    Top bar, minimal variant, separate dismiss key.
+
+    To use, remove display:none from the style attribute and ensure only
+    one .sbc bar is visible at a time.
+
+    <div
+      class="sbc sbc--top sbc--minimal"
+      id="sticky-bar-top"
+      role="complementary"
+      aria-label="Site announcement"
+      data-dismiss-key="annual-plan-bar-dismissed"
+      style="display:none"
+    >
+      <p class="sbc__message">New: annual plans save you 30% compared to monthly billing.</p>
+      <div class="sbc__action">
+        <a class="pbc pbc--solid pbc--rounded" href="/pricing">View plans</a>
+      </div>
+      <button class="sbc__close" type="button" aria-label="Dismiss">
+        <svg viewBox="0 0 16 16" aria-hidden="true" width="16" height="16">
+          <path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" fill="none"/>
+        </svg>
+      </button>
+    </div>
+    =====================================================================
+  -->
+
+</body>
+
+<!--
+  =========================================================================
+  Vanilla JS: dismiss behavior without a framework.
+
+  How it works:
+  1. Finds every element with [data-dismiss-key] on DOMContentLoaded.
+  2. For each bar, reads that key from localStorage.
+     - If the stored value is "1", the bar is already dismissed: set
+       display:none immediately (before the first paint shows it).
+  3. Binds a click handler to each .sbc__close button inside the bar.
+     - On click: writes "1" to localStorage under the bar's dismiss key,
+       then hides the bar with display:none.
+
+  No dependencies, no global pollution (wrapped in an IIFE).
+  =========================================================================
+-->
+<script>
+(function () {
+  "use strict";
+
+  function initStickyBars() {
+    var bars = document.querySelectorAll("[data-dismiss-key]");
+
+    bars.forEach(function (bar) {
+      var key = bar.getAttribute("data-dismiss-key");
+
+      /* Step 1: hide immediately if already dismissed */
+      try {
+        if (localStorage.getItem(key) === "1") {
+          bar.style.display = "none";
+          return; /* nothing more to set up for this bar */
+        }
+      } catch (e) {
+        /* localStorage unavailable; proceed without persistence */
+      }
+
+      /* Step 2: wire the close button */
+      var closeBtn = bar.querySelector(".sbc__close");
+      if (!closeBtn) return;
+
+      closeBtn.addEventListener("click", function () {
+        /* Persist the dismissed state */
+        try {
+          localStorage.setItem(key, "1");
+        } catch (e) {
+          /* localStorage unavailable; still hide the bar for this session */
+        }
+
+        /* Hide the bar */
+        bar.style.display = "none";
+      });
+    });
+  }
+
+  /* Run after the DOM is ready */
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initStickyBars);
+  } else {
+    /* DOMContentLoaded already fired (script is deferred or at end of body) */
+    initStickyBars();
+  }
+}());
+</script>
+</html>

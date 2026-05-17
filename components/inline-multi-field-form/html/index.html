@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>InlineMultiFieldForm examples</title>
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      padding: 2rem;
+      max-width: 800px;
+      margin: 0 auto;
+      color: #111827;
+    }
+    .demo {
+      margin-bottom: 4rem;
+    }
+    h1 {
+      margin-bottom: 2rem;
+    }
+    h2 {
+      margin-top: 0;
+      margin-bottom: 1rem;
+      font-size: 0.875rem;
+      color: #6b7280;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+  </style>
+</head>
+<body>
+  <h1>InlineMultiFieldForm examples</h1>
+
+  <!-- =======================================================================
+       Example: 4-field sales lead form with a select dropdown (grid layout)
+       Representative fields: full name, work email, company, and role-as-select.
+
+       DOM notes:
+         - The .imff__fields div drives layout via the layout modifier class
+           (.imff--grid, .imff--stacked, or .imff--horizontal).
+         - Each .imff__field contains a label, input (or select), and an error
+           paragraph. The error paragraph starts hidden and is revealed by the
+           script when validation fails.
+         - .imff__actions contains the submit button, the form-level error,
+           the disclaimer, and the success message. Keeping success inside
+           .imff__actions lets the script hide only the fields and button while
+           leaving the success text in its natural position.
+         - The success paragraph uses aria-live="polite" so screen readers
+           announce it without an explicit focus shift.
+       ======================================================================= -->
+
+  <div class="demo">
+    <h2>Grid layout (4 fields, select dropdown)</h2>
+
+    <form class="imff imff--grid" id="imff-demo" novalidate aria-live="polite">
+
+      <div class="imff__fields">
+
+        <!-- Field: Full name -->
+        <div class="imff__field">
+          <label class="imff__label" for="imff-name">Full name</label>
+          <input
+            class="imff__input"
+            id="imff-name"
+            type="text"
+            name="name"
+            placeholder="Jane Smith"
+            autocomplete="name"
+            required
+            aria-required="true"
+            aria-describedby="imff-name-error"
+          >
+          <p class="imff__error" id="imff-name-error" role="alert" hidden></p>
+        </div>
+
+        <!-- Field: Work email -->
+        <div class="imff__field">
+          <label class="imff__label" for="imff-email">Work email</label>
+          <input
+            class="imff__input"
+            id="imff-email"
+            type="email"
+            name="email"
+            placeholder="jane@company.com"
+            autocomplete="email"
+            required
+            aria-required="true"
+            aria-describedby="imff-email-error"
+          >
+          <p class="imff__error" id="imff-email-error" role="alert" hidden></p>
+        </div>
+
+        <!-- Field: Company -->
+        <div class="imff__field">
+          <label class="imff__label" for="imff-company">Company</label>
+          <input
+            class="imff__input"
+            id="imff-company"
+            type="text"
+            name="company"
+            placeholder="Acme Corp"
+            autocomplete="organization"
+            required
+            aria-required="true"
+            aria-describedby="imff-company-error"
+          >
+          <p class="imff__error" id="imff-company-error" role="alert" hidden></p>
+        </div>
+
+        <!-- Field: Role (select dropdown) -->
+        <div class="imff__field">
+          <label class="imff__label" for="imff-role">Your role</label>
+          <select
+            class="imff__select"
+            id="imff-role"
+            name="role"
+            required
+            aria-required="true"
+            aria-describedby="imff-role-error"
+          >
+            <option value="">Select your role</option>
+            <option value="engineering">Engineering</option>
+            <option value="product">Product</option>
+            <option value="marketing">Marketing</option>
+            <option value="design">Design</option>
+            <option value="sales">Sales</option>
+            <option value="leadership">Leadership</option>
+            <option value="other">Other</option>
+          </select>
+          <p class="imff__error" id="imff-role-error" role="alert" hidden></p>
+        </div>
+
+      </div><!-- /.imff__fields -->
+
+      <div class="imff__actions">
+        <button class="imff__button" type="submit" id="imff-submit-btn">
+          Request a demo
+        </button>
+
+        <!-- Form-level error: visible when the fetch call fails -->
+        <p class="imff__error" id="imff-form-error" role="alert" hidden>
+          Something went wrong. Check your entries and try again.
+        </p>
+
+        <!-- Disclaimer fine-print -->
+        <p class="imff__disclaimer">
+          No spam. We will reach out within one business day.
+        </p>
+
+        <!-- Success: hidden until a successful fetch response -->
+        <p class="imff__success" id="imff-success" hidden>
+          Thanks, we will be in touch.
+        </p>
+      </div><!-- /.imff__actions -->
+
+    </form>
+  </div><!-- /.demo -->
+
+  <!--
+    ==========================================================================
+    Vanilla JS submit handler
+    ==========================================================================
+    This script is intentionally self-contained so it can be adapted to any
+    server-side stack. The clearly marked section below is the only place you
+    need to change code to wire up a real endpoint.
+
+    What this handler does:
+      1.  Prevents the default browser form submission (page navigation).
+      2.  Reads and trims all field values into a plain object.
+      3.  Validates each field client-side:
+            - Required fields must not be empty.
+            - The email field is checked against a basic format pattern.
+          If validation fails, per-field error paragraphs are revealed and
+          the handler returns early without submitting.
+      4.  Disables the button and all inputs/selects while the request is
+          in flight, preventing double-submission.
+      5.  Clears any previously visible error messages.
+      6.  Sends data to your endpoint via fetch().
+            >>>>> REPLACE the URL and body shape here to match your API. <<<<<
+          Common targets:
+            - HubSpot Forms API:  POST /uploads/form-v2.json
+            - Salesforce Web-to-Lead: POST https://webto.salesforce.com/servlet/servlet.WebToLead
+            - Custom backend:     POST /api/leads  { name, email, company, role }
+      7.  On a 2xx response: hides the fields and button; reveals the success
+          paragraph inside .imff__actions.
+      8.  On a non-2xx response or network error: re-enables the form and
+          reveals the form-level error paragraph.
+    ==========================================================================
+  -->
+  <script>
+    (function () {
+      'use strict';
+
+      var form      = document.getElementById('imff-demo');
+      var submitBtn = document.getElementById('imff-submit-btn');
+      var formError = document.getElementById('imff-form-error');
+      var successEl = document.getElementById('imff-success');
+
+      // Field descriptors: { id, name, required, type }
+      var fieldDescriptors = [
+        { id: 'imff-name',    name: 'name',    required: true, type: 'text' },
+        { id: 'imff-email',   name: 'email',   required: true, type: 'email' },
+        { id: 'imff-company', name: 'company', required: true, type: 'text' },
+        { id: 'imff-role',    name: 'role',    required: true, type: 'select' }
+      ];
+
+      // Basic email format check (surface-level; server should re-validate).
+      function isValidEmail(value) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+      }
+
+      // Show a per-field error and mark the input as invalid.
+      function showFieldError(descriptor, message) {
+        var input = document.getElementById(descriptor.id);
+        var errorEl = document.getElementById(descriptor.id + '-error');
+        if (input)   { input.setAttribute('aria-invalid', 'true'); }
+        if (errorEl) {
+          errorEl.textContent = message;
+          errorEl.removeAttribute('hidden');
+        }
+      }
+
+      // Clear a per-field error and remove the invalid state.
+      function clearFieldError(descriptor) {
+        var input = document.getElementById(descriptor.id);
+        var errorEl = document.getElementById(descriptor.id + '-error');
+        if (input)   { input.removeAttribute('aria-invalid'); }
+        if (errorEl) {
+          errorEl.textContent = '';
+          errorEl.setAttribute('hidden', '');
+        }
+      }
+
+      // Disable or re-enable every input, select, and the submit button.
+      function setFormDisabled(disabled) {
+        fieldDescriptors.forEach(function (descriptor) {
+          var el = document.getElementById(descriptor.id);
+          if (el) el.disabled = disabled;
+        });
+        if (submitBtn) submitBtn.disabled = disabled;
+      }
+
+      if (!form) return;
+
+      form.addEventListener('submit', function (event) {
+        // Step 1: Prevent browser navigation.
+        event.preventDefault();
+
+        // Step 2: Collect and trim values.
+        var values = {};
+        fieldDescriptors.forEach(function (descriptor) {
+          var el = document.getElementById(descriptor.id);
+          values[descriptor.name] = el ? el.value.trim() : '';
+        });
+
+        // Step 3: Validate client-side.
+        var hasErrors = false;
+
+        fieldDescriptors.forEach(function (descriptor) {
+          clearFieldError(descriptor);
+          var value = values[descriptor.name];
+
+          if (descriptor.required && !value) {
+            // Use a friendly label derived from the field name for error text.
+            var labelEl = form.querySelector('label[for="' + descriptor.id + '"]');
+            var labelText = labelEl ? labelEl.textContent.trim() : descriptor.name;
+            showFieldError(descriptor, labelText + ' is required.');
+            hasErrors = true;
+            return;
+          }
+
+          if (descriptor.type === 'email' && value && !isValidEmail(value)) {
+            showFieldError(descriptor, 'Please enter a valid email address.');
+            hasErrors = true;
+          }
+        });
+
+        if (hasErrors) return;
+
+        // Step 4: Disable the form during the request.
+        setFormDisabled(true);
+        if (formError) formError.setAttribute('hidden', '');
+        if (submitBtn) submitBtn.textContent = 'Sending...';
+
+        // Step 5: Send data to your endpoint.
+        // -----------------------------------------------------------------------
+        // Replace '/api/leads' with your actual endpoint URL.
+        // The body object matches the field names declared in fieldDescriptors.
+        // Common alternatives:
+        //   HubSpot Forms proxy:  POST /api/subscribe  { email, ... }
+        //   Resend:               POST /api/contact    { name, email, ... }
+        //   Custom CRM webhook:   POST /api/leads      { name, email, company, role }
+        // -----------------------------------------------------------------------
+        fetch('/api/leads', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(values)
+        })
+          .then(function (response) {
+            if (!response.ok) {
+              throw new Error('Server responded with status ' + response.status);
+            }
+            return response.json();
+          })
+          .then(function () {
+            // Step 7: Success path.
+            // Hide the fields and the actions row except the success paragraph.
+            var fieldsEl  = form.querySelector('.imff__fields');
+            var actionsEl = form.querySelector('.imff__actions');
+
+            if (fieldsEl)  fieldsEl.setAttribute('hidden', '');
+            if (actionsEl) actionsEl.setAttribute('hidden', '');
+
+            // Reveal the success paragraph outside the hidden actions block.
+            // Because aria-live="polite" is on the <form>, screen readers
+            // will announce the success text automatically.
+            if (successEl) {
+              successEl.removeAttribute('hidden');
+              // Move success out of the now-hidden actions div so it is visible.
+              form.appendChild(successEl);
+            }
+          })
+          .catch(function (err) {
+            // Step 8: Error path. Re-enable so the user can retry.
+            console.error('Form submission error:', err);
+            setFormDisabled(false);
+            if (submitBtn) submitBtn.textContent = 'Request a demo';
+            if (formError) formError.removeAttribute('hidden');
+          });
+      });
+
+      // Live validation: clear field errors as the user corrects their input.
+      fieldDescriptors.forEach(function (descriptor) {
+        var el = document.getElementById(descriptor.id);
+        if (!el) return;
+
+        var eventName = descriptor.type === 'select' ? 'change' : 'input';
+        el.addEventListener(eventName, function () {
+          clearFieldError(descriptor);
+          // Also clear the form-level error banner while the user is editing.
+          if (formError) formError.setAttribute('hidden', '');
+        });
+      });
+
+    })();
+  </script>
+</body>
+</html>

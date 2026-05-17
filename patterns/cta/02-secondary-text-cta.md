@@ -75,6 +75,10 @@ Less natural with:
 - `06-hero-stack-primary-plus-secondary.md` for the composite pattern pairing these two
 - `20-asymmetric-cta-primary-de-emphasized-secondary.md` for the explicit size/weight asymmetry variant
 
+## Component implementation
+
+A v2 implementation of this pattern is available in [`components/secondary-text-cta/`](../../components/secondary-text-cta/). Both React (TypeScript) and HTML/CSS variants are provided. Customize via CSS custom properties.
+
 ## Sources
 
 - Nielsen Norman Group: "Progressive Disclosure" (nngroup.com)

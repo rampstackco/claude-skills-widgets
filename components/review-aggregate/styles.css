@@ -1,0 +1,131 @@
+/* =============================================================
+   ReviewAggregate (rav): shared styles for React + HTML variants
+   ============================================================= */
+
+/* ---------- CSS custom properties (theme tokens) ---------- */
+.rav {
+  --rav-star-color-filled: #f59e0b;
+  --rav-star-color-empty: #d1d5db;
+  --rav-star-size: 1.125rem;
+  --rav-text-color: #111827;
+  --rav-muted-color: #6b7280;
+  --rav-source-spacing: 0.375rem;
+  --rav-gap: 0.25rem;
+  --rav-font-size: 0.875rem;
+  --rav-rating-font-weight: 600;
+  --rav-logo-height: 1.25rem;
+  --rav-expanded-padding: 1rem 1.25rem;
+  --rav-expanded-radius: 0.5rem;
+  --rav-expanded-bg: #ffffff;
+  --rav-expanded-border: 1px solid #e5e7eb;
+}
+
+/* ---------- Base layout ---------- */
+.rav {
+  display: inline-flex;
+  align-items: center;
+  font-size: var(--rav-font-size);
+  color: var(--rav-text-color);
+  gap: var(--rav-gap);
+  font-family: inherit;
+  line-height: 1;
+}
+
+/* ---------- Compact variant (inline row) ---------- */
+.rav--compact {
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+/* ---------- Expanded variant (badge block) ---------- */
+.rav--expanded {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: var(--rav-expanded-padding);
+  border-radius: var(--rav-expanded-radius);
+  background-color: var(--rav-expanded-bg);
+  border: var(--rav-expanded-border);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.08);
+}
+
+/* ---------- Stars row ---------- */
+.rav__stars {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.125rem;
+  flex-shrink: 0;
+}
+
+/* ---------- Individual star ---------- */
+.rav__star {
+  display: inline-flex;
+  align-items: center;
+  width: var(--rav-star-size);
+  height: var(--rav-star-size);
+  flex-shrink: 0;
+}
+
+.rav__star svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ---------- Rating value ---------- */
+.rav__rating-value {
+  font-weight: var(--rav-rating-font-weight);
+  color: var(--rav-text-color);
+  white-space: nowrap;
+}
+
+/* Compact: add a small left buffer after the stars */
+.rav--compact .rav__rating-value {
+  margin-left: 0.125rem;
+}
+
+/* Expanded: slightly larger numeral */
+.rav--expanded .rav__rating-value {
+  font-size: 1.25rem;
+}
+
+/* ---------- Review count ---------- */
+.rav__count {
+  color: var(--rav-muted-color);
+  white-space: nowrap;
+}
+
+/* ---------- Source label ---------- */
+.rav__source {
+  color: var(--rav-muted-color);
+  white-space: nowrap;
+  margin-left: var(--rav-source-spacing);
+}
+
+/* Expanded: no extra left margin; let flex gap handle spacing */
+.rav--expanded .rav__source {
+  margin-left: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+/* ---------- Source logo ---------- */
+.rav__source-logo {
+  display: inline-block;
+  height: var(--rav-logo-height);
+  width: auto;
+  vertical-align: middle;
+  object-fit: contain;
+}
+
+/* Compact: align logo to baseline row */
+.rav--compact .rav__source-logo {
+  margin-left: var(--rav-source-spacing);
+}
+
+/* ---------- Expanded bottom row (count + source together) ---------- */
+.rav--expanded .rav__count,
+.rav--expanded .rav__source {
+  font-size: 0.8125rem;
+}

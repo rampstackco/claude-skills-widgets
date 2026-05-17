@@ -1,0 +1,56 @@
+/* SecondaryTextCTA shared styles. */
+
+.stc {
+  --stc-color: var(--brand-accent, #1e5fcf);
+  --stc-color-hover: color-mix(in srgb, var(--stc-color) 80%, black);
+  --stc-font-size: 1rem;
+  --stc-font-weight: 500;
+  --stc-gap: 0.375rem;
+  --stc-underline-offset: 2px;
+  --stc-transition: 150ms ease;
+
+  display: inline-flex;
+  align-items: center;
+  gap: var(--stc-gap);
+  font-size: var(--stc-font-size);
+  font-weight: var(--stc-font-weight);
+  color: var(--stc-color);
+  text-decoration: underline;
+  text-decoration-color: currentColor;
+  text-underline-offset: var(--stc-underline-offset);
+  font-family: inherit;
+  line-height: 1.4;
+  cursor: pointer;
+  /* Vertical padding ensures minimum 44px tap target height */
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  transition: color var(--stc-transition), text-decoration-color var(--stc-transition);
+}
+
+.stc:hover,
+.stc:focus-visible {
+  color: var(--stc-color-hover);
+}
+
+/* Small size */
+.stc--small {
+  --stc-font-size: 0.875rem;
+  --stc-gap: 0.25rem;
+}
+
+/* Icon */
+.stc__icon {
+  width: 1em;
+  height: 1em;
+  flex-shrink: 0;
+  /* Slight optical correction to align with cap height */
+  position: relative;
+  top: 0.05em;
+}
+
+/* Focus ring */
+.stc:focus-visible {
+  outline: 2px solid var(--stc-color);
+  outline-offset: 3px;
+  border-radius: 2px;
+}

@@ -17,8 +17,14 @@ Component implementations of the patterns documented in `/patterns/`. Each compo
 | single-quote-testimonial | `patterns/social-proof/03-single-quote-testimonial.md` | yes | yes |
 | customer-count | `patterns/social-proof/07-customer-count-display.md` | yes | yes |
 | countdown-timer | `patterns/urgency/01-countdown-timer.md` | yes | yes |
+| secondary-text-cta | `patterns/cta/02-secondary-text-cta.md` | yes | yes |
+| sticky-bar-cta | `patterns/cta/03-sticky-bottom-bar-cta.md` | yes | yes |
+| inline-multi-field-form | `patterns/lead-capture/02-inline-multi-field-form.md` | yes | yes |
+| newsletter-signup-inline | `patterns/lead-capture/08-newsletter-signup-inline.md` | yes | yes |
+| testimonial-grid | `patterns/social-proof/05-testimonial-grid.md` | yes | yes |
+| review-aggregate | `patterns/social-proof/09-review-aggregate.md` | yes | yes |
 
-Components that do not map cleanly to a documented pattern are utilities. The four v2.0 utilities are flagged as candidates for future pattern documentation; the six v2.1 components each map directly to a documented pattern.
+Components that do not map cleanly to a documented pattern are utilities. The four v2.0 utilities are flagged as candidates for future pattern documentation; the twelve v2.1 and v2.2 components each map directly to a documented pattern.
 
 ## Architecture
 
@@ -49,9 +55,13 @@ MIT, same as the catalog. Use freely in commercial and non-commercial projects. 
 
 v2.0: 5 Threshold seed components (utility-leaning).
 
-v2.1 (current): 6 pattern-mapped components covering CTA (2), lead capture (1), social proof (2), and urgency (1).
+v2.1: 6 pattern-mapped components covering CTA, lead capture, social proof, and urgency.
 
-v2.2+ planned: additional CTA variants (sticky bar, exit-intent), multi-step forms, customer logo strips with variations, Storybook integration.
+v2.2 (current): 6 more pattern-mapped components extending CTA (sticky bar, secondary), lead capture (multi-field, newsletter), and social proof (testimonial grid, review aggregate).
+
+Total: 17 component implementations across 5 categories.
+
+v2.3+ planned: multi-step form, exit-intent modal, customer logo strip variations, additional urgency patterns, Storybook integration.
 
 ## Cross-references
 

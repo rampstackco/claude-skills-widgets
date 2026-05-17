@@ -72,6 +72,10 @@ Less natural with:
 - `10-sticky-bottom-newsletter-bar.md` for the persistent bar version
 - `claude-skills/skills/lead-magnet-design` for designing the newsletter offer that makes the form convert
 
+## Component implementation
+
+A v2 implementation of this pattern is available in [`components/newsletter-signup-inline/`](../../components/newsletter-signup-inline/). Both React (TypeScript) and HTML/CSS variants are provided. Customize via CSS custom properties.
+
 ## Sources
 
 - Kit (ConvertKit): "Kit Forms: Email Signup Forms That Convert" (kit.com/features/forms)

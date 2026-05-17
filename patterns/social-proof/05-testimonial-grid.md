@@ -76,6 +76,10 @@ Less natural with:
 - `04-testimonial-carousel.md` for the rotating variant where space is a constraint
 - `11-twitter-x-embed-wall.md` for the social-native variant of multi-testimonial display
 
+## Component implementation
+
+A v2 implementation of this pattern is available in [`components/testimonial-grid/`](../../components/testimonial-grid/). Both React (TypeScript) and HTML/CSS variants are provided. Customize via CSS custom properties.
+
 ## Sources
 
 - Cialdini, Robert. "Influence: The Psychology of Persuasion." Social proof principle.

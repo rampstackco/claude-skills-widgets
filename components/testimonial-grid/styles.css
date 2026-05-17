@@ -1,0 +1,102 @@
+/* TestimonialGrid shared styles.
+   Provides only the container, eyebrow, headline, and grid layout.
+   Individual card styles live in single-quote-testimonial/styles.css. */
+
+.tg {
+  /* Layout */
+  --tg-gap: 1.5rem;
+  --tg-column-min-width: 18rem;
+  --tg-grid-padding: 0 0 4rem;
+
+  /* Eyebrow */
+  --tg-eyebrow-color: #6b7280;
+  --tg-eyebrow-size: 0.8125rem;
+  --tg-eyebrow-letter-spacing: 0.08em;
+
+  /* Headline */
+  --tg-headline-color: var(--brand-ink, #111827);
+  --tg-headline-size: 2rem;
+  --tg-headline-line-height: 1.25;
+
+  /* Header block spacing */
+  --tg-header-gap: 0.5rem;
+  --tg-header-margin-bottom: 2.5rem;
+
+  padding: var(--tg-grid-padding);
+  font-family: inherit;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ---- Section eyebrow ---- */
+.tg__eyebrow {
+  margin: 0 0 var(--tg-header-gap);
+  padding: 0;
+  font-size: var(--tg-eyebrow-size);
+  font-weight: 600;
+  color: var(--tg-eyebrow-color);
+  letter-spacing: var(--tg-eyebrow-letter-spacing);
+  text-transform: uppercase;
+}
+
+/* ---- Section headline ---- */
+.tg__headline {
+  margin: 0 0 var(--tg-header-margin-bottom);
+  padding: 0;
+  font-size: var(--tg-headline-size);
+  font-weight: 700;
+  color: var(--tg-headline-color);
+  line-height: var(--tg-headline-line-height);
+}
+
+/* When only a headline is present (no eyebrow), apply bottom margin directly */
+.tg__headline:first-child {
+  margin-bottom: var(--tg-header-margin-bottom);
+}
+
+/* ---- Grid container ---- */
+.tg__grid {
+  display: grid;
+  gap: var(--tg-gap);
+  /* Default: auto-fill with minimum column width; capped by column modifier */
+  grid-template-columns: repeat(auto-fill, minmax(var(--tg-column-min-width), 1fr));
+  align-items: start;
+}
+
+/* ---- Column count modifiers ---- */
+.tg--cols-2 .tg__grid {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.tg--cols-3 .tg__grid {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* ---- Grid item ---- */
+.tg__item {
+  /* Ensure the SQT figure inside fills the item height for equal-height cards */
+  display: flex;
+  flex-direction: column;
+}
+
+.tg__item > .sqt {
+  /* Override the SQT's centered auto-margin to let the grid control width */
+  margin: 0;
+  max-width: none;
+  flex: 1;
+}
+
+/* ---- Responsive: collapse to 1 column below the minimum column threshold ---- */
+@media (max-width: 640px) {
+  .tg--cols-2 .tg__grid,
+  .tg--cols-3 .tg__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---- Responsive: 2-column for 3-col grids at mid breakpoint ---- */
+@media (min-width: 641px) and (max-width: 900px) {
+  .tg--cols-3 .tg__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

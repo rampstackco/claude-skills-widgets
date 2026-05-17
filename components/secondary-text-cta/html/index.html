@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SecondaryTextCTA examples</title>
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    body { font-family: system-ui, sans-serif; padding: 2rem; max-width: 800px; margin: 0 auto; }
+    .demo { display: flex; gap: 1.5rem; flex-wrap: wrap; align-items: center; margin-bottom: 2rem; }
+    h2 { margin-top: 2rem; font-size: 1rem; color: #555; }
+  </style>
+</head>
+<body>
+  <h1>SecondaryTextCTA examples</h1>
+
+  <h2>Default (arrow-right icon)</h2>
+  <div class="demo">
+    <a class="stc" href="#">
+      View pricing
+      <svg class="stc__icon" viewBox="0 0 16 16" aria-hidden="true">
+        <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" fill="none"/>
+      </svg>
+    </a>
+  </div>
+
+  <h2>Small size with chevron-right</h2>
+  <div class="demo">
+    <a class="stc stc--small" href="#">
+      Read the docs
+      <svg class="stc__icon" viewBox="0 0 16 16" aria-hidden="true">
+        <path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" fill="none"/>
+      </svg>
+    </a>
+  </div>
+
+  <h2>External link icon</h2>
+  <div class="demo">
+    <a class="stc" href="https://github.com/example" target="_blank" rel="noopener noreferrer">
+      Open on GitHub
+      <svg class="stc__icon" viewBox="0 0 16 16" aria-hidden="true">
+        <path d="M6 3H3a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1v-3M9 2h5v5M8 8l6-6" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+  </div>
+
+  <h2>No icon (underline only)</h2>
+  <div class="demo">
+    <a class="stc" href="#">Contact sales</a>
+  </div>
+
+  <h2>Custom color via CSS variable override</h2>
+  <div class="demo">
+    <a class="stc" href="#" style="--stc-color: #7c3aed; --stc-color-hover: #5b21b6;">
+      Try the beta
+      <svg class="stc__icon" viewBox="0 0 16 16" aria-hidden="true">
+        <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" fill="none"/>
+      </svg>
+    </a>
+  </div>
+</body>
+</html>
