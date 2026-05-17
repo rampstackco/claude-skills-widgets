@@ -72,6 +72,10 @@ Less natural with:
 - `02-savings-calculator.md` for framing the pricing in terms of savings versus current spend
 - `07-product-feature-configurator.md` for when the output is a product configuration rather than a price
 
+## Component implementation
+
+A v2 implementation of this pattern is available in [`components/pricing-tier-configurator/`](../../components/pricing-tier-configurator/). Both React (TypeScript) and HTML/CSS variants are provided. Customize via CSS custom properties.
+
 ## Sources
 
 - Gartner B2B buyer research: self-service pricing preference in software purchasing

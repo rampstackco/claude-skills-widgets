@@ -72,6 +72,10 @@ Less natural with:
 - `06-pricing-tier-configurator.md` for when the output is a pricing tier rather than a product variant
 - `08-comparison-tool-vs-competitors.md` for when the user needs to compare configured options against alternatives
 
+## Component implementation
+
+A v2 implementation of this pattern is available in [`components/product-feature-configurator/`](../../components/product-feature-configurator/). Both React (TypeScript) and HTML/CSS variants are provided. Customize via CSS custom properties.
+
 ## Sources
 
 - Thaler, Richard: "Misbehaving" (endowment effect research)

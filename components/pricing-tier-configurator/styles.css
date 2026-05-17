@@ -1,0 +1,215 @@
+/* PricingTierConfigurator shared styles. */
+
+.ptc {
+  --ptc-bg: var(--brand-surface, white);
+  --ptc-text-color: var(--brand-ink, #102542);
+  --ptc-muted-color: rgba(16, 37, 66, 0.6);
+  --ptc-accent: var(--brand-accent, #1e5fcf);
+  --ptc-tier-bg: white;
+  --ptc-tier-border: rgba(0, 0, 0, 0.1);
+  --ptc-tier-recommended-bg: rgba(30, 95, 207, 0.04);
+  --ptc-tier-recommended-border: var(--ptc-accent);
+  --ptc-tier-recommended-shadow: 0 8px 32px -8px rgba(30, 95, 207, 0.25);
+  --ptc-input-bg: rgba(0, 0, 0, 0.025);
+  --ptc-input-border: rgba(0, 0, 0, 0.12);
+  --ptc-badge-bg: var(--ptc-accent);
+  --ptc-badge-text: white;
+  --ptc-radius: 1rem;
+  --ptc-section-padding: 2rem;
+  --ptc-gap: 1.5rem;
+
+  display: block;
+  padding: var(--ptc-section-padding);
+  background: var(--ptc-bg);
+  color: var(--ptc-text-color);
+}
+
+.ptc__header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.ptc__title {
+  margin: 0 0 0.5rem;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.ptc__description {
+  margin: 0;
+  color: var(--ptc-muted-color);
+  font-size: 1.0625rem;
+}
+
+.ptc__inputs {
+  display: grid;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+  padding: 1.5rem;
+  background: var(--ptc-input-bg);
+  border-radius: var(--ptc-radius);
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ptc__input-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.ptc__input-label {
+  font-size: 0.9375rem;
+  font-weight: 500;
+}
+
+.ptc__input-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.ptc__slider {
+  flex: 1;
+}
+
+.ptc__slider-value {
+  min-width: 3rem;
+  text-align: right;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.ptc__checkbox {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.ptc__checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.ptc__help-text {
+  font-size: 0.8125rem;
+  color: var(--ptc-muted-color);
+}
+
+.ptc__tiers {
+  display: grid;
+  gap: var(--ptc-gap);
+}
+
+.ptc--horizontal .ptc__tiers {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.ptc--vertical .ptc__tiers {
+  grid-template-columns: 1fr;
+}
+
+.ptc__tier {
+  position: relative;
+  background: var(--ptc-tier-bg);
+  border: 2px solid var(--ptc-tier-border);
+  border-radius: var(--ptc-radius);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 200ms ease, background 200ms ease, box-shadow 200ms ease;
+}
+
+.ptc__tier--recommended {
+  background: var(--ptc-tier-recommended-bg);
+  border-color: var(--ptc-tier-recommended-border);
+  box-shadow: var(--ptc-tier-recommended-shadow);
+}
+
+.ptc__badge {
+  position: absolute;
+  top: -0.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--ptc-badge-bg);
+  color: var(--ptc-badge-text);
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.ptc__recommended-flag {
+  position: absolute;
+  top: -0.75rem;
+  right: 1rem;
+  background: var(--ptc-accent);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.ptc__tier-name {
+  margin: 0 0 0.25rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.ptc__tier-description {
+  margin: 0 0 1.5rem;
+  color: var(--ptc-muted-color);
+  font-size: 0.9375rem;
+}
+
+.ptc__tier-price {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.ptc__tier-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2rem;
+  flex: 1;
+}
+
+.ptc__tier-features li {
+  padding: 0.375rem 0;
+  font-size: 0.9375rem;
+  display: flex;
+  align-items: start;
+  gap: 0.5rem;
+}
+
+.ptc__tier-features li::before {
+  content: "";
+  width: 1.25rem;
+  height: 1.25rem;
+  background-color: var(--ptc-accent);
+  mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path d='M3 8l3 3 7-7' stroke='white' stroke-width='2' fill='none'/></svg>");
+  mask-repeat: no-repeat;
+  mask-position: center;
+  flex-shrink: 0;
+  margin-top: 0.125rem;
+}
+
+.ptc__visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
