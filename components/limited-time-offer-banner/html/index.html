@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LimitedTimeOfferBanner examples</title>
+
+  <!--
+    Link order matters:
+      1. countdown-timer/styles.css  (defines .cdt variables and classes)
+      2. limited-time-offer-banner/styles.css  (defines .ltob; scopes .cdt overrides
+         inside .ltob__countdown; does NOT redefine .cdt globally)
+  -->
+  <link rel="stylesheet" href="../../countdown-timer/styles.css">
+  <link rel="stylesheet" href="../styles.css">
+
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      padding: 5rem 2rem 2rem;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    h2 { margin-top: 2.5rem; font-size: 0.9375rem; color: #555; text-transform: uppercase; letter-spacing: 0.05em; }
+    p { max-width: 65ch; line-height: 1.6; color: #333; }
+    .demo-note { font-size: 0.8125rem; color: #888; margin-top: 0.25rem; }
+  </style>
+</head>
+<body>
+  <h1>LimitedTimeOfferBanner examples</h1>
+
+  <p>
+    The banner shown above is fixed to the top of the viewport. The countdown
+    decrements live. Click the close button to dismiss it; the state is stored in
+    localStorage under the <code>data-dismiss-key</code> value. To reset for
+    testing, run <code>localStorage.removeItem("ltob-dismissed")</code> in the
+    browser console and reload.
+  </p>
+
+  <h2>Scroll filler (verifies banner stays pinned while scrolling)</h2>
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque habitant morbi tristique senectus.</p>
+  <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Proin vel ante.</p>
+  <p>Cras commodo cursus magna, vel scelerisque nisl consectetur et. Aenean lacinia bibendum nulla sed.</p>
+  <p>Nullam quis risus eget urna mollis ornare vel eu leo. Curabitur blandit tempus porttitor lorem.</p>
+  <p>Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Maecenas faucibus mollis.</p>
+
+  <!--
+    ==========================================================================
+    VARIANT 1: Warning, top position, with CTA (default configuration)
+
+    Class reference:
+      .ltob             root; fixed position, flex row, CSS variable scope
+      .ltob--top        pins to the top viewport edge with safe-area-inset-top
+      .ltob--warning    amber/orange background (#b45309 default)
+      .ltob__message    the offer copy
+      .ltob__countdown  scopes CountdownTimer overrides (inherit color, compact size)
+        .cdt            CountdownTimer root (from countdown-timer/styles.css)
+        .cdt__label     "Ends in" label
+        .cdt__display   live digit string, aria-live="off"
+      .ltob__cta        styled anchor button
+      .ltob__close      dismiss button
+
+    data-deadline: ISO 8601 string consumed by the JS countdown block below.
+    data-dismiss-key: localStorage key; change per campaign.
+    data-expired-action: "hide" or "show-expired-message"
+    data-expired-message: text shown when action is "show-expired-message"
+    ==========================================================================
+  -->
+  <div
+    class="ltob ltob--top ltob--warning"
+    id="ltob-warning"
+    role="complementary"
+    aria-label="Promotional offer"
+    data-dismiss-key="ltob-dismissed"
+    data-deadline="2026-05-22T23:59:59Z"
+    data-expired-action="hide"
+    data-expired-message="This offer has ended"
+  >
+    <p class="ltob__message">Sale ends Friday at midnight. 20% off all annual plans.</p>
+
+    <div class="ltob__countdown cdt" aria-label="Time remaining">
+      <p class="cdt__label">Ends in</p>
+      <p class="cdt__display" aria-live="off">--d --h --m --s</p>
+    </div>
+
+    <a class="ltob__cta" href="/pricing">See pricing</a>
+
+    <button class="ltob__close" type="button" aria-label="Dismiss promotional offer">
+      <svg viewBox="0 0 16 16" aria-hidden="true" width="16" height="16">
+        <path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" fill="none"/>
+      </svg>
+    </button>
+  </div>
+
+  <!--
+    ==========================================================================
+    VARIANT 2 (reference, hidden by default): Celebratory, with CTA button,
+    expires with a message instead of hiding.
+
+    To activate: remove the style="display:none" attribute. Ensure only one
+    .ltob banner is visible at a time to avoid stacking layout issues.
+
+    <div
+      class="ltob ltob--top ltob--celebratory"
+      id="ltob-celebratory"
+      role="complementary"
+      aria-label="Promotional offer"
+      data-dismiss-key="launch-week-2026"
+      data-deadline="2026-05-23T23:59:59Z"
+      data-expired-action="show-expired-message"
+      data-expired-message="Launch week pricing has closed. Standard rates now apply."
+      style="display:none"
+    >
+      <p class="ltob__message">Launch week pricing is live. Save 30% before the window closes.</p>
+
+      <div class="ltob__countdown cdt" aria-label="Time remaining">
+        <p class="cdt__label">Ends in</p>
+        <p class="cdt__display" aria-live="off">--d --h --m --s</p>
+      </div>
+
+      <a class="ltob__cta" href="/pricing">See pricing</a>
+
+      <button class="ltob__close" type="button" aria-label="Dismiss promotional offer">
+        <svg viewBox="0 0 16 16" aria-hidden="true" width="16" height="16">
+          <path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" fill="none"/>
+        </svg>
+      </button>
+    </div>
+    ==========================================================================
+  -->
+
+  <!--
+    ==========================================================================
+    VARIANT 3 (reference, hidden by default): Minimal, bottom position,
+    no CTA, hides on expire.
+
+    <div
+      class="ltob ltob--bottom ltob--minimal"
+      id="ltob-minimal"
+      role="complementary"
+      aria-label="Promotional offer"
+      data-dismiss-key="early-bird-2026"
+      data-deadline="2026-05-18T23:59:59Z"
+      data-expired-action="hide"
+      data-expired-message=""
+      style="display:none"
+    >
+      <p class="ltob__message">Early-bird rate applies until Sunday at 11:59 PM.</p>
+
+      <div class="ltob__countdown cdt" aria-label="Time remaining">
+        <p class="cdt__label">Ends in</p>
+        <p class="cdt__display" aria-live="off">--d --h --m --s</p>
+      </div>
+
+      <button class="ltob__close" type="button" aria-label="Dismiss promotional offer">
+        <svg viewBox="0 0 16 16" aria-hidden="true" width="16" height="16">
+          <path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" fill="none"/>
+        </svg>
+      </button>
+    </div>
+    ==========================================================================
+  -->
+
+</body>
+
+<!--
+  ============================================================================
+  Vanilla JS: countdown + dismiss behavior without a framework.
+
+  Architecture summary:
+    - Finds every .ltob element with [data-dismiss-key] on DOMContentLoaded.
+    - For each banner, reads the dismiss key from localStorage.
+        If stored as "1": hides immediately (before paint) and skips setup.
+    - Reads data-deadline (ISO 8601 string) and starts a 1-second interval
+      that updates .cdt__display with the remaining time in compact format.
+    - When the countdown reaches zero:
+        Clears the interval.
+        Reads data-expired-action:
+          "hide":                 sets display:none on the banner.
+          "show-expired-message": replaces the banner's inner content with
+                                  the data-expired-message text, wrapped in
+                                  a <p role="status"> for screen readers.
+    - Wires .ltob__close to persist the dismiss key and hide the banner.
+
+  No dependencies. No global pollution (IIFE-wrapped).
+  ============================================================================
+-->
+<script>
+(function () {
+  "use strict";
+
+  /* ---- Helpers ---- */
+
+  function pad(n) {
+    return String(Math.floor(n)).padStart(2, "0");
+  }
+
+  function getTimeLeft(deadlineMs) {
+    var diff = deadlineMs - Date.now();
+    if (diff <= 0) return null;
+    var totalSeconds = Math.floor(diff / 1000);
+    var days    = Math.floor(totalSeconds / 86400);
+    var hours   = Math.floor((totalSeconds % 86400) / 3600);
+    var minutes = Math.floor((totalSeconds % 3600) / 60);
+    var seconds = totalSeconds % 60;
+    return { days: days, hours: hours, minutes: minutes, seconds: seconds };
+  }
+
+  function formatCompact(t) {
+    var parts = [];
+    if (t.days > 0) parts.push(pad(t.days) + "d");
+    parts.push(pad(t.hours) + "h");
+    parts.push(pad(t.minutes) + "m");
+    parts.push(pad(t.seconds) + "s");
+    return parts.join(" ");
+  }
+
+  /* ---- Expired state handlers ---- */
+
+  function handleExpiredHide(banner) {
+    banner.style.display = "none";
+  }
+
+  function handleExpiredMessage(banner, message) {
+    /* Replace all children with a single status paragraph */
+    banner.innerHTML = "";
+    var p = document.createElement("p");
+    p.className = "ltob__expired-message";
+    p.setAttribute("role", "status");
+    p.textContent = message || "This offer has ended";
+    banner.appendChild(p);
+    banner.classList.add("ltob--expired");
+  }
+
+  /* ---- Per-banner initialization ---- */
+
+  function initBanner(banner) {
+    var dismissKey    = banner.getAttribute("data-dismiss-key");
+    var deadlineStr   = banner.getAttribute("data-deadline");
+    var expiredAction = banner.getAttribute("data-expired-action") || "hide";
+    var expiredMsg    = banner.getAttribute("data-expired-message") || "This offer has ended";
+
+    /* Step 1: skip (and hide) if already dismissed */
+    if (dismissKey) {
+      try {
+        if (localStorage.getItem(dismissKey) === "1") {
+          banner.style.display = "none";
+          return;
+        }
+      } catch (e) {
+        /* localStorage unavailable; proceed without persistence */
+      }
+    }
+
+    /* Step 2: wire the close button */
+    var closeBtn = banner.querySelector(".ltob__close");
+    if (closeBtn) {
+      closeBtn.addEventListener("click", function () {
+        if (dismissKey) {
+          try {
+            localStorage.setItem(dismissKey, "1");
+          } catch (e) {
+            /* localStorage unavailable; still hide for this session */
+          }
+        }
+        banner.style.display = "none";
+      });
+    }
+
+    /* Step 3: start the countdown if we have a deadline */
+    if (!deadlineStr) return;
+
+    var deadlineMs = new Date(deadlineStr).getTime();
+    if (isNaN(deadlineMs)) return; /* invalid date string; do nothing */
+
+    var display = banner.querySelector(".cdt__display");
+    if (!display) return;
+
+    /* Check immediately before starting the interval */
+    var initial = getTimeLeft(deadlineMs);
+    if (!initial) {
+      /* Already expired on load */
+      if (expiredAction === "show-expired-message") {
+        handleExpiredMessage(banner, expiredMsg);
+      } else {
+        handleExpiredHide(banner);
+      }
+      return;
+    }
+
+    display.textContent = formatCompact(initial);
+
+    var intervalId = setInterval(function () {
+      var remaining = getTimeLeft(deadlineMs);
+      if (!remaining) {
+        clearInterval(intervalId);
+        if (expiredAction === "show-expired-message") {
+          handleExpiredMessage(banner, expiredMsg);
+        } else {
+          handleExpiredHide(banner);
+        }
+        return;
+      }
+      display.textContent = formatCompact(remaining);
+    }, 1000);
+  }
+
+  /* ---- Boot ---- */
+
+  function initAllBanners() {
+    var banners = document.querySelectorAll(".ltob[data-dismiss-key], .ltob[data-deadline]");
+    banners.forEach(function (banner) {
+      initBanner(banner);
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initAllBanners);
+  } else {
+    /* DOMContentLoaded already fired (script at end of body) */
+    initAllBanners();
+  }
+}());
+</script>
+</html>

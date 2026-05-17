@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MultiOptionCTACluster examples</title>
+  <!-- PrimaryButtonCTA styles must be loaded first; moc styles layer on top -->
+  <link rel="stylesheet" href="../../primary-button-cta/styles.css">
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    body { font-family: system-ui, sans-serif; padding: 2rem; max-width: 900px; margin: 0 auto; }
+    .demo { margin-bottom: 3rem; }
+    h2 { margin-top: 2rem; font-size: 1rem; color: #555; border-bottom: 1px solid #e5e7eb; padding-bottom: 0.5rem; }
+  </style>
+</head>
+<body>
+  <h1>MultiOptionCTACluster examples</h1>
+
+  <!-- Example 1: Two-option developer vs. business split -->
+  <h2>Two-option split (horizontal, with descriptions)</h2>
+  <div class="demo">
+    <section class="moc moc--horizontal">
+      <p class="moc__eyebrow">Choose your path</p>
+      <h2 class="moc__headline">Where do you want to start?</h2>
+      <div class="moc__options">
+        <div class="moc__option">
+          <a class="pbc pbc--solid pbc--rounded" href="/docs/quickstart">Start building</a>
+          <p class="moc__option-description">API access, SDKs, and a sandbox environment ready in minutes.</p>
+        </div>
+        <div class="moc__option">
+          <a class="pbc pbc--solid pbc--rounded" href="/contact">Talk to sales</a>
+          <p class="moc__option-description">Custom pricing, SLAs, and dedicated onboarding support.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Example 2: Three-option cluster with descriptions and icons -->
+  <h2>Three-option cluster (horizontal, with descriptions and icons)</h2>
+  <div class="demo">
+    <section class="moc moc--horizontal">
+      <p class="moc__eyebrow">Pick what fits</p>
+      <h2 class="moc__headline">One product, three ways to get started</h2>
+      <div class="moc__options">
+        <div class="moc__option">
+          <a class="pbc pbc--solid pbc--rounded pbc--with-icon" href="/signup/free">
+            Start free
+            <svg class="pbc__icon" viewBox="0 0 16 16" aria-hidden="true">
+              <path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" fill="none"/>
+            </svg>
+          </a>
+          <p class="moc__option-description">Up to 3 projects, no credit card required.</p>
+        </div>
+        <div class="moc__option">
+          <a class="pbc pbc--solid pbc--rounded pbc--with-icon" href="/signup/trial">
+            Start trial
+            <svg class="pbc__icon" viewBox="0 0 16 16" aria-hidden="true">
+              <path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" fill="none"/>
+            </svg>
+          </a>
+          <p class="moc__option-description">Full-featured 14-day trial, no restrictions.</p>
+        </div>
+        <div class="moc__option">
+          <a class="pbc pbc--solid pbc--rounded pbc--with-icon" href="/demo">
+            Book a demo
+            <svg class="pbc__icon" viewBox="0 0 16 16" aria-hidden="true">
+              <path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" fill="none"/>
+            </svg>
+          </a>
+          <p class="moc__option-description">Live walkthrough with a product specialist.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Example 3: Stacked layout with arrow-right icons -->
+  <h2>Stacked layout (column at all viewports)</h2>
+  <div class="demo" style="max-width: 420px;">
+    <section class="moc moc--stacked">
+      <p class="moc__eyebrow">Get started</p>
+      <h2 class="moc__headline">Two paths, one product</h2>
+      <div class="moc__options">
+        <div class="moc__option">
+          <a class="pbc pbc--solid pbc--rounded pbc--with-icon" href="/signup/developer">
+            For individual developers
+            <svg class="pbc__icon" viewBox="0 0 16 16" aria-hidden="true">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" fill="none"/>
+            </svg>
+          </a>
+          <p class="moc__option-description">CLI tools, API keys, and local development support.</p>
+        </div>
+        <div class="moc__option">
+          <a class="pbc pbc--solid pbc--rounded pbc--with-icon" href="/signup/teams">
+            For teams and organizations
+            <svg class="pbc__icon" viewBox="0 0 16 16" aria-hidden="true">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" fill="none"/>
+            </svg>
+          </a>
+          <p class="moc__option-description">Role-based access, audit logs, and admin console included.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Example 4: Four-option grid (maximum recommended) -->
+  <h2>Four-option grid (horizontal, no descriptions)</h2>
+  <div class="demo">
+    <section class="moc moc--horizontal">
+      <p class="moc__eyebrow">All plans</p>
+      <h2 class="moc__headline">Choose the plan that fits your team</h2>
+      <div class="moc__options">
+        <div class="moc__option">
+          <a class="pbc pbc--solid pbc--rounded" href="/signup/free">Free</a>
+        </div>
+        <div class="moc__option">
+          <a class="pbc pbc--solid pbc--rounded" href="/signup/starter">Starter</a>
+        </div>
+        <div class="moc__option">
+          <a class="pbc pbc--solid pbc--rounded" href="/signup/pro">Pro</a>
+        </div>
+        <div class="moc__option">
+          <a class="pbc pbc--solid pbc--rounded" href="/contact/enterprise">Enterprise</a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+</body>
+</html>

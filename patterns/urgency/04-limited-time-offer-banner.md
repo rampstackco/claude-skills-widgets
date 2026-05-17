@@ -76,6 +76,10 @@ Less natural with:
 - `05-early-access-window.md` for the specific variant used during product launch windows
 - `08-cohort-enrollment-deadline.md` for banners tied to cohort enrollment close dates
 
+## Component implementation
+
+A v2 implementation of this pattern is available in [`components/limited-time-offer-banner/`](../../components/limited-time-offer-banner/). Both React (TypeScript) and HTML/CSS variants are provided. Customize via CSS custom properties.
+
 ## Sources
 
 - Cialdini, Robert. *Influence: The Psychology of Persuasion*. Scarcity principle.

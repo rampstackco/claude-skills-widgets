@@ -71,6 +71,10 @@ Less natural with:
 - `12-section-end-cta-repetition.md` for the repeating-throughout-page alternative
 - `03-sticky-bottom-bar-cta.md` for an always-visible alternative to a static section
 
+## Component implementation
+
+A v2 implementation of this pattern is available in [`components/footer-cta-section/`](../../components/footer-cta-section/). Both React (TypeScript) and HTML/CSS variants are provided. Customize via CSS custom properties.
+
 ## Sources
 
 - Cialdini, R.B.: "Influence: The Psychology of Persuasion" (commitment-consistency principle)

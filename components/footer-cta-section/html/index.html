@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FooterCTASection examples</title>
+  <!-- Composed component stylesheets -->
+  <link rel="stylesheet" href="../../primary-button-cta/styles.css">
+  <link rel="stylesheet" href="../../trust-logo-strip/styles.css">
+  <link rel="stylesheet" href="../../single-quote-testimonial/styles.css">
+  <!-- This component's styles (last so overrides apply correctly) -->
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f3f4f6;
+    }
+    .demo-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #9ca3af;
+      padding: 1.5rem 1.5rem 0.5rem;
+      background: #f3f4f6;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       Example 1: Subtle, centered (default)
+       No proof elements. Primary CTA with arrow icon plus a text-link secondary.
+       ============================================================ -->
+  <p class="demo-label">Subtle centered (default)</p>
+  <section class="fcs fcs--subtle fcs--center" aria-label="Ready to ship with confidence?">
+    <div class="fcs__inner">
+      <h2 class="fcs__headline">Ready to ship with confidence?</h2>
+      <p class="fcs__description">Join thousands of teams already building on a foundation that holds up.</p>
+      <div class="fcs__actions">
+        <a class="pbc pbc--solid pbc--rounded pbc--with-icon" href="/signup">
+          Get started
+          <svg class="pbc__icon" viewBox="0 0 16 16" aria-hidden="true">
+            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" fill="none"/>
+          </svg>
+        </a>
+        <a class="fcs__secondary-link" href="/pricing">View pricing</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       Example 2: Bold variant with TrustLogoStrip
+       Brand-accent background acts as a contrasting design break.
+       Logo strip renders inside .fcs__proof below the action group.
+       ============================================================ -->
+  <p class="demo-label">Bold with proof logos</p>
+  <section class="fcs fcs--bold fcs--center" aria-label="Start building today.">
+    <div class="fcs__inner">
+      <h2 class="fcs__headline">Start building today.</h2>
+      <p class="fcs__description">No credit card required. Full access for 14 days.</p>
+      <div class="fcs__actions">
+        <a class="pbc pbc--solid pbc--rounded pbc--with-icon" href="/signup">
+          Start free trial
+          <svg class="pbc__icon" viewBox="0 0 16 16" aria-hidden="true">
+            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" fill="none"/>
+          </svg>
+        </a>
+        <!-- Secondary CTA: outlined variant via .pbc -->
+        <a class="pbc pbc--outlined pbc--rounded" href="/contact">Talk to sales</a>
+      </div>
+
+      <!-- proofLogos: TrustLogoStrip inside .fcs__proof -->
+      <div class="fcs__proof">
+        <section class="tls">
+          <p class="tls__eyebrow">Used at teams like</p>
+          <ul class="tls__list">
+            <li class="tls__item">
+              <img class="tls__logo" src="https://via.placeholder.com/120x40?text=Acme" alt="Acme Corp" loading="lazy">
+            </li>
+            <li class="tls__item">
+              <img class="tls__logo" src="https://via.placeholder.com/120x40?text=Globex" alt="Globex Industries" loading="lazy">
+            </li>
+            <li class="tls__item">
+              <img class="tls__logo" src="https://via.placeholder.com/120x40?text=Initech" alt="Initech" loading="lazy">
+            </li>
+            <li class="tls__item">
+              <img class="tls__logo" src="https://via.placeholder.com/120x40?text=Umbrella" alt="Umbrella" loading="lazy">
+            </li>
+          </ul>
+        </section>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       Example 3: Subtle centered with SingleQuoteTestimonial
+       proofQuote renders inside .fcs__proof using .sqt--minimal.
+       ============================================================ -->
+  <p class="demo-label">Subtle centered with proof quote</p>
+  <section class="fcs fcs--subtle fcs--center" aria-label="The last tool you add becomes the one you rely on most.">
+    <div class="fcs__inner">
+      <h2 class="fcs__headline">The last tool you add becomes the one you rely on most.</h2>
+      <p class="fcs__description">Teams that integrate during setup stay integrated. Get up and running in under ten minutes.</p>
+      <div class="fcs__actions">
+        <a class="pbc pbc--solid pbc--rounded" href="/signup">Get started free</a>
+        <a class="fcs__secondary-link" href="/docs">See the docs</a>
+      </div>
+
+      <!-- proofQuote: SingleQuoteTestimonial inside .fcs__proof -->
+      <div class="fcs__proof">
+        <figure class="sqt sqt--minimal">
+          <blockquote class="sqt__quote">
+            <p>Switching was the easiest infrastructure decision we made all year. The on-call rotation has been genuinely calm since.</p>
+          </blockquote>
+          <figcaption class="sqt__attribution">
+            <span>
+              <span class="sqt__name">Jordan Lee</span>
+              <span class="sqt__meta">VP Engineering, Northwind</span>
+            </span>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>

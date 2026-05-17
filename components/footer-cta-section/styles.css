@@ -1,0 +1,155 @@
+/* FooterCTASection shared styles.
+   Only .fcs rules live here. Do NOT redefine .pbc, .tls, or .sqt. */
+
+.fcs {
+  --fcs-bg: var(--brand-surface, #ffffff);
+  --fcs-bold-bg: var(--brand-accent, #1e5fcf);
+  --fcs-text-color: var(--brand-ink, #111827);
+  --fcs-bold-text-color: #ffffff;
+  --fcs-padding: 5rem 1.5rem;
+  --fcs-heading-size: 2.5rem;
+  --fcs-max-width: 56rem;
+  --fcs-description-color: var(--brand-muted, #6b7280);
+  --fcs-bold-description-color: rgba(255, 255, 255, 0.8);
+  --fcs-secondary-link-color: var(--brand-ink, #111827);
+  --fcs-bold-secondary-link-color: rgba(255, 255, 255, 0.9);
+  --fcs-gap-actions: 1rem;
+  --fcs-gap-proof: 3rem;
+  --fcs-heading-line-height: 1.15;
+
+  display: block;
+  background-color: var(--fcs-bg);
+  color: var(--fcs-text-color);
+  padding: var(--fcs-padding);
+}
+
+/* ---- Inner container ---- */
+.fcs__inner {
+  max-width: var(--fcs-max-width);
+  margin: 0 auto;
+}
+
+/* ---- Headline ---- */
+.fcs__headline {
+  margin: 0 0 1rem;
+  font-size: var(--fcs-heading-size);
+  line-height: var(--fcs-heading-line-height);
+  font-weight: 700;
+  color: inherit;
+  font-family: inherit;
+}
+
+/* ---- Description ---- */
+.fcs__description {
+  margin: 0 0 2.25rem;
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: var(--fcs-description-color);
+  font-family: inherit;
+}
+
+/* ---- Actions ---- */
+.fcs__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--fcs-gap-actions);
+  align-items: center;
+}
+
+/* ---- Secondary CTA: text-link style ---- */
+.fcs__secondary-link {
+  display: inline-flex;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--fcs-secondary-link-color);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-family: inherit;
+  transition: opacity 150ms ease;
+}
+
+.fcs__secondary-link:hover,
+.fcs__secondary-link:focus-visible {
+  opacity: 0.75;
+}
+
+.fcs__secondary-link:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+/* ---- Proof area (logos + quote) ---- */
+.fcs__proof {
+  margin-top: var(--fcs-gap-proof);
+}
+
+/* ---- Alignment modifiers ---- */
+.fcs--center .fcs__inner {
+  text-align: center;
+}
+
+.fcs--center .fcs__actions {
+  justify-content: center;
+}
+
+.fcs--left .fcs__inner {
+  text-align: left;
+}
+
+.fcs--left .fcs__actions {
+  justify-content: flex-start;
+}
+
+/* ---- Variant: subtle (default, no extra styles needed) ---- */
+
+/* ---- Variant: bold ---- */
+.fcs--bold {
+  background-color: var(--fcs-bold-bg);
+  color: var(--fcs-bold-text-color);
+}
+
+.fcs--bold .fcs__description {
+  color: var(--fcs-bold-description-color);
+}
+
+.fcs--bold .fcs__secondary-link {
+  color: var(--fcs-bold-secondary-link-color);
+}
+
+/* On bold, override the trust-logo-strip so logos read on dark BG */
+.fcs--bold .tls {
+  --tls-eyebrow-color: rgba(255, 255, 255, 0.6);
+  --tls-logo-opacity: 0.55;
+  --tls-logo-filter: brightness(0) invert(1);
+  --tls-logo-opacity-hover: 0.9;
+}
+
+/* On bold, override the testimonial quote and attribution colors */
+.fcs--bold .sqt {
+  --sqt-quote-color: #ffffff;
+  --sqt-name-color: #ffffff;
+  --sqt-meta-color: rgba(255, 255, 255, 0.65);
+}
+
+/* ---- Mobile ---- */
+@media (max-width: 640px) {
+  .fcs {
+    --fcs-padding: 3.5rem 1.25rem;
+    --fcs-heading-size: 1.875rem;
+    --fcs-gap-proof: 2rem;
+  }
+
+  .fcs__description {
+    font-size: 1rem;
+  }
+
+  .fcs__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .fcs--center .fcs__actions {
+    align-items: center;
+  }
+}

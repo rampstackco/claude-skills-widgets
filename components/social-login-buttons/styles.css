@@ -1,0 +1,132 @@
+/* SocialLoginButtons shared styles. */
+
+.slb {
+  --slb-button-bg: var(--brand-surface, #ffffff);
+  --slb-button-border: var(--brand-border, #d1d5db);
+  --slb-button-text-color: var(--brand-ink, #111827);
+  --slb-button-bg-hover: var(--brand-surface-hover, #f3f4f6);
+  --slb-button-padding: 0.75rem 1.25rem;
+  --slb-icon-size: 1.25rem;
+  --slb-gap: 0.75rem;
+  --slb-button-radius: 0.5rem;
+  --slb-button-font-size: 0.9375rem;
+  --slb-button-font-weight: 500;
+  --slb-divider-color: var(--brand-border, #d1d5db);
+  --slb-divider-text-color: var(--brand-muted, #6b7280);
+  --slb-transition: 150ms ease;
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--slb-gap);
+  width: 100%;
+}
+
+/* Layout: row */
+.slb--row {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+/* Layout: stacked (explicit, also default column direction above) */
+.slb--stacked {
+  flex-direction: column;
+}
+
+/* Provider button */
+.slb__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  padding: var(--slb-button-padding);
+  min-height: 44px;
+  background-color: var(--slb-button-bg);
+  color: var(--slb-button-text-color);
+  border: 1px solid var(--slb-button-border);
+  border-radius: var(--slb-button-radius);
+  font-size: var(--slb-button-font-size);
+  font-weight: var(--slb-button-font-weight);
+  font-family: inherit;
+  line-height: 1.25;
+  cursor: pointer;
+  text-decoration: none;
+  transition:
+    background-color var(--slb-transition),
+    border-color var(--slb-transition),
+    color var(--slb-transition);
+  white-space: nowrap;
+}
+
+/* Stacked buttons fill full width */
+.slb--stacked .slb__button {
+  width: 100%;
+}
+
+/* Row buttons size to their content */
+.slb--row .slb__button {
+  flex: 0 0 auto;
+}
+
+.slb__button:hover,
+.slb__button:focus-visible {
+  background-color: var(--slb-button-bg-hover);
+}
+
+.slb__button:focus-visible {
+  outline: 2px solid var(--slb-button-text-color);
+  outline-offset: 2px;
+}
+
+.slb__button:active {
+  opacity: 0.85;
+}
+
+/* Icon */
+.slb__icon {
+  width: var(--slb-icon-size);
+  height: var(--slb-icon-size);
+  flex-shrink: 0;
+  display: block;
+}
+
+/* Label */
+.slb__label {
+  /* inherits button styles; explicit element to keep SVG aria-hidden clean */
+}
+
+/* Minimal style: muted border, no background fill difference */
+.slb--minimal .slb__button {
+  --slb-button-bg: transparent;
+  --slb-button-border: var(--brand-border, #d1d5db);
+}
+
+.slb--minimal .slb__button:hover,
+.slb--minimal .slb__button:focus-visible {
+  --slb-button-bg-hover: var(--brand-surface-hover, #f3f4f6);
+}
+
+/* Divider */
+.slb__divider {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--slb-divider-text-color);
+  font-size: 0.8125rem;
+  line-height: 1;
+  user-select: none;
+  width: 100%;
+}
+
+.slb__divider::before,
+.slb__divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background-color: var(--slb-divider-color);
+}
+
+.slb__divider-text {
+  flex-shrink: 0;
+  padding: 0 0.25rem;
+}

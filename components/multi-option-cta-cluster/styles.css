@@ -1,0 +1,93 @@
+/* MultiOptionCTACluster shared styles.
+   This file defines only .moc rules.
+   .pbc rules live in primary-button-cta/styles.css and must be linked separately. */
+
+.moc {
+  --moc-gap: 1rem;
+  --moc-option-min-width: 10rem;
+  --moc-eyebrow-color: var(--brand-accent, #1e5fcf);
+  --moc-eyebrow-size: 0.8125rem;
+  --moc-headline-color: var(--brand-ink, #102542);
+  --moc-headline-size: 1.75rem;
+  --moc-description-color: var(--brand-muted, #4b5563);
+  --moc-description-size: 0.9375rem;
+
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.moc__eyebrow {
+  margin: 0 0 0.5rem;
+  font-size: var(--moc-eyebrow-size);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--moc-eyebrow-color);
+  font-family: inherit;
+}
+
+.moc__headline {
+  margin: 0 0 1.5rem;
+  font-size: var(--moc-headline-size);
+  font-weight: 700;
+  color: var(--moc-headline-color);
+  font-family: inherit;
+  line-height: 1.25;
+}
+
+/* Options row: equal-width flex children in horizontal mode */
+.moc__options {
+  display: flex;
+  gap: var(--moc-gap);
+}
+
+/* Horizontal layout (default): row on wide, stack on narrow */
+.moc--horizontal .moc__options {
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+/* Stacked layout: column at all viewports */
+.moc--stacked .moc__options {
+  flex-direction: column;
+}
+
+/* Each option cell grows equally so all buttons share the same width */
+.moc__option {
+  flex: 1 1 var(--moc-option-min-width);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+/* In stacked layout, stretch buttons to full width */
+.moc--stacked .moc__option {
+  flex: none;
+  width: 100%;
+}
+
+.moc--stacked .moc__option .pbc {
+  width: 100%;
+  justify-content: center;
+}
+
+.moc__option-description {
+  margin: 0;
+  font-size: var(--moc-description-size);
+  color: var(--moc-description-color);
+  font-family: inherit;
+  line-height: 1.5;
+}
+
+/* Narrow-screen: stack horizontal clusters when space runs out */
+@media (max-width: 480px) {
+  .moc--horizontal .moc__option {
+    flex: 1 1 100%;
+  }
+
+  .moc--horizontal .moc__option .pbc {
+    width: 100%;
+    justify-content: center;
+  }
+}

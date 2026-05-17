@@ -72,6 +72,10 @@ Less natural with:
 - `06-pricing-tier-configurator.md` for the seat/volume configuration that often precedes a savings output
 - Lead capture patterns for savings report gating
 
+## Component implementation
+
+A v2 implementation of this pattern is available in [`components/savings-calculator/`](../../components/savings-calculator/). Both React (TypeScript) and HTML/CSS variants are provided. Customize via CSS custom properties.
+
 ## Sources
 
 - Kahneman, Daniel: "Thinking, Fast and Slow" (loss aversion research)
