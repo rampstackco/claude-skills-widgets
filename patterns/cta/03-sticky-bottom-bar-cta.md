@@ -73,6 +73,10 @@ Less natural with:
 - `12-section-end-cta-repetition.md` for an alternative approach to CTA persistence across long pages
 - `06-hero-stack-primary-plus-secondary.md` for the hero-level CTA this pattern supports
 
+## Component implementation
+
+A v2 implementation of this pattern is available in [`components/sticky-bar-cta/`](../../components/sticky-bar-cta/). Both React (TypeScript) and HTML/CSS variants are provided. Customize via CSS custom properties.
+
 ## Sources
 
 - CXL Institute: Scroll depth and conversion rate research (cxl.com)

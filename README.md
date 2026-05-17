@@ -80,7 +80,20 @@ v2.1 builds on the Threshold seed migration by adding components that map direct
 - **CustomerCount**: implements `patterns/social-proof/07-customer-count-display.md`
 - **CountdownTimer**: implements `patterns/urgency/01-countdown-timer.md`
 
-Each component pairs React (TypeScript) with HTML/CSS for portability across stacks. The form and countdown components include vanilla JS in the HTML variant so the static files demonstrate working behavior. Browse `components/` for the full catalog and `components/README.md` for the roadmap.
+Each component pairs React (TypeScript) with HTML/CSS for portability across stacks. The form and countdown components include vanilla JS in the HTML variant so the static files demonstrate working behavior.
+
+## v2.2: 6 more pattern-mapped components
+
+v2.2 extends the catalog with:
+
+- **SecondaryTextCTA**: companion to PrimaryButtonCTA for less-prominent text-link actions
+- **StickyBarCTA**: persistent bottom-of-viewport CTA with dismiss persistence
+- **InlineMultiFieldForm**: sales lead form with 3 to 5 fields
+- **NewsletterSignupInline**: email signup with optional headline and supporting copy
+- **TestimonialGrid**: 3 to 6 testimonials in a responsive grid
+- **ReviewAggregate**: star rating and review count from third-party sources
+
+Total v2.x: 17 component implementations across CTA, lead capture, social proof, urgency, and utility categories. Browse `components/` for the full catalog and `components/README.md` for the roadmap.
 
 ## How patterns are documented
 

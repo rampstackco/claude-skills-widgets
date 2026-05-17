@@ -1,0 +1,308 @@
+/* InlineMultiFieldForm shared styles.
+   Class prefix: imff
+   Consumed by both the React component and the HTML variant. */
+
+.imff {
+  /* Spacing */
+  --imff-gap: 1rem;
+
+  /* Labels */
+  --imff-label-color: var(--brand-ink, #111827);
+  --imff-label-font-size: 0.875rem;
+  --imff-label-font-weight: 500;
+
+  /* Inputs and selects */
+  --imff-input-border: var(--brand-border, #d1d5db);
+  --imff-input-border-radius: 0.375rem;
+  --imff-input-padding-y: 0.625rem;
+  --imff-input-padding-x: 0.875rem;
+  --imff-input-font-size: 1rem;
+  --imff-input-focus-ring: var(--brand-accent, #1e5fcf);
+
+  /* Grid layout */
+  --imff-grid-cols-desktop: 2;
+
+  /* Button */
+  --imff-button-bg: var(--brand-accent, #1e5fcf);
+  --imff-button-bg-hover: color-mix(in srgb, var(--imff-button-bg) 88%, black);
+  --imff-button-text: #ffffff;
+  --imff-button-font-size: 1rem;
+  --imff-button-font-weight: 600;
+
+  /* Disclaimer */
+  --imff-disclaimer-color: var(--brand-muted, #6b7280);
+  --imff-disclaimer-font-size: 0.8125rem;
+
+  /* State colors */
+  --imff-success-color: var(--brand-success, #16a34a);
+  --imff-error-color: var(--brand-error, #dc2626);
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--imff-gap);
+  font-family: inherit;
+  width: 100%;
+}
+
+/* ===================================================================
+   Layout: grid (default, 2 columns on desktop)
+   =================================================================== */
+
+.imff--grid .imff__fields {
+  display: grid;
+  grid-template-columns: repeat(var(--imff-grid-cols-desktop), 1fr);
+  gap: var(--imff-gap);
+}
+
+/* ===================================================================
+   Layout: stacked (single column at all widths)
+   =================================================================== */
+
+.imff--stacked .imff__fields {
+  display: flex;
+  flex-direction: column;
+  gap: var(--imff-gap);
+}
+
+/* ===================================================================
+   Layout: horizontal (fields and button in one row, wraps on narrow)
+   =================================================================== */
+
+.imff--horizontal .imff__fields {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: var(--imff-gap);
+  align-items: flex-end;
+}
+
+.imff--horizontal .imff__field {
+  flex: 1 1 10rem;
+  min-width: 0;
+}
+
+.imff--horizontal .imff__actions {
+  flex-shrink: 0;
+  align-self: flex-end;
+}
+
+/* ===================================================================
+   Field wrapper
+   =================================================================== */
+
+.imff__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3125rem;
+  min-width: 0;
+}
+
+/* ===================================================================
+   Label
+   =================================================================== */
+
+.imff__label {
+  font-size: var(--imff-label-font-size);
+  font-weight: var(--imff-label-font-weight);
+  color: var(--imff-label-color);
+  line-height: 1.4;
+}
+
+/* ===================================================================
+   Input
+   =================================================================== */
+
+.imff__input {
+  width: 100%;
+  font-size: var(--imff-input-font-size);
+  font-family: inherit;
+  padding: var(--imff-input-padding-y) var(--imff-input-padding-x);
+  border: 1px solid var(--imff-input-border);
+  border-radius: var(--imff-input-border-radius);
+  background-color: #ffffff;
+  color: inherit;
+  line-height: 1.4;
+  min-height: 44px;
+  box-sizing: border-box;
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.imff__input::placeholder {
+  color: #9ca3af;
+}
+
+.imff__input:focus {
+  outline: none;
+  border-color: var(--imff-input-focus-ring);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--imff-input-focus-ring) 20%, transparent);
+}
+
+.imff__input:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  background-color: #f9fafb;
+}
+
+.imff__input[aria-invalid="true"] {
+  border-color: var(--imff-error-color);
+}
+
+/* ===================================================================
+   Select
+   =================================================================== */
+
+.imff__select {
+  width: 100%;
+  font-size: var(--imff-input-font-size);
+  font-family: inherit;
+  padding: var(--imff-input-padding-y) var(--imff-input-padding-x);
+  border: 1px solid var(--imff-input-border);
+  border-radius: var(--imff-input-border-radius);
+  background-color: #ffffff;
+  color: inherit;
+  line-height: 1.4;
+  min-height: 44px;
+  box-sizing: border-box;
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+  /* Show a caret using a background SVG so the element looks consistent
+     cross-browser without relying on -webkit-appearance defaults. */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b7280' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  padding-right: 2.25rem;
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+}
+
+.imff__select:focus {
+  outline: none;
+  border-color: var(--imff-input-focus-ring);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--imff-input-focus-ring) 20%, transparent);
+}
+
+.imff__select:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  background-color: #f9fafb;
+}
+
+.imff__select[aria-invalid="true"] {
+  border-color: var(--imff-error-color);
+}
+
+/* ===================================================================
+   Per-field error message
+   =================================================================== */
+
+.imff__error {
+  font-size: 0.8125rem;
+  color: var(--imff-error-color);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ===================================================================
+   Actions row (button)
+   =================================================================== */
+
+.imff__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--imff-gap);
+}
+
+/* ===================================================================
+   Submit button
+   =================================================================== */
+
+.imff__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--imff-input-padding-y) 1.5rem;
+  font-size: var(--imff-button-font-size);
+  font-weight: var(--imff-button-font-weight);
+  font-family: inherit;
+  background-color: var(--imff-button-bg);
+  color: var(--imff-button-text);
+  border: 1px solid var(--imff-button-bg);
+  border-radius: var(--imff-input-border-radius);
+  cursor: pointer;
+  line-height: 1.4;
+  min-height: 44px;
+  white-space: nowrap;
+  transition: background-color 120ms ease, border-color 120ms ease, opacity 120ms ease;
+  align-self: flex-start;
+}
+
+.imff__button:hover:not(:disabled) {
+  background-color: var(--imff-button-bg-hover);
+  border-color: var(--imff-button-bg-hover);
+}
+
+.imff__button:focus-visible {
+  outline: 2px solid var(--imff-input-focus-ring);
+  outline-offset: 2px;
+}
+
+.imff__button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* ===================================================================
+   Disclaimer fine-print
+   =================================================================== */
+
+.imff__disclaimer {
+  font-size: var(--imff-disclaimer-font-size);
+  color: var(--imff-disclaimer-color);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ===================================================================
+   Success state
+   =================================================================== */
+
+.imff__success {
+  font-size: 1rem;
+  color: var(--imff-success-color);
+  font-weight: 500;
+  padding: 0.25rem 0;
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* ===================================================================
+   Narrow viewport overrides (all layouts collapse to single column)
+   =================================================================== */
+
+@media (max-width: 600px) {
+  .imff--grid .imff__fields,
+  .imff--horizontal .imff__fields {
+    grid-template-columns: 1fr;
+    flex-direction: column;
+  }
+
+  .imff--horizontal .imff__field {
+    flex: 1 1 100%;
+  }
+
+  .imff--horizontal .imff__actions {
+    width: 100%;
+  }
+
+  .imff__button {
+    width: 100%;
+    align-self: stretch;
+  }
+}
+
+/* Hidden utility for HTML variant */
+[hidden] {
+  display: none !important;
+}

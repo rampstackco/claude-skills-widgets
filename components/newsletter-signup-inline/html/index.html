@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NewsletterSignupInline examples</title>
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      padding: 2rem 1.5rem;
+      max-width: 640px;
+      margin: 0 auto;
+      color: #111827;
+      background: #ffffff;
+    }
+    .demo {
+      margin-bottom: 3.5rem;
+    }
+    .demo-label {
+      display: block;
+      margin-bottom: 1rem;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #9ca3af;
+    }
+  </style>
+</head>
+<body>
+  <h1 style="font-size: 1.5rem; margin-bottom: 2.5rem;">NewsletterSignupInline examples</h1>
+
+  <!-- =====================================================================
+       Variant 1: Default style
+       Transparent background, no padding, no border. The headline and
+       description sit above the form row. Positioned at article ends or
+       between content sections.
+       ===================================================================== -->
+  <div class="demo">
+    <span class="demo-label">Default style</span>
+
+    <section class="nsi nsi--default" id="nsi-default">
+      <h2 class="nsi__headline">Get the weekly essay</h2>
+      <p class="nsi__description">One piece on B2B pricing, every Thursday. No filler, no pitches.</p>
+
+      <form class="nsi__form" id="form-default" novalidate>
+        <label class="nsi__label nsi__label--visually-hidden" for="nsi-default-input">
+          Email address
+        </label>
+        <input
+          id="nsi-default-input"
+          class="nsi__input"
+          type="email"
+          placeholder="you@company.com"
+          autocomplete="email"
+          required
+        >
+        <button class="nsi__button" type="submit">Subscribe</button>
+      </form>
+
+      <p class="nsi__error" id="nsi-default-error" hidden role="alert"></p>
+      <p class="nsi__success" id="nsi-default-success" hidden aria-live="polite">
+        You're on the list. See you Thursday.
+      </p>
+
+      <p class="nsi__disclaimer">Unsubscribe anytime. No spam.</p>
+    </section>
+  </div>
+
+  <!-- =====================================================================
+       Variant 2: Minimal style
+       Same transparent container as default but with tighter gap and
+       a smaller headline. Sits inside running text without disrupting
+       the page's visual rhythm.
+       ===================================================================== -->
+  <div class="demo">
+    <span class="demo-label">Minimal style</span>
+
+    <section class="nsi nsi--minimal" id="nsi-minimal">
+      <h2 class="nsi__headline">Enjoyed this article?</h2>
+      <p class="nsi__description">Get the next one in your inbox.</p>
+
+      <form class="nsi__form" id="form-minimal" novalidate>
+        <label class="nsi__label nsi__label--visually-hidden" for="nsi-minimal-input">
+          Email address
+        </label>
+        <input
+          id="nsi-minimal-input"
+          class="nsi__input"
+          type="email"
+          placeholder="you@company.com"
+          autocomplete="email"
+          required
+        >
+        <button class="nsi__button" type="submit">Subscribe</button>
+      </form>
+
+      <p class="nsi__error" id="nsi-minimal-error" hidden role="alert"></p>
+      <p class="nsi__success" id="nsi-minimal-success" hidden aria-live="polite">
+        Thanks for subscribing.
+      </p>
+
+      <p class="nsi__disclaimer">Unsubscribe anytime.</p>
+    </section>
+  </div>
+
+  <!-- =====================================================================
+       Variant 3: Card style
+       Elevated surface with background, padding, and a border. Use when
+       the form needs to stand apart from surrounding content, such as in
+       a sidebar or between two distinct content sections.
+       ===================================================================== -->
+  <div class="demo">
+    <span class="demo-label">Card style</span>
+
+    <section class="nsi nsi--card" id="nsi-card">
+      <h2 class="nsi__headline">Stay in the loop</h2>
+      <p class="nsi__description">Weekly notes on product, growth, and distribution. Read by 4,200 founders.</p>
+
+      <form class="nsi__form" id="form-card" novalidate>
+        <label class="nsi__label nsi__label--visually-hidden" for="nsi-card-input">
+          Email address
+        </label>
+        <input
+          id="nsi-card-input"
+          class="nsi__input"
+          type="email"
+          placeholder="you@company.com"
+          autocomplete="email"
+          required
+        >
+        <button class="nsi__button" type="submit">Join the list</button>
+      </form>
+
+      <p class="nsi__error" id="nsi-card-error" hidden role="alert"></p>
+      <p class="nsi__success" id="nsi-card-success" hidden aria-live="polite">
+        Welcome. Check your inbox for a confirmation.
+      </p>
+
+      <p class="nsi__disclaimer">No spam. Unsubscribe at any time.</p>
+    </section>
+  </div>
+
+  <!-- =====================================================================
+       Vanilla JS submit handler
+       =====================================================================
+
+       This script is intentionally self-contained. Each form on the page
+       gets its own handler via attachHandler(). The handler:
+
+         1. Prevents default browser form submission.
+         2. Reads and trims the email value.
+         3. Guards against empty or already-submitting states.
+         4. Disables the input and button during the async call.
+         5. Sends data to your endpoint (replace the fetch section below).
+         6. On success: hides the form, reveals the success message.
+         7. On error: re-enables the form, reveals the error message.
+
+       To wire up a real endpoint, find the section marked
+       "REPLACE THIS SECTION" and swap in your fetch call.
+
+       Compatible services: Mailchimp, Kit (ConvertKit), Resend,
+       Beehiiv, Buttondown, custom backend routes.
+       ===================================================================== -->
+  <script>
+    (function () {
+      'use strict';
+
+      /**
+       * Attach a submit handler to one NewsletterSignupInline form.
+       *
+       * @param {object} opts
+       * @param {string} opts.formId      - The <form> element id.
+       * @param {string} opts.inputId     - The <input> element id.
+       * @param {string} opts.errorId     - The error <p> element id.
+       * @param {string} opts.successId   - The success <p> element id.
+       * @param {string} opts.endpoint    - The URL to POST JSON to.
+       */
+      function attachHandler(opts) {
+        var form    = document.getElementById(opts.formId);
+        if (!form) return;
+
+        var input     = document.getElementById(opts.inputId);
+        var errorEl   = document.getElementById(opts.errorId);
+        var successEl = document.getElementById(opts.successId);
+        var button    = form.querySelector('button[type="submit"]');
+        var submitting = false;
+
+        form.addEventListener('submit', function (event) {
+          // Step 1: Stop the browser from navigating.
+          event.preventDefault();
+
+          // Guard: ignore duplicate submits while a call is in flight.
+          if (submitting) return;
+
+          // Step 2: Read and trim the email value.
+          var email = input ? input.value.trim() : '';
+
+          // Step 3: Guard against empty input.
+          if (!email) {
+            if (errorEl) {
+              errorEl.textContent = 'Please enter your email address.';
+              errorEl.removeAttribute('hidden');
+            }
+            if (input) input.focus();
+            return;
+          }
+
+          // Step 4: Disable the form and mark in-flight.
+          submitting = true;
+          if (input)  input.disabled  = true;
+          if (button) {
+            button.disabled = true;
+            button.textContent = 'Sending...';
+          }
+          if (errorEl) errorEl.setAttribute('hidden', '');
+
+          // ----------------------------------------------------------------
+          // REPLACE THIS SECTION with your real API call.
+          //
+          // Examples:
+          //   Mailchimp proxy:  POST /api/subscribe     { email: email }
+          //   Kit (ConvertKit): POST /api/kit-subscribe { email: email }
+          //   Resend:           POST /api/newsletter    { email: email }
+          //   Beehiiv:          POST /api/beehiiv       { email: email }
+          //   Custom backend:   POST /api/leads         { email: email }
+          // ----------------------------------------------------------------
+          fetch(opts.endpoint || '/api/subscribe', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: email })
+          })
+            .then(function (response) {
+              if (!response.ok) {
+                throw new Error('Server error ' + response.status);
+              }
+              return response.json();
+            })
+            .then(function () {
+              // Step 6: Success. Hide the form, reveal the success message.
+              // The form element itself is hidden so the success message
+              // takes its place in the layout.
+              form.setAttribute('hidden', '');
+
+              // Also hide the disclaimer (it sits outside the form in the DOM).
+              var section = form.closest('.nsi');
+              if (section) {
+                var disclaimer = section.querySelector('.nsi__disclaimer');
+                if (disclaimer) disclaimer.setAttribute('hidden', '');
+              }
+
+              if (successEl) successEl.removeAttribute('hidden');
+            })
+            .catch(function (err) {
+              // Step 7: Error. Re-enable the form so the user can retry.
+              console.error('[nsi] Subscription error:', err);
+              submitting = false;
+              if (input)  input.disabled  = false;
+              if (button) {
+                button.disabled = false;
+                button.textContent = opts.buttonLabel || 'Subscribe';
+              }
+              if (errorEl) {
+                errorEl.textContent = 'Something went wrong. Check your entry and try again.';
+                errorEl.removeAttribute('hidden');
+              }
+            });
+          // ----------------------------------------------------------------
+          // END REPLACE
+          // ----------------------------------------------------------------
+        });
+      }
+
+      // Attach handlers to each variant on this page.
+      // Adjust formId, inputId, errorId, successId, and endpoint to match
+      // your actual element IDs and API routes.
+
+      attachHandler({
+        formId:      'form-default',
+        inputId:     'nsi-default-input',
+        errorId:     'nsi-default-error',
+        successId:   'nsi-default-success',
+        endpoint:    '/api/subscribe',
+        buttonLabel: 'Subscribe'
+      });
+
+      attachHandler({
+        formId:      'form-minimal',
+        inputId:     'nsi-minimal-input',
+        errorId:     'nsi-minimal-error',
+        successId:   'nsi-minimal-success',
+        endpoint:    '/api/subscribe',
+        buttonLabel: 'Subscribe'
+      });
+
+      attachHandler({
+        formId:      'form-card',
+        inputId:     'nsi-card-input',
+        errorId:     'nsi-card-error',
+        successId:   'nsi-card-success',
+        endpoint:    '/api/subscribe',
+        buttonLabel: 'Join the list'
+      });
+
+    })();
+  </script>
+</body>
+</html>

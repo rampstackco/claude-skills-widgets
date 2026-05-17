@@ -74,6 +74,10 @@ Less natural with:
 - `04-modal-lead-form.md` for the modal-triggered version of the same capture
 - `claude-skills/skills/form-strategy` for field selection and validation principles
 
+## Component implementation
+
+A v2 implementation of this pattern is available in [`components/inline-multi-field-form/`](../../components/inline-multi-field-form/). Both React (TypeScript) and HTML/CSS variants are provided. Customize via CSS custom properties.
+
 ## Sources
 
 - Baymard Institute: "Form Field Usability" research (baymard.com)

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TestimonialGrid examples</title>
+  <link rel="stylesheet" href="../../single-quote-testimonial/styles.css">
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      padding: 3rem 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      background: #fff;
+      color: #111827;
+    }
+    .demo {
+      margin-bottom: 5rem;
+    }
+    .demo-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #9ca3af;
+      margin: 0 0 1.5rem;
+    }
+  </style>
+</head>
+<body>
+  <h1 style="font-size:1.375rem;margin-bottom:3rem;">TestimonialGrid examples</h1>
+
+  <!-- 3-column card grid with eyebrow and headline -->
+  <div class="demo">
+    <p class="demo-label">3-column card grid with heading</p>
+    <section class="tg tg--cols-3">
+      <p class="tg__eyebrow">What customers say</p>
+      <h2 class="tg__headline">Teams that ship faster trust it</h2>
+      <div class="tg__grid">
+
+        <div class="tg__item">
+          <figure class="sqt sqt--card">
+            <blockquote class="sqt__quote">
+              <p>Shipping confidence went up immediately after we adopted it. Our on-call rotation is genuinely calm now and the team is no longer afraid of Fridays.</p>
+            </blockquote>
+            <figcaption class="sqt__attribution">
+              <span>
+                <span class="sqt__name">Jordan Lee</span>
+                <span class="sqt__meta">VP Engineering, Northwind</span>
+              </span>
+            </figcaption>
+          </figure>
+        </div>
+
+        <div class="tg__item">
+          <figure class="sqt sqt--card">
+            <blockquote class="sqt__quote">
+              <p>The onboarding cut our setup time from days to under an hour. I expected the usual week-long back-and-forth and it just didn't happen.</p>
+            </blockquote>
+            <figcaption class="sqt__attribution">
+              <span>
+                <span class="sqt__name">Morgan Reyes</span>
+                <span class="sqt__meta">CTO, Crestfield Labs</span>
+              </span>
+            </figcaption>
+          </figure>
+        </div>
+
+        <div class="tg__item">
+          <figure class="sqt sqt--card">
+            <blockquote class="sqt__quote">
+              <p>Our support volume dropped 40% in the first month. The self-serve docs are clear enough that customers can actually find answers.</p>
+            </blockquote>
+            <figcaption class="sqt__attribution">
+              <span>
+                <span class="sqt__name">Sam Okoro</span>
+                <span class="sqt__meta">Head of Customer Success, Fenwick</span>
+              </span>
+            </figcaption>
+          </figure>
+        </div>
+
+        <div class="tg__item">
+          <figure class="sqt sqt--card">
+            <blockquote class="sqt__quote">
+              <p>We evaluated four alternatives and this was the only one that fit our data residency requirements without a custom contract.</p>
+            </blockquote>
+            <figcaption class="sqt__attribution">
+              <span>
+                <span class="sqt__name">Riley Chen</span>
+                <span class="sqt__meta">Director of Infrastructure, Ashford Analytics</span>
+              </span>
+            </figcaption>
+          </figure>
+        </div>
+
+        <div class="tg__item">
+          <figure class="sqt sqt--card">
+            <blockquote class="sqt__quote">
+              <p>The API surface is small and honest. There are no surprise abstractions that break once you push past the happy path.</p>
+            </blockquote>
+            <figcaption class="sqt__attribution">
+              <span>
+                <span class="sqt__name">Alex Petrov</span>
+                <span class="sqt__meta">Staff Engineer, Brackfield</span>
+              </span>
+            </figcaption>
+          </figure>
+        </div>
+
+        <div class="tg__item">
+          <figure class="sqt sqt--card">
+            <blockquote class="sqt__quote">
+              <p>We migrated 12 services in a single sprint. The migration guide was accurate and the deprecation warnings were actually helpful.</p>
+            </blockquote>
+            <figcaption class="sqt__attribution">
+              <span>
+                <span class="sqt__name">Dana Kim</span>
+                <span class="sqt__meta">Platform Lead, Veystone</span>
+              </span>
+            </figcaption>
+          </figure>
+        </div>
+
+      </div>
+    </section>
+  </div>
+
+  <!-- 2-column minimal grid, no heading -->
+  <div class="demo">
+    <p class="demo-label">2-column minimal grid</p>
+    <section class="tg tg--cols-2">
+      <div class="tg__grid">
+
+        <div class="tg__item">
+          <figure class="sqt sqt--minimal">
+            <blockquote class="sqt__quote">
+              <p>The documentation matched the behavior. That alone put it ahead of every other tool we considered.</p>
+            </blockquote>
+            <figcaption class="sqt__attribution">
+              <span>
+                <span class="sqt__name">Taylor Brooks</span>
+                <span class="sqt__meta">Principal Engineer, Greyfield</span>
+              </span>
+            </figcaption>
+          </figure>
+        </div>
+
+        <div class="tg__item">
+          <figure class="sqt sqt--minimal">
+            <blockquote class="sqt__quote">
+              <p>Rollouts take minutes instead of an afternoon. The team stopped treating deploys as events and started treating them as routine.</p>
+            </blockquote>
+            <figcaption class="sqt__attribution">
+              <span>
+                <span class="sqt__name">Cameron Walsh</span>
+                <span class="sqt__meta">Engineering Manager, Solaris Build</span>
+              </span>
+            </figcaption>
+          </figure>
+        </div>
+
+        <div class="tg__item">
+          <figure class="sqt sqt--minimal">
+            <blockquote class="sqt__quote">
+              <p>Our compliance team signed off in two days. Usually that process takes a quarter.</p>
+            </blockquote>
+            <figcaption class="sqt__attribution">
+              <span>
+                <span class="sqt__name">Avery Santos</span>
+                <span class="sqt__meta">VP Operations, Clearbridge</span>
+              </span>
+            </figcaption>
+          </figure>
+        </div>
+
+        <div class="tg__item">
+          <figure class="sqt sqt--minimal">
+            <blockquote class="sqt__quote">
+              <p>We went from prototype to production in three weeks. The default configuration was close enough to sensible that we barely had to touch it.</p>
+            </blockquote>
+            <figcaption class="sqt__attribution">
+              <span>
+                <span class="sqt__name">Quinn Harmon</span>
+                <span class="sqt__meta">Founder, Stonewick</span>
+              </span>
+            </figcaption>
+          </figure>
+        </div>
+
+      </div>
+    </section>
+  </div>
+
+  <!-- 3-column card grid with headshots (with-headshot variant) -->
+  <div class="demo">
+    <p class="demo-label">3-column grid with headshots</p>
+    <section class="tg tg--cols-3">
+      <h2 class="tg__headline">Heard from customers across roles</h2>
+      <div class="tg__grid">
+
+        <div class="tg__item">
+          <figure class="sqt sqt--with-headshot">
+            <blockquote class="sqt__quote">
+              <p>Incident resolution time dropped by half in the first 60 days. The observability hooks made the difference.</p>
+            </blockquote>
+            <figcaption class="sqt__attribution">
+              <img
+                class="sqt__avatar"
+                src="https://via.placeholder.com/64"
+                alt="Finley Grant"
+                width="48"
+                height="48"
+              >
+              <span>
+                <span class="sqt__name">Finley Grant</span>
+                <span class="sqt__meta">SRE Lead, Colton Systems</span>
+              </span>
+            </figcaption>
+          </figure>
+        </div>
+
+        <div class="tg__item">
+          <figure class="sqt sqt--with-headshot">
+            <blockquote class="sqt__quote">
+              <p>The pricing is transparent and the contract was two pages. That is not something we say often.</p>
+            </blockquote>
+            <figcaption class="sqt__attribution">
+              <img
+                class="sqt__avatar"
+                src="https://via.placeholder.com/64"
+                alt="Blake Nguyen"
+                width="48"
+                height="48"
+              >
+              <span>
+                <span class="sqt__name">Blake Nguyen</span>
+                <span class="sqt__meta">CFO, Ridgepoint</span>
+              </span>
+            </figcaption>
+          </figure>
+        </div>
+
+        <div class="tg__item">
+          <figure class="sqt sqt--with-headshot">
+            <blockquote class="sqt__quote">
+              <p>We run it on three continents and the latency profile is consistent. That was the hardest requirement to meet.</p>
+            </blockquote>
+            <figcaption class="sqt__attribution">
+              <img
+                class="sqt__avatar"
+                src="https://via.placeholder.com/64"
+                alt="Reese Adeyemi"
+                width="48"
+                height="48"
+              >
+              <span>
+                <span class="sqt__name">Reese Adeyemi</span>
+                <span class="sqt__meta">VP Platform, Halcyon Cloud</span>
+              </span>
+            </figcaption>
+          </figure>
+        </div>
+
+      </div>
+    </section>
+  </div>
+
+</body>
+</html>

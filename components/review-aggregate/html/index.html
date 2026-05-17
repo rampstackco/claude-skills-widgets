@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ReviewAggregate component demo</title>
+  <link rel="stylesheet" href="../styles.css" />
+  <style>
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #f9fafb;
+      padding: 3rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+    .demo-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #9ca3af;
+      margin-bottom: 0.5rem;
+    }
+    .demo-block {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       Compact variant: 4.5 stars with source label and half star
+       ============================================================ -->
+  <div class="demo-block">
+    <p class="demo-label">Compact (4.5 stars, half-star rendered)</p>
+
+    <div
+      class="rav rav--compact"
+      aria-label="Rated 4.5 out of 5 stars based on 12,847 reviews on G2"
+    >
+      <!-- Stars row (aria-hidden: screen readers use the root aria-label) -->
+      <div class="rav__stars" aria-hidden="true">
+
+        <!-- Star 1: full -->
+        <span class="rav__star rav__star--full">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" focusable="false">
+            <path
+              d="M12 2.25l2.828 5.73 6.32.918-4.574 4.458 1.08 6.295L12 16.755l-5.654 2.896 1.08-6.295L2.852 8.898l6.32-.918L12 2.25z"
+              fill="var(--rav-star-color-filled, #f59e0b)"
+              stroke="none"
+            />
+          </svg>
+        </span>
+
+        <!-- Star 2: full -->
+        <span class="rav__star rav__star--full">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" focusable="false">
+            <path
+              d="M12 2.25l2.828 5.73 6.32.918-4.574 4.458 1.08 6.295L12 16.755l-5.654 2.896 1.08-6.295L2.852 8.898l6.32-.918L12 2.25z"
+              fill="var(--rav-star-color-filled, #f59e0b)"
+              stroke="none"
+            />
+          </svg>
+        </span>
+
+        <!-- Star 3: full -->
+        <span class="rav__star rav__star--full">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" focusable="false">
+            <path
+              d="M12 2.25l2.828 5.73 6.32.918-4.574 4.458 1.08 6.295L12 16.755l-5.654 2.896 1.08-6.295L2.852 8.898l6.32-.918L12 2.25z"
+              fill="var(--rav-star-color-filled, #f59e0b)"
+              stroke="none"
+            />
+          </svg>
+        </span>
+
+        <!-- Star 4: full -->
+        <span class="rav__star rav__star--full">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" focusable="false">
+            <path
+              d="M12 2.25l2.828 5.73 6.32.918-4.574 4.458 1.08 6.295L12 16.755l-5.654 2.896 1.08-6.295L2.852 8.898l6.32-.918L12 2.25z"
+              fill="var(--rav-star-color-filled, #f59e0b)"
+              stroke="none"
+            />
+          </svg>
+        </span>
+
+        <!-- Star 5: half (linearGradient fills left 50% with gold, right 50% with gray) -->
+        <span class="rav__star rav__star--half">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" focusable="false">
+            <defs>
+              <linearGradient id="rav-half-static-1" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="50%" stop-color="var(--rav-star-color-filled, #f59e0b)" />
+                <stop offset="50%" stop-color="var(--rav-star-color-empty, #d1d5db)" />
+              </linearGradient>
+            </defs>
+            <path
+              d="M12 2.25l2.828 5.73 6.32.918-4.574 4.458 1.08 6.295L12 16.755l-5.654 2.896 1.08-6.295L2.852 8.898l6.32-.918L12 2.25z"
+              fill="url(#rav-half-static-1)"
+              stroke="none"
+            />
+          </svg>
+        </span>
+
+      </div><!-- /.rav__stars -->
+
+      <span class="rav__rating-value">4.5</span>
+      <span class="rav__count">(12,847)</span>
+      <span class="rav__source">on G2</span>
+    </div>
+  </div>
+
+
+  <!-- ============================================================
+       Compact variant: 4 whole stars, no source (clean minimal)
+       ============================================================ -->
+  <div class="demo-block">
+    <p class="demo-label">Compact (4 whole stars, no source)</p>
+
+    <div
+      class="rav rav--compact"
+      aria-label="Rated 4 out of 5 stars based on 2,100 reviews"
+    >
+      <div class="rav__stars" aria-hidden="true">
+
+        <span class="rav__star rav__star--full">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" focusable="false">
+            <path d="M12 2.25l2.828 5.73 6.32.918-4.574 4.458 1.08 6.295L12 16.755l-5.654 2.896 1.08-6.295L2.852 8.898l6.32-.918L12 2.25z" fill="var(--rav-star-color-filled, #f59e0b)" stroke="none"/>
+          </svg>
+        </span>
+        <span class="rav__star rav__star--full">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" focusable="false">
+            <path d="M12 2.25l2.828 5.73 6.32.918-4.574 4.458 1.08 6.295L12 16.755l-5.654 2.896 1.08-6.295L2.852 8.898l6.32-.918L12 2.25z" fill="var(--rav-star-color-filled, #f59e0b)" stroke="none"/>
+          </svg>
+        </span>
+        <span class="rav__star rav__star--full">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" focusable="false">
+            <path d="M12 2.25l2.828 5.73 6.32.918-4.574 4.458 1.08 6.295L12 16.755l-5.654 2.896 1.08-6.295L2.852 8.898l6.32-.918L12 2.25z" fill="var(--rav-star-color-filled, #f59e0b)" stroke="none"/>
+          </svg>
+        </span>
+        <span class="rav__star rav__star--full">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" focusable="false">
+            <path d="M12 2.25l2.828 5.73 6.32.918-4.574 4.458 1.08 6.295L12 16.755l-5.654 2.896 1.08-6.295L2.852 8.898l6.32-.918L12 2.25z" fill="var(--rav-star-color-filled, #f59e0b)" stroke="none"/>
+          </svg>
+        </span>
+        <span class="rav__star rav__star--empty">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" focusable="false">
+            <path d="M12 2.25l2.828 5.73 6.32.918-4.574 4.458 1.08 6.295L12 16.755l-5.654 2.896 1.08-6.295L2.852 8.898l6.32-.918L12 2.25z" fill="var(--rav-star-color-empty, #d1d5db)" stroke="none"/>
+          </svg>
+        </span>
+
+      </div>
+
+      <span class="rav__rating-value">4</span>
+      <span class="rav__count">(2,100)</span>
+    </div>
+  </div>
+
+
+  <!-- ============================================================
+       Expanded variant: badge with half star, logo, and source
+       ============================================================ -->
+  <div class="demo-block">
+    <p class="demo-label">Expanded badge (4.8 stars, source logo, half-star rendered)</p>
+
+    <div
+      class="rav rav--expanded"
+      aria-label="Rated 4.8 out of 5 stars based on 3,210 reviews on Capterra"
+      style="max-width: 220px;"
+    >
+      <div class="rav__stars" aria-hidden="true">
+
+        <!-- Stars 1-4: full -->
+        <span class="rav__star rav__star--full">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" focusable="false">
+            <path d="M12 2.25l2.828 5.73 6.32.918-4.574 4.458 1.08 6.295L12 16.755l-5.654 2.896 1.08-6.295L2.852 8.898l6.32-.918L12 2.25z" fill="var(--rav-star-color-filled, #f59e0b)" stroke="none"/>
+          </svg>
+        </span>
+        <span class="rav__star rav__star--full">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" focusable="false">
+            <path d="M12 2.25l2.828 5.73 6.32.918-4.574 4.458 1.08 6.295L12 16.755l-5.654 2.896 1.08-6.295L2.852 8.898l6.32-.918L12 2.25z" fill="var(--rav-star-color-filled, #f59e0b)" stroke="none"/>
+          </svg>
+        </span>
+        <span class="rav__star rav__star--full">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" focusable="false">
+            <path d="M12 2.25l2.828 5.73 6.32.918-4.574 4.458 1.08 6.295L12 16.755l-5.654 2.896 1.08-6.295L2.852 8.898l6.32-.918L12 2.25z" fill="var(--rav-star-color-filled, #f59e0b)" stroke="none"/>
+          </svg>
+        </span>
+        <span class="rav__star rav__star--full">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" focusable="false">
+            <path d="M12 2.25l2.828 5.73 6.32.918-4.574 4.458 1.08 6.295L12 16.755l-5.654 2.896 1.08-6.295L2.852 8.898l6.32-.918L12 2.25z" fill="var(--rav-star-color-filled, #f59e0b)" stroke="none"/>
+          </svg>
+        </span>
+
+        <!-- Star 5: half (4.8 rounds to full under the >= 0.75 rule, but a half is shown here as a static markup illustration) -->
+        <!-- For a clean 4.8 demo, we show a half as a visual sample; callers can adjust the rating prop accordingly. -->
+        <span class="rav__star rav__star--half">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" focusable="false">
+            <defs>
+              <linearGradient id="rav-half-static-2" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="50%" stop-color="var(--rav-star-color-filled, #f59e0b)" />
+                <stop offset="50%" stop-color="var(--rav-star-color-empty, #d1d5db)" />
+              </linearGradient>
+            </defs>
+            <path
+              d="M12 2.25l2.828 5.73 6.32.918-4.574 4.458 1.08 6.295L12 16.755l-5.654 2.896 1.08-6.295L2.852 8.898l6.32-.918L12 2.25z"
+              fill="url(#rav-half-static-2)"
+              stroke="none"
+            />
+          </svg>
+        </span>
+
+      </div><!-- /.rav__stars -->
+
+      <div class="rav__rating-value">4.8</div>
+      <div class="rav__count">3,210 reviews</div>
+      <div class="rav__source">
+        <img
+          class="rav__source-logo"
+          src="https://via.placeholder.com/72x20"
+          alt=""
+        />
+        on Capterra
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

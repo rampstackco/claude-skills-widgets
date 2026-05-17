@@ -76,6 +76,10 @@ Less natural with:
 - `12-industry-analyst-quote.md` for the highest-authority third-party signal in enterprise contexts
 - `10-detailed-case-study-card.md` for the qualitative depth behind the aggregate rating
 
+## Component implementation
+
+A v2 implementation of this pattern is available in [`components/review-aggregate/`](../../components/review-aggregate/). Both React (TypeScript) and HTML/CSS variants are provided. Customize via CSS custom properties.
+
 ## Sources
 
 - Cialdini, Robert. "Influence: The Psychology of Persuasion." Social proof and authority principles.
