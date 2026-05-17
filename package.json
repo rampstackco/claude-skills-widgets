@@ -4,10 +4,12 @@
   "private": true,
   "description": "TypeScript type-checking for the component implementations in /components. The repo itself remains documentation-first; this package exists only to catch type errors before downstream consumers do.",
   "scripts": {
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "capture-screenshots": "node tools/capture_component_screenshots.js"
   },
   "devDependencies": {
     "typescript": "^6.0.3",
-    "@types/react": "^19.0.0"
+    "@types/react": "^19.0.0",
+    "playwright": "^1.45.0"
   }
 }
