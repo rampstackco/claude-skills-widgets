@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SavingsCalculator example</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <section class="sc">
+    <h2 class="sc__title">Calculate your annual savings</h2>
+    <form class="sc__inputs" id="my-calc">
+      <label class="sc__field">
+        <span class="sc__label">Current monthly spend</span>
+        <div class="sc__input-group">
+          <span class="sc__prefix">$</span>
+          <input class="sc__input" type="number" name="currentSpend" value="5000">
+        </div>
+      </label>
+      <label class="sc__field">
+        <span class="sc__label">Team size</span>
+        <input class="sc__input" type="number" name="teamSize" value="10">
+      </label>
+    </form>
+    <div class="sc__results" data-results aria-live="polite">
+      <!-- Populated by script -->
+    </div>
+  </section>
+
+  <script>
+    (function () {
+      const form = document.getElementById('my-calc');
+      const results = document.querySelector('[data-results]');
+
+      // Replace this with your own calculation. Keep the math honest:
+      // inflated projections damage trust.
+      function compute(values) {
+        const monthlySavings = Number(values.currentSpend) * 0.3;
+        const annualSavings = monthlySavings * 12;
+        return [
+          { label: 'Monthly savings', value: monthlySavings, format: 'currency' },
+          { label: 'Annual savings', value: annualSavings, format: 'currency', emphasized: true },
+          { label: 'Payback period', value: 2, format: 'months' },
+        ];
+      }
+
+      function format(value, type) {
+        if (type === 'currency') return '$' + Number(value).toLocaleString('en-US', { maximumFractionDigits: 0 });
+        if (type === 'months') return value + ' months';
+        if (type === 'percent') return value + '%';
+        return String(value);
+      }
+
+      function render() {
+        const formData = new FormData(form);
+        const values = Object.fromEntries(formData);
+        const computed = compute(values);
+        results.innerHTML = computed.map(function (r) {
+          return '<div class="sc__result' + (r.emphasized ? ' sc__result--emphasized' : '') + '">' +
+            '<span class="sc__result-label">' + r.label + '</span>' +
+            '<span class="sc__result-value">' + format(r.value, r.format) + '</span>' +
+            '</div>';
+        }).join('');
+      }
+
+      form.addEventListener('input', render);
+      render();
+    })();
+  </script>
+</body>
+</html>

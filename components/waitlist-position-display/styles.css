@@ -1,0 +1,169 @@
+/* WaitlistPositionDisplay shared styles. */
+
+.wpd {
+  --wpd-bg: var(--brand-surface, #ffffff);
+  --wpd-radius: 0.75rem;
+  --wpd-padding: 2rem;
+  --wpd-gap: 1rem;
+  --wpd-text-color: var(--brand-ink, #111111);
+  --wpd-muted-color: var(--brand-ink-muted, #555555);
+  --wpd-position-color: var(--brand-accent, #1e5fcf);
+  --wpd-position-size: 4rem;
+  --wpd-referral-bg: var(--brand-surface-alt, #f4f4f4);
+  --wpd-referral-radius: 0.5rem;
+  --wpd-copy-bg: var(--brand-accent, #1e5fcf);
+  --wpd-copy-color: #ffffff;
+  --wpd-copy-radius: 0.375rem;
+  --wpd-copy-hover-bg: color-mix(in srgb, var(--wpd-copy-bg) 88%, black);
+  --wpd-border: 1px solid color-mix(in srgb, var(--wpd-text-color) 12%, transparent);
+  --wpd-transition: 140ms ease;
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--wpd-gap);
+  padding: var(--wpd-padding);
+  background-color: var(--wpd-bg);
+  border-radius: var(--wpd-radius);
+  border: var(--wpd-border);
+  color: var(--wpd-text-color);
+  font-family: inherit;
+  box-sizing: border-box;
+  max-width: 36rem;
+}
+
+/* ---- Modifiers ---- */
+
+.wpd--compact {
+  --wpd-padding: 1.25rem;
+  --wpd-gap: 0.625rem;
+  --wpd-position-size: 2.75rem;
+}
+
+/* ---- Welcome line ---- */
+
+.wpd__welcome {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--wpd-muted-color);
+  line-height: 1.4;
+}
+
+.wpd--compact .wpd__welcome {
+  display: none;
+}
+
+/* ---- Headline ---- */
+
+.wpd__headline {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--wpd-text-color);
+}
+
+.wpd--compact .wpd__headline {
+  font-size: 0.9375rem;
+}
+
+/* ---- Position number ---- */
+
+.wpd__position {
+  margin: 0;
+  font-size: var(--wpd-position-size);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--wpd-position-color);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+.wpd__position-prefix {
+  font-size: calc(var(--wpd-position-size) * 0.6);
+  font-weight: 600;
+  vertical-align: super;
+  line-height: 1;
+  margin-right: 0.05em;
+}
+
+/* ---- Total count ---- */
+
+.wpd__total {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--wpd-muted-color);
+  line-height: 1.4;
+}
+
+/* ---- Referral block ---- */
+
+.wpd__referral {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  flex-wrap: wrap;
+  margin-top: 0.25rem;
+  padding: 0.75rem 1rem;
+  background-color: var(--wpd-referral-bg);
+  border-radius: var(--wpd-referral-radius);
+}
+
+.wpd__referral-url {
+  flex: 1 1 0;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.8125rem;
+  color: var(--wpd-muted-color);
+  font-family: ui-monospace, "Cascadia Code", "Fira Code", monospace;
+}
+
+/* ---- Copy button ---- */
+
+.wpd__copy-button {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.4375rem 0.875rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  font-family: inherit;
+  line-height: 1.2;
+  color: var(--wpd-copy-color);
+  background-color: var(--wpd-copy-bg);
+  border: none;
+  border-radius: var(--wpd-copy-radius);
+  cursor: pointer;
+  min-height: 36px;
+  transition: background-color var(--wpd-transition);
+}
+
+.wpd__copy-button:hover {
+  background-color: var(--wpd-copy-hover-bg);
+}
+
+.wpd__copy-button:focus-visible {
+  outline: 2px solid var(--wpd-copy-bg);
+  outline-offset: 2px;
+}
+
+.wpd__copy-button--copied {
+  background-color: #16a34a;
+}
+
+.wpd__copy-button--copied:hover {
+  background-color: color-mix(in srgb, #16a34a 88%, black);
+}
+
+/* ---- Copied status (screen readers) ---- */
+
+.wpd__copy-status {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}

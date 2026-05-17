@@ -76,6 +76,10 @@ Less natural with:
 - `03-activity-based-urgency.md` for broader demand signals that complement position display
 - `07-real-time-recent-activity-ticker.md` for live activity feeds that can accompany a waitlist context
 
+## Component implementation
+
+A v2 implementation of this pattern is available in [`components/waitlist-position-display/`](../../components/waitlist-position-display/). Both React (TypeScript) and HTML/CSS variants are provided. Customize via CSS custom properties.
+
 ## Sources
 
 - Cialdini, Robert. *Influence: The Psychology of Persuasion*. Scarcity and commitment-consistency principles.

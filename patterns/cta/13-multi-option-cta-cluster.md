@@ -72,6 +72,10 @@ Less natural with:
 - `06-hero-stack-primary-plus-secondary.md` for the hierarchical primary-plus-secondary alternative
 - `20-asymmetric-cta-primary-de-emphasized-secondary.md` for when one option should be clearly dominant
 
+## Component implementation
+
+A v2 implementation of this pattern is available in [`components/multi-option-cta-cluster/`](../../components/multi-option-cta-cluster/). Both React (TypeScript) and HTML/CSS variants are provided. Customize via CSS custom properties.
+
 ## Sources
 
 - Thaler, R.H. and Sunstein, C.R.: "Nudge: Improving Decisions About Health, Wealth, and Happiness" (choice architecture)

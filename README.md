@@ -93,7 +93,20 @@ v2.2 extends the catalog with:
 - **TestimonialGrid**: 3 to 6 testimonials in a responsive grid
 - **ReviewAggregate**: star rating and review count from third-party sources
 
-Total v2.x: 17 component implementations across CTA, lead capture, social proof, urgency, and utility categories. Browse `components/` for the full catalog and `components/README.md` for the roadmap.
+Total v2.x: 17 component implementations across CTA, lead capture, social proof, urgency, and utility categories.
+
+## v2.3: 6 components opening interactive-tooling
+
+v2.3 introduces the interactive-tooling category and deepens CTA, lead-capture, and urgency coverage:
+
+- **SavingsCalculator**: config-driven calculator for ROI, savings, and payback calculations (interactive-tooling)
+- **FooterCTASection**: section-sized last-chance CTA with optional social proof
+- **MultiOptionCTACluster**: equal-weight choice architecture (2 to 4 options)
+- **SocialLoginButtons**: OAuth provider buttons (Google, GitHub, Apple, and others)
+- **LimitedTimeOfferBanner**: deadline-driven banner composing CountdownTimer
+- **WaitlistPositionDisplay**: position display with optional referral mechanic
+
+Total v2.x: 23 component implementations across CTA, lead capture, social proof, urgency, interactive tooling, and utility categories. Browse `components/` for the full catalog and `components/README.md` for the roadmap.
 
 ## How patterns are documented
 

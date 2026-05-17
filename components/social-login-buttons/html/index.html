@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SocialLoginButtons examples</title>
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    body { font-family: system-ui, sans-serif; padding: 2rem; max-width: 480px; margin: 0 auto; }
+    .demo { margin-bottom: 2.5rem; }
+    h2 { margin-top: 2rem; margin-bottom: 0.75rem; font-size: 0.875rem; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: 0.05em; }
+    /* Simple email input for divider demo */
+    .demo-input {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 0.75rem 1rem;
+      border: 1px solid #d1d5db;
+      border-radius: 0.5rem;
+      font-size: 0.9375rem;
+      font-family: inherit;
+      margin-top: 0.75rem;
+    }
+  </style>
+</head>
+<body>
+  <h1 style="font-size: 1.25rem; margin-bottom: 0.25rem;">SocialLoginButtons</h1>
+  <p style="color: #6b7280; font-size: 0.875rem; margin-top: 0; margin-bottom: 2rem;">
+    Click handling is the consumer's responsibility. Wire <code>data-provider</code> to your OAuth flow.
+  </p>
+
+  <!-- ================================================================
+    EXAMPLE 1: Stacked layout (default)
+    Buttons are full-width, rendered vertically.
+  ================================================================ -->
+  <h2>Stacked (default)</h2>
+  <div class="demo">
+    <div class="slb slb--stacked slb--default">
+
+      <!-- Google -->
+      <button class="slb__button" type="button" data-provider="google">
+        <svg class="slb__icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+          <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+          <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
+          <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+        </svg>
+        <span class="slb__label">Continue with Google</span>
+      </button>
+
+      <!-- GitHub -->
+      <button class="slb__button" type="button" data-provider="github">
+        <svg class="slb__icon" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.868-.013-1.703-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/>
+        </svg>
+        <span class="slb__label">Continue with GitHub</span>
+      </button>
+
+      <!-- Apple -->
+      <button class="slb__button" type="button" data-provider="apple">
+        <svg class="slb__icon" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.7 9.05 7.4c1.39.07 2.36.74 3.18.76 1.2-.21 2.35-.91 3.63-.81 1.55.13 2.71.73 3.45 1.85-3.2 1.89-2.44 6.03.68 7.22-.6 1.26-1.27 2.49-2.94 3.86zM12.03 7.25c-.13-2.67 2.05-4.87 4.56-5.25.34 2.99-2.68 5.17-4.56 5.25z"/>
+        </svg>
+        <span class="slb__label">Continue with Apple</span>
+      </button>
+
+    </div>
+  </div>
+
+  <!-- ================================================================
+    EXAMPLE 2: Row layout
+    Buttons sit side by side, sized to their content.
+  ================================================================ -->
+  <h2>Row layout</h2>
+  <div class="demo">
+    <div class="slb slb--row slb--default">
+
+      <!-- Google -->
+      <button class="slb__button" type="button" data-provider="google">
+        <svg class="slb__icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+          <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+          <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
+          <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+        </svg>
+        <span class="slb__label">Continue with Google</span>
+      </button>
+
+      <!-- GitHub -->
+      <button class="slb__button" type="button" data-provider="github">
+        <svg class="slb__icon" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.868-.013-1.703-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/>
+        </svg>
+        <span class="slb__label">Continue with GitHub</span>
+      </button>
+
+    </div>
+  </div>
+
+  <!-- ================================================================
+    EXAMPLE 3: Minimal style with divider, sitting above an email input
+    The divider visually separates the provider buttons from the email form.
+  ================================================================ -->
+  <h2>Minimal style with divider</h2>
+  <div class="demo">
+    <div class="slb slb--stacked slb--minimal">
+
+      <!-- Google -->
+      <button class="slb__button" type="button" data-provider="google">
+        <svg class="slb__icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+          <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+          <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
+          <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+        </svg>
+        <span class="slb__label">Continue with Google</span>
+      </button>
+
+      <!-- Microsoft -->
+      <button class="slb__button" type="button" data-provider="microsoft">
+        <svg class="slb__icon" viewBox="0 0 24 24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="2" width="9.5" height="9.5" fill="#F25022"/>
+          <rect x="12.5" y="2" width="9.5" height="9.5" fill="#7FBA00"/>
+          <rect x="2" y="12.5" width="9.5" height="9.5" fill="#00A4EF"/>
+          <rect x="12.5" y="12.5" width="9.5" height="9.5" fill="#FFB900"/>
+        </svg>
+        <span class="slb__label">Continue with Microsoft</span>
+      </button>
+
+      <!-- LinkedIn -->
+      <button class="slb__button" type="button" data-provider="linkedin">
+        <svg class="slb__icon" viewBox="0 0 24 24" aria-hidden="true" fill="#0A66C2" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+        </svg>
+        <span class="slb__label">Continue with LinkedIn</span>
+      </button>
+
+      <!-- Divider: role="separator" keeps this out of heading/landmark semantics -->
+      <div class="slb__divider" role="separator" aria-label="or continue with email">
+        <span class="slb__divider-text">or continue with email</span>
+      </div>
+
+    </div>
+
+    <!-- Sibling email input follows the divider -->
+    <input class="demo-input" type="email" placeholder="you@example.com" />
+  </div>
+
+  <!-- ================================================================
+    EXAMPLE 4: All six built-in providers, stacked
+    Twitter icon included for completeness.
+  ================================================================ -->
+  <h2>All built-in providers</h2>
+  <div class="demo">
+    <div class="slb slb--stacked slb--default">
+
+      <button class="slb__button" type="button" data-provider="google">
+        <svg class="slb__icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+          <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+          <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
+          <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+        </svg>
+        <span class="slb__label">Continue with Google</span>
+      </button>
+
+      <button class="slb__button" type="button" data-provider="github">
+        <svg class="slb__icon" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.868-.013-1.703-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/>
+        </svg>
+        <span class="slb__label">Continue with GitHub</span>
+      </button>
+
+      <button class="slb__button" type="button" data-provider="apple">
+        <svg class="slb__icon" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.7 9.05 7.4c1.39.07 2.36.74 3.18.76 1.2-.21 2.35-.91 3.63-.81 1.55.13 2.71.73 3.45 1.85-3.2 1.89-2.44 6.03.68 7.22-.6 1.26-1.27 2.49-2.94 3.86zM12.03 7.25c-.13-2.67 2.05-4.87 4.56-5.25.34 2.99-2.68 5.17-4.56 5.25z"/>
+        </svg>
+        <span class="slb__label">Continue with Apple</span>
+      </button>
+
+      <button class="slb__button" type="button" data-provider="microsoft">
+        <svg class="slb__icon" viewBox="0 0 24 24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="2" width="9.5" height="9.5" fill="#F25022"/>
+          <rect x="12.5" y="2" width="9.5" height="9.5" fill="#7FBA00"/>
+          <rect x="2" y="12.5" width="9.5" height="9.5" fill="#00A4EF"/>
+          <rect x="12.5" y="12.5" width="9.5" height="9.5" fill="#FFB900"/>
+        </svg>
+        <span class="slb__label">Continue with Microsoft</span>
+      </button>
+
+      <button class="slb__button" type="button" data-provider="twitter">
+        <svg class="slb__icon" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+        </svg>
+        <span class="slb__label">Continue with Twitter</span>
+      </button>
+
+      <button class="slb__button" type="button" data-provider="linkedin">
+        <svg class="slb__icon" viewBox="0 0 24 24" aria-hidden="true" fill="#0A66C2" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+        </svg>
+        <span class="slb__label">Continue with LinkedIn</span>
+      </button>
+
+    </div>
+  </div>
+
+  <!--
+    Click handling: attach event listeners in your own script.
+    Example:
+      document.querySelectorAll('.slb__button').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const provider = btn.dataset.provider;
+          window.location.href = `/auth/${provider}`;
+        });
+      });
+  -->
+</body>
+</html>

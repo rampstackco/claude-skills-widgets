@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>WaitlistPositionDisplay examples</title>
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      padding: 2rem;
+      max-width: 600px;
+      margin: 0 auto;
+      background: #f9f9f9;
+    }
+    h2 {
+      margin-top: 2.5rem;
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #666;
+    }
+    .demo { margin-bottom: 2rem; }
+  </style>
+</head>
+<body>
+  <h1 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.25rem;">WaitlistPositionDisplay</h1>
+  <p style="color: #555; font-size: 0.875rem; margin: 0 0 2rem;">Static HTML examples with shared styles.css</p>
+
+  <!-- ================================================
+       Example 1: Expanded with email and referral link
+       ================================================ -->
+  <h2>Expanded with email and referral link</h2>
+  <div class="demo">
+    <section
+      class="wpd wpd--expanded"
+      aria-label="You are number 847 in the waitlist"
+      id="wpd-expanded"
+    >
+      <p class="wpd__welcome">Welcome, you@example.com</p>
+      <h2 class="wpd__headline">You are in line</h2>
+      <p class="wpd__position">
+        <span class="wpd__position-prefix" aria-hidden="true">#</span>847
+      </p>
+      <p class="wpd__total">of 12,400 people on the waitlist</p>
+      <div class="wpd__referral">
+        <span class="wpd__referral-url" title="https://yourapp.com/ref/abc123">
+          https://yourapp.com/ref/abc123
+        </span>
+        <button
+          class="wpd__copy-button"
+          type="button"
+          aria-label="Copy referral link"
+          data-url="https://yourapp.com/ref/abc123"
+          data-default-label="Copy your link"
+        >
+          Copy your link
+        </button>
+        <span class="wpd__copy-status" aria-live="polite"></span>
+      </div>
+    </section>
+  </div>
+
+  <!-- ========================
+       Example 2: Compact style
+       ======================== -->
+  <h2>Compact (no welcome line, reduced padding)</h2>
+  <div class="demo">
+    <section
+      class="wpd wpd--compact"
+      aria-label="You are number 312 in the waitlist"
+    >
+      <h2 class="wpd__headline">You are in line</h2>
+      <p class="wpd__position">
+        <span class="wpd__position-prefix" aria-hidden="true">#</span>312
+      </p>
+      <p class="wpd__total">of 8,900 people on the waitlist</p>
+    </section>
+  </div>
+
+  <!-- ==================================
+       Example 3: Expanded, no referral
+       ================================== -->
+  <h2>Expanded with custom headline, no referral</h2>
+  <div class="demo">
+    <section
+      class="wpd wpd--expanded"
+      aria-label="You are number 203 in the waitlist"
+    >
+      <p class="wpd__welcome">Welcome, alex@example.com</p>
+      <h2 class="wpd__headline">Here is where you stand</h2>
+      <p class="wpd__position">
+        <span class="wpd__position-prefix" aria-hidden="true">#</span>203
+      </p>
+      <p class="wpd__total">of 5,000 people on the waitlist</p>
+    </section>
+  </div>
+
+  <!--
+    Vanilla JS: wires every copy button on the page.
+    Requires a secure context (HTTPS or localhost) for navigator.clipboard.
+    Falls back to a hidden input + execCommand for older or non-secure contexts.
+  -->
+  <script>
+    (function () {
+      var COPIED_DURATION = 2000;
+
+      document.querySelectorAll(".wpd__copy-button[data-url]").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var url = btn.getAttribute("data-url");
+          var defaultLabel = btn.getAttribute("data-default-label") || "Copy your link";
+          var statusEl = btn.parentElement
+            ? btn.parentElement.querySelector(".wpd__copy-status")
+            : null;
+
+          function showCopied() {
+            btn.textContent = "Copied";
+            btn.setAttribute("aria-label", "Referral link copied");
+            btn.classList.add("wpd__copy-button--copied");
+            if (statusEl) statusEl.textContent = "Referral link copied to clipboard.";
+
+            setTimeout(function () {
+              btn.textContent = defaultLabel;
+              btn.setAttribute("aria-label", "Copy referral link");
+              btn.classList.remove("wpd__copy-button--copied");
+              if (statusEl) statusEl.textContent = "";
+            }, COPIED_DURATION);
+          }
+
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(url).then(showCopied).catch(function () {
+              /* Copy failed; button stays in default state */
+            });
+          } else {
+            /* execCommand fallback for non-secure contexts or older browsers */
+            try {
+              var input = document.createElement("input");
+              input.value = url;
+              input.style.position = "fixed";
+              input.style.opacity = "0";
+              input.style.pointerEvents = "none";
+              document.body.appendChild(input);
+              input.select();
+              input.setSelectionRange(0, input.value.length);
+              document.execCommand("copy");
+              document.body.removeChild(input);
+              showCopied();
+            } catch (err) {
+              /* Copy failed silently */
+            }
+          }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

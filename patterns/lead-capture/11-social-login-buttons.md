@@ -72,6 +72,10 @@ Less natural with:
 - `15-free-trial-signup-no-credit-card.md` for the trial signup flow that often uses social login as the entry point
 - `01-inline-single-field-form.md` for the email-based alternative when social login is not appropriate
 
+## Component implementation
+
+A v2 implementation of this pattern is available in [`components/social-login-buttons/`](../../components/social-login-buttons/). Both React (TypeScript) and HTML/CSS variants are provided. Customize via CSS custom properties.
+
 ## Sources
 
 - InfluenceFlow: "Social Login Integration Guide 2026" (influenceflow.io/resources/social-login-integration-a-complete-2026-guide-for-businesses-and-developers/)

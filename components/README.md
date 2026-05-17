@@ -23,8 +23,14 @@ Component implementations of the patterns documented in `/patterns/`. Each compo
 | newsletter-signup-inline | `patterns/lead-capture/08-newsletter-signup-inline.md` | yes | yes |
 | testimonial-grid | `patterns/social-proof/05-testimonial-grid.md` | yes | yes |
 | review-aggregate | `patterns/social-proof/09-review-aggregate.md` | yes | yes |
+| savings-calculator | `patterns/interactive-tooling/02-savings-calculator.md` | yes | yes |
+| footer-cta-section | `patterns/cta/09-footer-cta-section.md` | yes | yes |
+| multi-option-cta-cluster | `patterns/cta/13-multi-option-cta-cluster.md` | yes | yes |
+| social-login-buttons | `patterns/lead-capture/11-social-login-buttons.md` | yes | yes |
+| limited-time-offer-banner | `patterns/urgency/04-limited-time-offer-banner.md` | yes | yes |
+| waitlist-position-display | `patterns/urgency/06-waitlist-position-display.md` | yes | yes |
 
-Components that do not map cleanly to a documented pattern are utilities. The four v2.0 utilities are flagged as candidates for future pattern documentation; the twelve v2.1 and v2.2 components each map directly to a documented pattern.
+Components that do not map cleanly to a documented pattern are utilities. The four v2.0 utilities are flagged as candidates for future pattern documentation; the eighteen v2.1, v2.2, and v2.3 components each map directly to a documented pattern.
 
 ## Architecture
 
@@ -55,13 +61,21 @@ MIT, same as the catalog. Use freely in commercial and non-commercial projects. 
 
 v2.0: 5 Threshold seed components (utility-leaning).
 
-v2.1: 6 pattern-mapped components covering CTA, lead capture, social proof, and urgency.
+v2.1: 6 foundational pattern-mapped components.
 
-v2.2 (current): 6 more pattern-mapped components extending CTA (sticky bar, secondary), lead capture (multi-field, newsletter), and social proof (testimonial grid, review aggregate).
+v2.2: 6 more pattern-mapped components extending CTA, lead capture, and social proof.
 
-Total: 17 component implementations across 5 categories.
+v2.3 (current): 6 more components opening the interactive-tooling category and expanding urgency. Highlights:
+- savings-calculator (first interactive-tooling component)
+- footer-cta-section (last-chance conversion section)
+- multi-option-cta-cluster (choice architecture for B2B and developer-vs-business splits)
+- social-login-buttons (OAuth provider UI)
+- limited-time-offer-banner (deadline-driven banner with countdown integration)
+- waitlist-position-display (position and referral mechanic)
 
-v2.3+ planned: multi-step form, exit-intent modal, customer logo strip variations, additional urgency patterns, Storybook integration.
+Total: 23 component implementations across 6 categories.
+
+v2.4+ planned: showcase pages on rampstack.co for the rest of the v2.x components, Storybook integration, additional interactive-tooling (quizzes, configurators).
 
 ## Cross-references
 
