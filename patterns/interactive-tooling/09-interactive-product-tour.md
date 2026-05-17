@@ -72,6 +72,10 @@ Less natural with:
 - `10-scheduling-tool.md` for the conversion moment that follows a completed tour (book a demo for a deeper walkthrough)
 - `claude-skills/skills/funnel-flow-architecture` for placing the tour at the correct funnel stage
 
+## Component implementation
+
+A v2 implementation of this pattern is available in [`components/interactive-product-tour/`](../../components/interactive-product-tour/). Both React (TypeScript) and HTML/CSS variants are provided. Customize via CSS custom properties.
+
 ## Sources
 
 - Userpilot: product tour onboarding research and day-7 retention data (userpilot.com/blog/product-tour-examples)

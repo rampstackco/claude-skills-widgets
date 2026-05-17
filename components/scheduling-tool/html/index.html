@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SchedulingTool example</title>
+  <link rel="stylesheet" href="../../primary-button-cta/styles.css">
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    body { font-family: system-ui, sans-serif; padding: 2rem; background: #f6f8fa; }
+  </style>
+</head>
+<body>
+  <section class="sch" id="sch">
+    <!-- Populated by script -->
+  </section>
+
+  <script>
+    (function () {
+      // Replace availableSlots and the onConfirm logic with your own.
+      // Show only times you can actually honor; fake availability damages trust.
+      const config = {
+        title: "Book a 30-minute intro call",
+        duration: 30,
+        timezone: "Your local timezone",
+        availableSlots: [
+          { date: "2026-05-20", times: ["09:00", "09:30", "10:00", "14:00"] },
+          { date: "2026-05-21", times: ["10:00", "11:00", "15:00", "15:30"] },
+          { date: "2026-05-22", times: ["09:00", "13:00", "13:30", "14:00"] },
+        ],
+      };
+
+      const root = document.getElementById("sch");
+      const state = { date: null, time: null };
+
+      function formatDate(dateStr) {
+        const d = new Date(dateStr);
+        return {
+          weekday: new Intl.DateTimeFormat("en-US", { weekday: "short" }).format(d),
+          day: new Intl.DateTimeFormat("en-US", { day: "numeric" }).format(d),
+          month: new Intl.DateTimeFormat("en-US", { month: "short" }).format(d),
+        };
+      }
+
+      function formatTime(time) {
+        const parts = time.split(":");
+        const d = new Date();
+        d.setHours(Number(parts[0]), Number(parts[1]));
+        return new Intl.DateTimeFormat("en-US", {
+          hour: "numeric",
+          minute: "2-digit",
+          hour12: true,
+        }).format(d);
+      }
+
+      function render() {
+        const dates = config.availableSlots.map(function (slot) {
+          const info = formatDate(slot.date);
+          const pressed = state.date === slot.date ? "true" : "false";
+          return (
+            '<button class="sch__date" type="button" data-date="' + slot.date +
+            '" aria-pressed="' + pressed + '">' +
+            '<span class="sch__date-weekday">' + info.weekday + "</span>" +
+            '<span class="sch__date-day">' + info.day + "</span>" +
+            '<span class="sch__date-month">' + info.month + "</span>" +
+            "</button>"
+          );
+        }).join("");
+
+        let timesHtml = "";
+        if (state.date) {
+          const slot = config.availableSlots.find(function (s) { return s.date === state.date; });
+          timesHtml =
+            '<p class="sch__step-label">2. Pick a time</p>' +
+            '<div class="sch__times" role="group" aria-label="Available times">' +
+            slot.times.map(function (t) {
+              const pressed = state.time === t ? "true" : "false";
+              return '<button class="sch__time" type="button" data-time="' + t +
+                '" aria-pressed="' + pressed + '">' + formatTime(t) + "</button>";
+            }).join("") +
+            "</div>";
+        }
+
+        let formHtml = "";
+        if (state.date && state.time) {
+          formHtml =
+            '<form class="sch__form" id="sch-form">' +
+            '<p class="sch__step-label">3. Your details</p>' +
+            '<div class="sch__field">' +
+            '<label class="sch__field-label" for="sch-name">Name *</label>' +
+            '<input class="sch__field-input" id="sch-name" name="name" type="text" required>' +
+            "</div>" +
+            '<div class="sch__field">' +
+            '<label class="sch__field-label" for="sch-email">Email *</label>' +
+            '<input class="sch__field-input" id="sch-email" name="email" type="email" required>' +
+            "</div>" +
+            '<div class="sch__actions">' +
+            '<button class="pbc pbc--solid pbc--rounded" type="submit">Confirm booking</button>' +
+            "</div>" +
+            '<p class="sch__timezone">' + config.timezone + "</p>" +
+            "</form>";
+        }
+
+        root.innerHTML =
+          '<h2 class="sch__title">' + config.title + "</h2>" +
+          '<p class="sch__duration">' + config.duration + " minute meeting</p>" +
+          '<p class="sch__step-label">1. Pick a date</p>' +
+          '<div class="sch__dates" role="group" aria-label="Available dates">' + dates + "</div>" +
+          timesHtml +
+          formHtml;
+      }
+
+      function renderSuccess() {
+        const info = formatDate(state.date);
+        root.innerHTML =
+          '<div class="sch__success" role="status" aria-live="polite">' +
+          '<div class="sch__success-icon" aria-hidden="true">' +
+          '<svg viewBox="0 0 24 24" width="24" height="24"><path d="M5 12l5 5 9-9" stroke="white" stroke-width="3" fill="none"/></svg>' +
+          "</div>" +
+          '<p class="sch__success-message">Booking confirmed</p>' +
+          '<p class="sch__success-details">' + info.weekday + ", " + info.month + " " +
+          info.day + " at " + formatTime(state.time) + "</p>" +
+          "</div>";
+      }
+
+      root.addEventListener("click", function (e) {
+        const dateBtn = e.target.closest("[data-date]");
+        if (dateBtn) {
+          state.date = dateBtn.dataset.date;
+          state.time = null;
+          render();
+          return;
+        }
+        const timeBtn = e.target.closest("[data-time]");
+        if (timeBtn) {
+          state.time = timeBtn.dataset.time;
+          render();
+        }
+      });
+
+      root.addEventListener("submit", function (e) {
+        e.preventDefault();
+        // Wire your booking backend here, for example:
+        // fetch("/api/book", { method: "POST", body: JSON.stringify(state) });
+        renderSuccess();
+      });
+
+      render();
+    })();
+  </script>
+</body>
+</html>

@@ -128,7 +128,17 @@ v2.5 advances interactive-tooling with the configurator family:
 - **ProductFeatureConfigurator**: Tesla-style product builder with a running price total
 - **ComparisonToolVsCompetitors**: feature comparison table with optional category toggles
 
-Total v2.x: 29 component implementations. Interactive-tooling at 7/10. Browse `components/` for the full catalog and `components/README.md` for the roadmap.
+Total v2.x: 29 component implementations. Interactive-tooling at 7/10.
+
+## v2.6: 3 specialized components
+
+v2.6 closes interactive-tooling and extends social-proof:
+
+- **SchedulingTool**: Calendly-style date/time picker with form completion
+- **InteractiveProductTour**: step-by-step tooltip tour pinning to DOM elements
+- **FeaturedInPressStrip**: press-mentions variant composing TrustLogoStrip
+
+Total v2.x: 32 component implementations. Interactive-tooling complete (9/10 explicit plus the ROI calculator cross-link). Browse `components/` for the full catalog and `components/README.md` for the roadmap.
 
 ## How patterns are documented
 

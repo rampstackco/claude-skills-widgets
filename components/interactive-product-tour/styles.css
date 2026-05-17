@@ -1,0 +1,217 @@
+/* InteractiveProductTour shared styles.
+   Consumed by both react/InteractiveProductTour.tsx and html/index.html.
+   All visual tokens are CSS custom properties on .ipt__overlay so consumers
+   can override them without touching this file. */
+
+/* ─── Root / overlay ─────────────────────────────────────────────────────── */
+
+.ipt__overlay {
+  /* Tokens */
+  --ipt-overlay-bg: rgba(0, 0, 0, 0.5);
+  --ipt-z-index: 9999;
+  --ipt-spotlight-padding: 6px;
+  --ipt-tooltip-bg: var(--brand-surface, #ffffff);
+  --ipt-tooltip-shadow: 0 8px 32px rgba(0, 0, 0, 0.18), 0 2px 8px rgba(0, 0, 0, 0.1);
+  --ipt-tooltip-padding: 1.5rem;
+  --ipt-tooltip-radius: 0.75rem;
+  --ipt-tooltip-width: 320px;
+  --ipt-tooltip-offset: 12px;
+  --ipt-text-color: var(--brand-ink, #102542);
+  --ipt-muted-color: rgba(16, 37, 66, 0.6);
+  --ipt-accent: var(--brand-accent, #1e5fcf);
+  --ipt-progress-color: rgba(16, 37, 66, 0.45);
+  --ipt-title-size: 1rem;
+  --ipt-content-size: 0.9375rem;
+
+  /* Layout */
+  position: fixed;
+  inset: 0;
+  z-index: var(--ipt-z-index);
+  background: var(--ipt-overlay-bg);
+
+  /* pointer-events: none lets clicks reach the highlighted target element
+     when a spotlight is active. The tooltip card re-enables pointer-events
+     on itself so navigation buttons remain clickable. */
+  pointer-events: none;
+}
+
+/* ─── Spotlight cutout ───────────────────────────────────────────────────── */
+
+/*
+  Technique: .ipt__spotlight is a transparent fixed-position box placed over
+  the target element (sized via inline style from getBoundingClientRect).
+  A very large box-shadow (spread: 9999px) fills everything outside the box
+  with a semi-opaque dark color, creating the "cutout" effect without a
+  second element or clip-path. The overlay itself is transparent when a
+  spotlight is active so the shadow handles all dimming.
+*/
+
+.ipt__spotlight {
+  position: fixed;
+  z-index: calc(var(--ipt-z-index) + 1);
+  background: transparent;
+  border-radius: 4px;
+  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.55);
+  pointer-events: none;
+  transition: top 220ms ease, left 220ms ease, width 220ms ease, height 220ms ease;
+}
+
+/* When a spotlight is rendered the overlay background should be transparent
+   because the spotlight shadow handles the dimming. The JS/TSX sets this
+   class conditionally. */
+.ipt__overlay--spotlit {
+  background: transparent;
+}
+
+/* ─── Tooltip card ───────────────────────────────────────────────────────── */
+
+.ipt__tooltip {
+  position: fixed;
+  z-index: calc(var(--ipt-z-index) + 2);
+  width: var(--ipt-tooltip-width);
+  max-width: calc(100vw - 2rem);
+  background: var(--ipt-tooltip-bg);
+  border-radius: var(--ipt-tooltip-radius);
+  box-shadow: var(--ipt-tooltip-shadow);
+  padding: var(--ipt-tooltip-padding);
+  color: var(--ipt-text-color);
+  font-family: inherit;
+
+  /* Re-enable pointer events so buttons inside are clickable */
+  pointer-events: auto;
+
+  /* Smooth repositioning when the step changes */
+  transition: top 220ms ease, left 220ms ease;
+}
+
+/* Give the tooltip a visible focus outline when focused programmatically */
+.ipt__tooltip:focus {
+  outline: 2px solid var(--ipt-accent);
+  outline-offset: 2px;
+}
+
+.ipt__tooltip:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* ─── Close button (top-right X) ─────────────────────────────────────────── */
+
+.ipt__close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  color: var(--ipt-muted-color);
+  padding: 0;
+  font-family: inherit;
+  transition: color 150ms ease, background 150ms ease;
+}
+
+.ipt__close:hover {
+  color: var(--ipt-text-color);
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.ipt__close:focus-visible {
+  outline: 2px solid var(--ipt-accent);
+  outline-offset: 2px;
+}
+
+/* ─── Step title ─────────────────────────────────────────────────────────── */
+
+.ipt__tooltip-title {
+  margin: 0 2rem 0.5rem 0;
+  font-size: var(--ipt-title-size);
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--ipt-text-color);
+}
+
+/* ─── Step body copy ─────────────────────────────────────────────────────── */
+
+.ipt__tooltip-content {
+  margin: 0 0 1.25rem;
+  font-size: var(--ipt-content-size);
+  line-height: 1.6;
+  color: var(--ipt-muted-color);
+}
+
+/* ─── Progress indicator ("Step 2 of 4") ────────────────────────────────── */
+
+.ipt__progress {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--ipt-progress-color);
+  letter-spacing: 0.02em;
+  margin-bottom: 0.875rem;
+}
+
+/* ─── Actions row ────────────────────────────────────────────────────────── */
+
+.ipt__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Back button uses the outlined pbc variant, override sizing to keep it compact */
+.ipt__actions .pbc--outlined {
+  --pbc-padding-y: 0.5rem;
+  --pbc-padding-x: 1rem;
+  --pbc-font-size: 0.9375rem;
+}
+
+/* Next / Finish button compact sizing */
+.ipt__actions .pbc--solid {
+  --pbc-padding-y: 0.5rem;
+  --pbc-padding-x: 1rem;
+  --pbc-font-size: 0.9375rem;
+}
+
+/* ─── Skip link ──────────────────────────────────────────────────────────── */
+
+.ipt__skip {
+  margin-left: auto;
+  background: none;
+  border: none;
+  padding: 0.25rem 0;
+  font-family: inherit;
+  font-size: 0.8125rem;
+  color: var(--ipt-muted-color);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 150ms ease;
+}
+
+.ipt__skip:hover {
+  color: var(--ipt-text-color);
+}
+
+.ipt__skip:focus-visible {
+  outline: 2px solid var(--ipt-accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ─── Completion announcement (visually hidden, read by screen readers) ──── */
+
+.ipt__status {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
