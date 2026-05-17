@@ -20,4 +20,22 @@ updates:
     labels:
       - "dependencies"
       - "github-actions"
-      
+
+  # Track the TypeScript type-checking devDependencies (typescript,
+  # @types/react). Type-only deps; bump conservatively.
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "America/Denver"
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "chore"
+      include: "scope"
+    labels:
+      - "dependencies"
+      - "npm"
+    versioning-strategy: "increase-if-necessary"
+

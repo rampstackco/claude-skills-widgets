@@ -316,7 +316,7 @@ export function ProductFeatureConfigurator({
         }
       } else {
         const val = typeof sel === "string" ? sel : "";
-        display = group.options.find((o) => o.value === val)?.label ?? val || "None";
+        display = (group.options.find((o) => o.value === val)?.label ?? val) || "None";
       }
       return { key: group.label, value: display };
     });
