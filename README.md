@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/illustrations/hero.png" alt="Visual representation of the 5 pattern categories in the catalog: CTAs, lead capture, social proof, urgency, and interactive tooling" width="100%">
+  <img src="assets/hero.png" alt="Claude Skills Widgets: 65 patterns + 32 components for Claude Code" width="1200"/>
 </p>
 
 # claude-skills-widgets
