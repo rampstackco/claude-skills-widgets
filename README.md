@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/hero.png" alt="Claude Skills Widgets: 65 patterns + 32 components for Claude Code" width="1200"/>
+  <img src="assets/images/hero.svg" alt="Claude Skills Widgets" width="800"/>
 </p>
 
 # claude-skills-widgets
