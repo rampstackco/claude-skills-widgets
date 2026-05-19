@@ -6,7 +6,8 @@
   "scripts": {
     "typecheck": "tsc --noEmit",
     "capture-screenshots": "node tools/capture_component_screenshots.js",
-    "capture-hero": "node tools/capture_hero_image.js"
+    "capture-hero": "node tools/capture_hero_image.js",
+    "capture-social-card": "node tools/capture_social_card.js"
   },
   "devDependencies": {
     "typescript": "^6.0.3",
