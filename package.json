@@ -5,7 +5,8 @@
   "description": "TypeScript type-checking for the component implementations in /components. The repo itself remains documentation-first; this package exists only to catch type errors before downstream consumers do.",
   "scripts": {
     "typecheck": "tsc --noEmit",
-    "capture-screenshots": "node tools/capture_component_screenshots.js"
+    "capture-screenshots": "node tools/capture_component_screenshots.js",
+    "capture-hero": "node tools/capture_hero_image.js"
   },
   "devDependencies": {
     "typescript": "^6.0.3",
