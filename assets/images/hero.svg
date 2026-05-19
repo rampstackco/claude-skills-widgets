@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 280" width="800" height="280">
+  <!-- Background -->
+  <rect width="800" height="280" fill="#0f172a" rx="12"/>
+
+  <!-- Subtle grid pattern (matches starter and seo for family consistency) -->
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e293b" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="280" fill="url(#grid)" opacity="0.6"/>
+
+  <!-- Headline -->
+  <text x="400" y="95" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif" font-weight="700" font-size="42" fill="#f1f5f9">Claude Skills Widgets</text>
+
+  <!-- Tagline -->
+  <text x="400" y="135" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif" font-weight="400" font-size="18" fill="#94a3b8">65 patterns + 32 components for Claude Code</text>
+
+  <!-- Category badges (6 categories, centered horizontally) -->
+  <!-- Each badge 105w with 10 gaps: 6*105 + 5*10 = 680. Centered: (800-680)/2 = 60 -->
+  <g transform="translate(60, 185)">
+    <!-- CTA: blue -->
+    <rect x="0" y="0" width="105" height="28" rx="14" fill="#1e40af" opacity="0.3"/>
+    <text x="52.5" y="18" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#93c5fd" font-weight="500">CTA &#183; 6</text>
+
+    <!-- Forms (Lead Capture): purple -->
+    <rect x="115" y="0" width="105" height="28" rx="14" fill="#7c3aed" opacity="0.3"/>
+    <text x="167.5" y="18" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#c4b5fd" font-weight="500">Forms &#183; 4</text>
+
+    <!-- Proof (Social Proof): green -->
+    <rect x="230" y="0" width="105" height="28" rx="14" fill="#059669" opacity="0.3"/>
+    <text x="282.5" y="18" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#6ee7b7" font-weight="500">Proof &#183; 6</text>
+
+    <!-- Urgency: red -->
+    <rect x="345" y="0" width="105" height="28" rx="14" fill="#dc2626" opacity="0.3"/>
+    <text x="397.5" y="18" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#fca5a5" font-weight="500">Urgency &#183; 3</text>
+
+    <!-- Tools (Interactive Tooling): orange -->
+    <rect x="460" y="0" width="105" height="28" rx="14" fill="#ea580c" opacity="0.3"/>
+    <text x="512.5" y="18" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#fdba74" font-weight="500">Tools &#183; 9</text>
+
+    <!-- Utility: slate -->
+    <rect x="575" y="0" width="105" height="28" rx="14" fill="#475569" opacity="0.3"/>
+    <text x="627.5" y="18" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#cbd5e1" font-weight="500">Utility &#183; 4</text>
+  </g>
+
+  <!-- Subtitle: live preview URL -->
+  <text x="400" y="245" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#64748b" font-weight="400">Live previews at rampstack.co/showcase/widgets</text>
+</svg>
