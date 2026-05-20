@@ -147,12 +147,19 @@ For people building by hand: each pattern is a complete reference for that patte
 
 For agencies and consultants: the catalog is a shared vocabulary for client conversations. Pointing at a documented pattern is faster than describing one.
 
-## Companion repos
+## Family repos
 
-This repo provides two surfaces: pattern documentation in `patterns/` and component implementations in `components/`. The documentation explains the design space; the components are portable React and HTML/CSS code.
+This pattern library is part of the Claude Skills family. Other family repos:
 
-- [rampstackco/claude-skills](https://github.com/rampstackco/claude-skills): the parent catalog of methodology skills covering brand, design, engineering, audit, and growth work (99 skills)
-- `rampstackco/claude-skills-starter` (planned): curated 12-15 skill subset for users who want a focused starter pack rather than the full catalog
+| Repo | Focus | Skills |
+|---|---|---|
+| [claude-skills](https://github.com/rampstackco/claude-skills) | Full catalog | 99 |
+| [claude-skills-starter](https://github.com/rampstackco/claude-skills-starter) | General-purpose lite | 14 |
+| [claude-skills-seo](https://github.com/rampstackco/claude-skills-seo) | SEO consulting | 12 |
+| [claude-skills-pm](https://github.com/rampstackco/claude-skills-pm) | Product management | 12 |
+| [awesome-claude-skills](https://github.com/rampstackco/awesome-claude-skills) | Curated discovery list | n/a |
+
+Each family repo is MIT-licensed, conforms to the [Agent Skills Specification](https://agentskills.io), and is stack-agnostic. Use the full catalog for breadth; use a specialty subset when working in one domain.
 
 ## Version history
 
