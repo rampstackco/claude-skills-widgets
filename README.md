@@ -4,6 +4,10 @@
 
 # claude-skills-widgets
 
+[![Patterns](https://img.shields.io/badge/Patterns-65-blue.svg)](#whats-in-the-catalog)
+[![Components](https://img.shields.io/badge/Components-32-blue.svg)](#component-implementations-32-components-6-categories)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+
 A research-backed pattern catalog of lead-gen, CTA, social proof, urgency, and interactive tooling patterns used by top-converting B2B SaaS, fintech, DTC, and consumer brands.
 
 Documentation and code. Each pattern includes description, variations, real-world examples with attribution, implementation notes, and brand archetype compatibility. Most patterns also ship a production-ready component.
