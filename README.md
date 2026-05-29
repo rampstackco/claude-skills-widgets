@@ -157,7 +157,7 @@ This pattern library is part of the Claude Skills family. Other family repos:
 
 | Repo | Focus | Skills |
 |---|---|---|
-| [claude-skills](https://github.com/rampstackco/claude-skills) | Full catalog | 99 |
+| [claude-skills](https://github.com/rampstackco/claude-skills) | Full catalog | 102 |
 | [claude-skills-starter](https://github.com/rampstackco/claude-skills-starter) | General-purpose lite | 14 |
 | [claude-skills-seo](https://github.com/rampstackco/claude-skills-seo) | SEO consulting | 12 |
 | [claude-skills-pm](https://github.com/rampstackco/claude-skills-pm) | Product management | 12 |
