@@ -14,6 +14,14 @@ Documentation and code. Each pattern includes description, variations, real-worl
 
 Companion to [rampstackco/claude-skills](https://github.com/rampstackco/claude-skills) for users building landing pages, marketing surfaces, or product onboarding with Claude.
 
+## Trust and security
+
+This pattern catalog is a companion to
+[rampstackco/claude-skills](https://github.com/rampstackco/claude-skills) and
+follows the same review process before changes merge. To report a security
+issue, see the
+[security policy](https://github.com/rampstackco/claude-skills/security/policy).
+
 ## Why a pattern catalog and not just a component library
 
 Most component libraries (Tailwind UI, shadcn/ui, Catalyst) ship code. They solve the "how do I implement this" problem.
