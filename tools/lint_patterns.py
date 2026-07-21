@@ -89,15 +89,60 @@ FORBIDDEN_PHRASES = [
     "take it to the next level",
 ]
 
-REAL_FIRM_WATCHLIST = [
-    "illumine", "endure", "adunn08", "gamedesk", "wirly",
-    "bankranked", "econgrader", "stayrentals", "degreemath",
-    "retiregrader", "credit-factor", "taxgrader", "homerule",
-    "vehiclemd", "mycarneedsthis", "carcabin", "ar15outfitters",
-    "roguegunfighter", "precisionammo", "valleyfirearms",
-    "rifleopticsworld", "straightstocks", "insurrates",
-    "tevoz", "houserama",
-]
+# Real-firm watchlist. Any case-insensitive substring hit is an error.
+#
+# The roster itself is NOT stored in this public repo: it lives in the private
+# rampstack/lint-config repo, and CI fetches it into the path named by
+# REAL_FIRM_WATCHLIST_FILE. Keeping the list inline here published the very
+# names this check exists to keep out.
+#
+# Fail closed: if the file is not provided, is missing, or is empty, the run
+# FAILS. The one exception is the fork-pull-request path, where repository
+# secrets are unavailable by design; those runs set
+# ALLOW_MISSING_REAL_FIRM_WATCHLIST, the check is skipped loudly, and the
+# push-to-main run is the enforcing backstop.
+
+REAL_FIRM_WATCHLIST_ENV = "REAL_FIRM_WATCHLIST_FILE"
+ALLOW_MISSING_ENV = "ALLOW_MISSING_REAL_FIRM_WATCHLIST"
+
+
+def load_real_firm_watchlist():
+    """Load the watchlist named by REAL_FIRM_WATCHLIST_FILE.
+
+    Returns the token list, or None when the check is explicitly skipped on a
+    fork PR. Exits non-zero rather than silently passing.
+    """
+    path = os.environ.get(REAL_FIRM_WATCHLIST_ENV, "").strip()
+    if not path:
+        if os.environ.get(ALLOW_MISSING_ENV, "").strip():
+            print(
+                f"WARNING: {REAL_FIRM_WATCHLIST_ENV} is not set; real-firm watchlist "
+                "check SKIPPED. Expected on fork pull requests, where repository "
+                "secrets are unavailable. The push-to-main run enforces this check."
+            )
+            return None
+        print(
+            f"ERROR: {REAL_FIRM_WATCHLIST_ENV} is not set. The watchlist could not be "
+            "loaded, so the check cannot run. CI fetches it from "
+            "rampstack/lint-config; see .github/workflows/lint.yml.",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+
+    if not os.path.isfile(path):
+        print(f"ERROR: real-firm watchlist file not found: {path}", file=sys.stderr)
+        sys.exit(1)
+
+    with open(path, encoding="utf-8") as fh:
+        tokens = [
+            line.strip()
+            for line in fh
+            if line.strip() and not line.strip().startswith("#")
+        ]
+    if not tokens:
+        print(f"ERROR: real-firm watchlist at {path} is empty.", file=sys.stderr)
+        sys.exit(1)
+    return tokens
 
 # Filename pattern: NN-kebab-case-name.md
 FILENAME_PATTERN = re.compile(r"^\d{2}-[a-z][a-z0-9-]*\.md$")
@@ -192,9 +237,11 @@ def lint_pattern_file(filepath: Path) -> list[LintIssue]:
             issues.append(LintIssue("error", f"Forbidden phrase found: '{phrase}'"))
 
     # Real-firm scrub
-    for term in REAL_FIRM_WATCHLIST:
-        if term in content_lower:
-            issues.append(LintIssue("error", f"Watchlist term found: '{term}'"))
+    watchlist = load_real_firm_watchlist()
+    if watchlist is not None:
+        for term in watchlist:
+            if term in content_lower:
+                issues.append(LintIssue("error", f"Watchlist term found: '{term}'"))
 
     return issues
 
