@@ -17,6 +17,27 @@ jobs:
         with:
           python-version: "3.11"
 
+      - name: Fetch real-firm watchlist (private)
+        if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository
+        env:
+          LINT_CONFIG_TOKEN: ${{ secrets.LINT_CONFIG_TOKEN }}
+        run: |
+          set -euo pipefail
+          test -n "${LINT_CONFIG_TOKEN:-}"
+          curl -fsSL \
+            -H "Authorization: Bearer $LINT_CONFIG_TOKEN" \
+            -H "Accept: application/vnd.github.raw" \
+            "https://api.github.com/repos/rampstack/lint-config/contents/real-firm-watchlist.txt?ref=v1" \
+            -o "$RUNNER_TEMP/real-firm-watchlist.txt"
+          echo "REAL_FIRM_WATCHLIST_FILE=$RUNNER_TEMP/real-firm-watchlist.txt" >> "$GITHUB_ENV"
+
+      - name: Skip real-firm watchlist on fork PR
+        if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name != github.repository
+        run: |
+          echo "Fork PR: repository secrets are unavailable, so the real-firm watchlist"
+          echo "check is skipped here. The push-to-main run is the enforcing backstop."
+          echo "ALLOW_MISSING_REAL_FIRM_WATCHLIST=1" >> "$GITHUB_ENV"
+
       - name: Run pattern linter
         run: python tools/lint_patterns.py
 
