@@ -10,7 +10,7 @@
     "capture-social-card": "node tools/capture_social_card.js"
   },
   "devDependencies": {
-    "typescript": "^6.0.3",
+    "typescript": "^7.0.2",
     "@types/react": "^19.0.0",
     "playwright": "^1.45.0"
   }
