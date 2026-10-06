@@ -163,13 +163,13 @@ For agencies and consultants: the catalog is a shared vocabulary for client conv
 
 This pattern library is part of the Claude Skills family. Other family repos:
 
-| Repo | Focus | Skills |
-|---|---|---|
-| [claude-skills](https://github.com/rampstackco/claude-skills) | Full catalog | All |
-| [claude-skills-starter](https://github.com/rampstackco/claude-skills-starter) | General-purpose lite | 14 |
-| [claude-skills-seo](https://github.com/rampstackco/claude-skills-seo) | SEO consulting | 12 |
-| [claude-skills-pm](https://github.com/rampstackco/claude-skills-pm) | Product management | 12 |
-| [awesome-claude-skills](https://github.com/rampstackco/awesome-claude-skills) | Curated discovery list | n/a |
+| Repo | Focus |
+|---|---|
+| [claude-skills](https://github.com/rampstackco/claude-skills) | Full catalog |
+| [claude-skills-starter](https://github.com/rampstackco/claude-skills-starter) | General-purpose lite |
+| [claude-skills-seo](https://github.com/rampstackco/claude-skills-seo) | SEO consulting |
+| [claude-skills-pm](https://github.com/rampstackco/claude-skills-pm) | Product management |
+| [awesome-claude-skills](https://github.com/rampstackco/awesome-claude-skills) | Curated discovery list |
 
 Each family repo is MIT-licensed, conforms to the [Agent Skills Specification](https://agentskills.io), and is stack-agnostic. Use the full catalog for breadth; use a specialty subset when working in one domain.
 
