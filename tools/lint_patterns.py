@@ -15,6 +15,7 @@ Exit codes:
 - 1: at least one file failed
 """
 
+import ast
 import os
 import re
 import sys
@@ -256,6 +257,85 @@ def extract_section(content: str, heading: str) -> str:
     return match.group(1) if match else ""
 
 
+# Bare skill counts, the same rule as the claude-skills linters. This README
+# typed the parent catalog's skill count and kept it one behind for two
+# months. A count may appear only inside a generator's <!-- NAME:START -->
+# ... <!-- NAME:END --> markers, where a script owns it. Pattern and
+# component counts are not skill counts and are not matched.
+README = REPO_ROOT / "README.md"
+SKILL_COUNT = re.compile(
+    r"(?<![\w.])~?\d+(?:\s*\+\s*\d+)?(?:-|\s+)(?:[A-Za-z][\w'-]*\s+){0,4}skills?\b",
+    re.IGNORECASE,
+)
+GENERATED_BLOCK = re.compile(r"<!-- ([A-Z0-9_]+):START -->.*?<!-- \1:END -->", re.DOTALL)
+COUNT_SCAN_SKIP_DIRS = {".git", "node_modules", "dist"}
+
+
+def table_cells(line: str) -> list:
+    return [cell.strip() for cell in line.strip().strip("|").split("|")]
+
+
+def skills_column_numbers(lines: list):
+    """Yield (line number, cell) for numeric cells in a table column headed Skills."""
+    for i, line in enumerate(lines[:-1]):
+        if not (line.lstrip().startswith("|") and re.match(r"^\s*\|[\s:|-]+\|\s*$", lines[i + 1])):
+            continue
+        headers = [cell.lower() for cell in table_cells(line)]
+        if "skills" not in headers:
+            continue
+        col = headers.index("skills")
+        for j in range(i + 2, len(lines)):
+            if not lines[j].lstrip().startswith("|"):
+                break
+            cells = table_cells(lines[j])
+            if col < len(cells) and re.search(r"\d", cells[col]):
+                yield j + 1, cells[col]
+
+
+def python_docstrings(path: Path):
+    """Yield (first line number, raw text) for every docstring in a Python file."""
+    try:
+        tree = ast.parse(path.read_text(encoding="utf-8"))
+    except SyntaxError:
+        return
+    for node in ast.walk(tree):
+        if not isinstance(node, (ast.Module, ast.ClassDef, ast.FunctionDef, ast.AsyncFunctionDef)):
+            continue
+        doc = ast.get_docstring(node, clean=False)
+        if doc is not None:
+            yield node.body[0].lineno, doc
+
+
+def lint_bare_skill_counts() -> list:
+    """No typed skill count in README.md or a Python docstring outside generator markers."""
+    found = []
+    if README.exists():
+        text = README.read_text(encoding="utf-8")
+        text = GENERATED_BLOCK.sub(lambda m: "\n" * m.group(0).count("\n"), text)
+        lines = text.splitlines()
+        for number, line in enumerate(lines, 1):
+            for match in SKILL_COUNT.finditer(line):
+                found.append(f"README.md:{number}: {match.group(0)!r}")
+        for number, cell in skills_column_numbers(lines):
+            found.append(f"README.md:{number}: Skills column cell {cell!r}")
+    for path in sorted(REPO_ROOT.rglob("*.py")):
+        rel = path.relative_to(REPO_ROOT)
+        if COUNT_SCAN_SKIP_DIRS & set(rel.parts):
+            continue
+        for start, doc in python_docstrings(path):
+            for offset, line in enumerate(doc.splitlines()):
+                for match in SKILL_COUNT.finditer(line):
+                    found.append(f"{rel.as_posix()}:{start + offset} (docstring): {match.group(0)!r}")
+    return [
+        LintIssue(
+            "error",
+            f"Bare skill count at {item}. Drop the number, or move it inside "
+            "generator markers that a script fills in.",
+        )
+        for item in found
+    ]
+
+
 def main():
     print(f"Linting pattern files in {PATTERNS_DIR}\n")
 
@@ -289,6 +369,14 @@ def main():
                 total_errors += 1
             else:
                 total_warnings += 1
+
+    count_issues = lint_bare_skill_counts()
+    if count_issues:
+        files_with_issues += 1
+        print("\nREADME.md and docstrings:")
+        for issue in count_issues:
+            print(f"  {issue}")
+            total_errors += 1
 
     print(f"\n{'='*60}")
     print(f"Linted {len(pattern_files)} pattern files")
